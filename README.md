@@ -2,6 +2,8 @@
 
 ## Technology choices
 
+### Project management
+
 ### Frontend
 
 * AngularJS
@@ -18,9 +20,20 @@
 * Pre-commit
 * Sonarqube (?)
 
-## Application components
+## Application
+
+Games database / information page to find or recommend games of interest.
+
+### Database of games
+
+Some Classification (Tags, Genres, Groups)
 
 ### User and group management
 
+Membership (Tags, Genres, Groups)
 
-### Groupmember
+```mermaid
+graph TD
+  foo
+```
+
