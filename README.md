@@ -1,6 +1,14 @@
-# ase_backend
+# Advanced software engineering 
+
+**Date**: 12/2020
+
+**Project**: Steambuddy - Games recommender
+
+**Authors**: Jochum Peter, Lila Keti, Marktl Daniel, Starzacher Philipp, Tragut Mathias, Zenzmaier Florian
 
 ## Technology choices
+
+The project use the following technology stack.
 
 ### Project management
 
@@ -25,8 +33,6 @@
 
 ## Application epics
 
-Games database / information page to find or recommend games of interest.
-
 ### Database of games
 
 Games are classified using Tags, Genres and Groups
@@ -40,15 +46,26 @@ Friends
 
 ### Users game collections
 
+Users should be able to organize a collection of their games,
+which is the base for the recommendation of other games they do not yet own.
+
 #### Game collection view
 
 Users can view all the games from their collection.
 
 #### Game detail view
 
-adding games to my collection
+* Adding games to my collection
+* Rating games
 
 ### Game recommendation system
+
+The Core part of the application is a recommendation system 
+which is able to find games the user might enjoy based on current games in the collection.
+
+#### Games you like
+
+* View to find games or recommend games of interest.
 
 #### Games by genre
 
