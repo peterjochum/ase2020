@@ -4,6 +4,8 @@
 
 ### Project management
 
+* Scrum/Kanban-Board
+
 ### Frontend
 
 * AngularJS
@@ -32,8 +34,10 @@ Some Classification (Tags, Genres, Groups)
 
 Membership (Tags, Genres, Groups)
 
-```mermaid
-graph TD
-  foo
-```
+## Features
 
+As a user,
+I can add a game to my collection.
+
+As a user interested in strategy
+I can get a list of strategy games.
