@@ -73,4 +73,6 @@ which is able to find games the user might enjoy based on current games in the c
 
 ### Profile page
 
-* Edit your name, search friends
+* Edit your name
+* Search friends
+* Add friends
