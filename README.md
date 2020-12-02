@@ -21,6 +21,7 @@
 
 * Pre-commit
 * Sonarqube (?)
+* CI-System (one of Travis, Gitlab, DroneCI, CircleCI)
 
 ## Application epics
 
@@ -41,10 +42,18 @@ Friends
 
 #### Game collection view
 
+Users can view all the games from their collection.
+
 #### Game detail view
 
 adding games to my collection
 
 ### Game recommendation system
 
-#### Genre-List-View
+#### Games by genre
+
+* Support pagination
+
+### Profile page
+
+* Edit your name, search friends
