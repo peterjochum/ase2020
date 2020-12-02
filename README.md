@@ -13,6 +13,10 @@
 * Spring-Framework
 * JUnit
 
+### Software technology tools
+
+* Pre-commit
+* Sonarqube (?)
 
 ## Application components
 
