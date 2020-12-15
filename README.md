@@ -6,6 +6,13 @@
 
 **Authors**: Jochum Peter, Lila Keti, Marktl Daniel, Starzacher Philipp, Tragut Mathias, Zenzmaier Florian
 
+
+## Build
+
+### Frontend
+
+
+
 ## Technology choices
 
 The project use the following technology stack.
