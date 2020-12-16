@@ -1,4 +1,13 @@
-<h2>Games</h2>
-<li *ngFor="let game of games" class="game-info">
-  <strong>{{game.name}}</strong> {{game.year}}
-</li>
+<div class="row">
+  <div class="col-md-4" *ngFor="let game of games">
+    <div class="card">
+      <img class="card-img-top" src="{{game.image}}" alt="Card image cap">
+      <div class="card-body">
+
+      <h5 class="card-title">{{game.name}}</h5>
+        <p class="card-text">Released: {{game.year}}</p>
+        <a href="#" class="btn btn-primary">Show details</a>
+      </div>
+    </div>
+  </div>
+</div>

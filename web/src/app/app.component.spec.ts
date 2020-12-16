@@ -2,16 +2,22 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import {GamesListComponent} from './games-list/games-list.component';
+import {HttpClientModule} from '@angular/common/http';
+import {FooterComponent} from './footer/footer.component';
+import {NavbarComponent} from './navbar/navbar.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientModule
       ],
       declarations: [
         AppComponent,
-        GamesListComponent
+        GamesListComponent,
+        FooterComponent,
+        NavbarComponent
       ],
     }).compileComponents();
   });
@@ -32,6 +38,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('#mainMessage').textContent).toContain('Steambuddy (ASE2020) app is running!');
+    expect(compiled.querySelector('.navbar-brand').textContent).toContain('SteamBuddy');
   });
 });
