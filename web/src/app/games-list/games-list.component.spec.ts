@@ -25,6 +25,6 @@ describe('GamesListComponent', () => {
 
   it('should have 3 games listed', () => {
     const compiled = fixture.nativeElement;
-    expect(compiled.queryAll('.game-info')).toHaveSize(3);
+    expect(compiled.querySelectorAll('.game-info').length).toBe(3);
   });
 });

@@ -15,6 +15,6 @@ import { GamesListComponent } from './games-list/games-list.component';
     AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, GamesListComponent]
 })
 export class AppModule { }

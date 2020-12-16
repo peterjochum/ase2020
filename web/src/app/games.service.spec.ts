@@ -16,7 +16,6 @@ describe('GamesService', () => {
 
   it('should return 3 games', () => {
     service.getGames().subscribe(games => {
-      console.log(games);
       expect(games.length).toBe(3);
     });
   });
