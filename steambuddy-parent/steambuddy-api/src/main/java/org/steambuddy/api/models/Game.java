@@ -52,11 +52,12 @@ public class Game {
 		this.text = text;
 	}
 
-	public static Game getInstance(String name, int year, String image) {
+	public static Game getInstance(String name, int year, String image, String text) {
 		Game instance = new Game();
 		instance.setName(name);
 		instance.setYear(year);
 		instance.setImage(image);
+		instance.setText(text);
 		return instance;
 	}
 
