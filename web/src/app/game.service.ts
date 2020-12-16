@@ -1,21 +1,25 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Config} from './config';
+import {ConfigService} from './config.service';
+import {Observable} from 'rxjs';
 import {Game} from './game';
-import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
+  config: Config;
 
-  constructor() { }
-
-  FakeGames: Game[] = [
-    {id: 1, name: 'Red Dead', year: 2017},
-    {id: 2, name: 'Cyberpunk', year: 2020},
-    {id: 3, name: 'Baba is you', year: 2019},
-  ];
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.config = {gamesUrl: ''};
+    configService.getConfig().subscribe(config => {
+      this.config = config;
+    });
+  }
 
   getGames(): Observable<Game[]> {
-    return of(this.FakeGames);
+    return this.http.get<Game[]>('http://localhost:8080/games');
   }
+
 }
