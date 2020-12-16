@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {Game} from './game';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GamesService {
+export class GameService {
 
   constructor() { }
 
@@ -14,7 +15,7 @@ export class GamesService {
     {id: 3, name: 'Baba is you', year: 2019},
   ];
 
-  getGames(): Game[] {
-    return this.FakeGames;
+  getGames(): Observable<Game[]> {
+    return of(this.FakeGames);
   }
 }
