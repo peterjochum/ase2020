@@ -1,6 +1,6 @@
 package org.steambuddy.api.models;
 
-public class Games {
+public class Game {
 
 	private Long id;
 
