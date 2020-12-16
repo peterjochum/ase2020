@@ -8,11 +8,11 @@ import { GamesListComponent } from './games-list/games-list.component';
 @NgModule({
   declarations: [
     AppComponent,
-    GamesListComponent
+    GamesListComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
