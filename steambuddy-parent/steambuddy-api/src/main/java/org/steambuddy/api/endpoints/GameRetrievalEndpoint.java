@@ -19,9 +19,12 @@ public class GameRetrievalEndpoint {
 	public List<Game> getGames() {
 		List<Game> games = new ArrayList<Game>();
 
-		games.add(Game.getInstance("Cyberpunk 2077", 2020));
-		games.add(Game.getInstance("The Witcher 3", 2016));
-		games.add(Game.getInstance("The Elderscrolls VI", 2220));
+		games.add(Game.getInstance("Cyberpunk 2077", 2020,
+				"https://images.igdb.com/igdb/image/upload/t_cover_big/co2mjs.jpg"));
+		games.add(Game.getInstance("The Witcher 3: Wild Hunt", 2015,
+				"https://images.igdb.com/igdb/image/upload/t_cover_big/co1wyy.jpg"));
+		games.add(Game.getInstance("The Elderscrolls VI", 2220,
+				"https://images.igdb.com/igdb/image/upload/t_cover_big/co1ycv.jpg"));
 		return games;
 	}
 
