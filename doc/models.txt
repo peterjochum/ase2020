@@ -1,0 +1,10 @@
+Loose model notes
+
+-- Games
+game[name: string, year: int, image: string, description: text, genre_id, publisher_id]
+genre[name: string]
+publisher[name: string]
+
+-- not today
+user[username: string, email: string]
+tags[name: string]
