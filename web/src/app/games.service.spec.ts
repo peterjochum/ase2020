@@ -13,4 +13,9 @@ describe('GamesService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should return 3 games', () => {
+    expect(service.getGames().length).toBe(3);
+  });
+
 });
