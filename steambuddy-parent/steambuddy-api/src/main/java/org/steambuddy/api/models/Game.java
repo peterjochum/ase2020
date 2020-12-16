@@ -52,4 +52,11 @@ public class Game {
 		this.text = text;
 	}
 
+	public static Game getInstance(String name, int year) {
+		Game instance = new Game();
+		instance.setName(name);
+		instance.setYear(year);
+		return instance;
+	}
+
 }
