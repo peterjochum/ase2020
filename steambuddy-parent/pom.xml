@@ -18,6 +18,16 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+     <!-- SWAGGER -->
+     <swagger.version>1.6.2</swagger.version>
+     <swagger.spec.output>${project.build.directory}/swagger</swagger.spec.output>
+     <swagger.ts.output>${project.basedir}/src/app/integration</swagger.ts.output>
+     <swagger.ignore>${project.basedir}/.swagger-codegen-ignore</swagger.ignore>
+
+     <!-- PLUGINS -->
+     <swagger-maven-plugin.version>3.1.8</swagger-maven-plugin.version>
+     <swagger-codegen-maven-plugin.version>2.4.17</swagger-codegen-maven-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -34,9 +44,15 @@
             <version>${spring.boot.version}</version>
          </dependency>
          
+         <!-- MISC -->
+         <dependency>
+         	<groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger.version}</version>
+         </dependency>
   	</dependencies>
   </dependencyManagement>
-            
+
   <modules>
   	<module>steambuddy-api</module>
   	<module>steambuddy-app</module>
