@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Game} from './game';
+import {Game} from '../interfaces/game';
 import {Observable, of} from 'rxjs';
 
 @Injectable({

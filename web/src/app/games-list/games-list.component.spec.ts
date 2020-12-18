@@ -2,8 +2,8 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {GamesListComponent} from './games-list.component';
 import {HttpClientModule} from '@angular/common/http';
-import {GameService} from '../game.service';
-import {MockGameService} from '../mock-game.service';
+import {GameService} from '../services/game.service';
+import {MockGameService} from '../services/mock-game.service';
 
 describe('GamesListComponent', () => {
   let component: GamesListComponent;
@@ -14,7 +14,7 @@ describe('GamesListComponent', () => {
       declarations: [GamesListComponent],
       imports: [HttpClientModule],
       providers: [
-        {provides: GameService, useClass: MockGameService}
+        {provide: GameService, useClass: GameService}
       ]
     })
       .compileComponents();
@@ -30,9 +30,9 @@ describe('GamesListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should have 3 games listed', () => {
-  //   const compiled = fixture.nativeElement;
-  //   console.log(fixture.nativeElement);
-  //   expect(compiled.querySelectorAll('.card').length).toBe(3);
-  // });
+  it('should have 3 games listed', () => {
+    const compiled = fixture.nativeElement;
+    console.log(fixture.nativeElement);
+    expect(compiled.querySelectorAll('.card').length).toBe(3);
+  });
 });

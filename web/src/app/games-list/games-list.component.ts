@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {Game} from '../game';
-import {GameService} from '../game.service';
+import {Component, OnInit} from '@angular/core';
+import {Game} from '../interfaces/game';
+import {GameService} from '../services/game.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-games-list',
@@ -9,17 +10,17 @@ import {GameService} from '../game.service';
 })
 export class GamesListComponent implements OnInit {
 
-  games: Game[];
+  games?: Game[];
+  serviceError?: HttpErrorResponse;
 
-  constructor(private gameService: GameService) {
-    this.games = [];
-  }
+  constructor(private gameService: GameService) {}
 
   ngOnInit(): void {
     this.getGames();
   }
 
-  getGames(): void {
-    this.gameService.getGames().subscribe(games => this.games = games);
+  private getGames(): void {
+    this.gameService.getGames().subscribe(games => this.games = games,
+        error => this.serviceError = error);
   }
 }

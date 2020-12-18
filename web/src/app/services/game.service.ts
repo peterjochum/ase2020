@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Config} from './config';
+import {Config} from '../interfaces/config';
 import {ConfigService} from './config.service';
 import {Observable} from 'rxjs';
-import {Game} from './game';
+import {Game} from '../interfaces/game';
 
 @Injectable({
   providedIn: 'root'
