@@ -5,6 +5,7 @@ import { GamesListComponent } from './games-list/games-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import {MockGameService} from './services/mock-game.service';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -16,6 +17,9 @@ describe('AppComponent', () => {
         FooterComponent,
         NavbarComponent,
       ],
+      providers: [
+        {provide: 'IGameService', useClass: MockGameService}
+      ]
     }).compileComponents();
   });
 

@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GamesListComponent } from './games-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { GameService } from '../services/game.service';
 import { MockGameService } from '../services/mock-game.service';
+import { IGameService } from '../interfaces/gameservice';
 
 describe('GamesListComponent', () => {
   let component: GamesListComponent;
@@ -13,7 +13,7 @@ describe('GamesListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [GamesListComponent],
       imports: [HttpClientModule],
-      providers: [{ provide: GameService, useClass: MockGameService }],
+      providers: [{ provide: 'IGameService', useClass: MockGameService }],
     }).compileComponents();
   });
 
