@@ -29,7 +29,6 @@ describe('GamesListComponent', () => {
   it('should have 3 games listed', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    console.log(fixture.nativeElement);
     expect(compiled.querySelectorAll('.card').length).toBe(3);
   });
 });

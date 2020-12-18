@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - 'main'
+    paths:
+      - 'web/**' # Pipeline only affects file is web
+      - gitlab-ci.yml # Gitlab can decide if changes matter
   pull_request:
-    branches: [main]
-      
+    branches: [main]  # Execute pipeline in any case if we merge to main
 
 jobs:
   build:
