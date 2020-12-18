@@ -1,3 +1,6 @@
+import { GameService } from '../app/services/game.service';
+
 export const environment = {
-  production: true
+  production: true,
+  gameService: GameService,
 };

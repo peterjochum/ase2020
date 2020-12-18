@@ -2,8 +2,12 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { GameService } from '../app/services/game.service';
+import { MockGameService } from '../app/services/mock-game.service';
+
 export const environment = {
-  production: false
+  production: false,
+  gameService: MockGameService,
 };
 
 /*

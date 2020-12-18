@@ -1,24 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import {GamesListComponent} from './games-list/games-list.component';
-import {HttpClientModule} from '@angular/common/http';
-import {FooterComponent} from './footer/footer.component';
-import {NavbarComponent} from './navbar/navbar.component';
+import { GamesListComponent } from './games-list/games-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import {MockGameService} from './services/mock-game.service';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        HttpClientModule
-      ],
+      imports: [RouterTestingModule, HttpClientModule],
       declarations: [
         AppComponent,
         GamesListComponent,
         FooterComponent,
-        NavbarComponent
+        NavbarComponent,
       ],
+      providers: [
+        {provide: 'IGameService', useClass: MockGameService}
+      ]
     }).compileComponents();
   });
 
@@ -38,6 +39,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.navbar-brand').textContent).toContain('SteamBuddy');
+    expect(compiled.querySelector('.navbar-brand').textContent).toContain(
+      'SteamBuddy'
+    );
   });
 });

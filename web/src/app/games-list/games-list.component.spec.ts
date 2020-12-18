@@ -1,9 +1,9 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {GamesListComponent} from './games-list.component';
-import {HttpClientModule} from '@angular/common/http';
-import {GameService} from '../services/game.service';
-import {MockGameService} from '../services/mock-game.service';
+import { GamesListComponent } from './games-list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MockGameService } from '../services/mock-game.service';
+import { IGameService } from '../interfaces/gameservice';
 
 describe('GamesListComponent', () => {
   let component: GamesListComponent;
@@ -13,17 +13,13 @@ describe('GamesListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [GamesListComponent],
       imports: [HttpClientModule],
-      providers: [
-        {provide: GameService, useClass: GameService}
-      ]
-    })
-      .compileComponents();
+      providers: [{ provide: 'IGameService', useClass: MockGameService }],
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GamesListComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -31,6 +27,7 @@ describe('GamesListComponent', () => {
   });
 
   it('should have 3 games listed', () => {
+    fixture.detectChanges();
     const compiled = fixture.nativeElement;
     console.log(fixture.nativeElement);
     expect(compiled.querySelectorAll('.card').length).toBe(3);
