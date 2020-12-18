@@ -1,6 +1,6 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {MockGameService} from './mock-game.service';
+import { MockGameService } from './mock-game.service';
 
 describe('GamesService', () => {
   let service: MockGameService;
@@ -15,9 +15,8 @@ describe('GamesService', () => {
   });
 
   it('should return 3 games', () => {
-    service.getGames().subscribe(games => {
+    service.getGames().subscribe((games) => {
       expect(games.length).toBe(3);
     });
   });
-
 });
