@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiOperation;
 public interface GameResource {
 	
 	@ApiOperation(value = "Get the list of all games.",
-			nickname = "games",
+			nickname = "getGames",
 			notes = "Returns all games.",
 			tags = "GameResources",
 			response = GameDTO.class,

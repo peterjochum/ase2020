@@ -24,7 +24,7 @@
 		<!-- SWAGGER -->
 		<swagger.version>1.6.2</swagger.version>
 		<swagger.spec.output>${project.build.directory}/swagger</swagger.spec.output>
-		<swagger.ts.output>${project.basedir}/src/app/integration</swagger.ts.output>
+		<swagger.ts.output>${project.basedir}/../../web/src/app/integration</swagger.ts.output>
 		<swagger.ignore>${project.basedir}/.swagger-codegen-ignore</swagger.ignore>
 
 		<!-- PLUGINS -->
