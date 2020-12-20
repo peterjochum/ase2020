@@ -6,9 +6,20 @@
 
 **Authors**: Jochum Peter, Lila Keti, Marktl Daniel, Starzacher Philipp, Tragut Mathias, Zenzmaier Florian
 
+
+## Build & Run
+
+### Frontend
+
+Refer to the [frontend README](web/README.md)
+
+### Backend
+
+TODO
+
 ## Technology choices
 
-The project use the following technology stack.
+The project uses the following technology stack.
 
 ### Project management
 
