@@ -71,8 +71,8 @@
 					<version>${swagger-maven-plugin.version}</version>
 					<dependencies>
 						<dependency>
-							<groupId>com.smartersoftware.appointment</groupId>
-							<artifactId>appointment-api</artifactId>
+							<groupId>at.steambuddy</groupId>
+							<artifactId>steambuddy-api</artifactId>
 							<version>${project.version}</version>
 						</dependency>
 						<dependency>
