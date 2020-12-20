@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -10,6 +10,5 @@ import {Component, OnInit} from '@angular/core';
  * and links.
  */
 export class FooterComponent {
-  constructor() {
-  }
+  constructor() {}
 }

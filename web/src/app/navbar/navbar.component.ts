@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -10,8 +10,7 @@ import {Component, Input, OnInit} from '@angular/core';
  *
  * Provides access to navigation, account settings and a search.
  */
-export class NavbarComponent{
-
+export class NavbarComponent {
   /** brand shows the company/application name in the navbar */
   @Input() brand: string;
 

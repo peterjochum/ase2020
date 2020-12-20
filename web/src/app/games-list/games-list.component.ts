@@ -9,7 +9,6 @@ import { IGameService } from '../interfaces/gameservice';
   styleUrls: ['./games-list.component.scss'],
 })
 export class GamesListComponent implements OnInit {
-
   /** games to be output in the list view */
   games?: Game[];
 

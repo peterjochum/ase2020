@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import {Observable, throwError} from 'rxjs';
-import {catchError, retry} from 'rxjs/operators';
-import {Config} from '../interfaces/config';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
+import { Config } from '../interfaces/config';
 
 @Injectable({
   providedIn: 'root',
@@ -18,15 +18,17 @@ export class ConfigService {
   /** config is the main configuration object */
   private config?: Config;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   /**
    * loadConfig gets the configuration file. It returns a promise to let
    * the application initializer (app.module.ts) know when the Config is ready.
    */
   loadConfig(): Promise<Config> {
-    return this.http.get<Config>('/assets/config.json').toPromise().then(config => this.config = config);
+    return this.http
+      .get<Config>('/assets/config.json')
+      .toPromise()
+      .then((config) => (this.config = config));
   }
 
   /**
