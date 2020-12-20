@@ -9,6 +9,7 @@ import { IGameService } from '../interfaces/gameservice';
 export class MockGameService implements IGameService {
   constructor() {}
 
+  /** FakeGames is curated list of fake games */
   FakeGames: Game[] = [
     {
       id: 1,
@@ -35,6 +36,10 @@ export class MockGameService implements IGameService {
     },
   ];
 
+  /**
+   * getGames returns a list of fake games for development
+   * @return some fake games
+   */
   getGames(): Observable<Game[]> {
     return of(this.FakeGames);
   }

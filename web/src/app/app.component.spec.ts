@@ -5,7 +5,7 @@ import { GamesListComponent } from './games-list/games-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import {MockGameService} from './services/mock-game.service';
+import { MockGameService } from './services/mock-game.service';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -17,9 +17,7 @@ describe('AppComponent', () => {
         FooterComponent,
         NavbarComponent,
       ],
-      providers: [
-        {provide: 'IGameService', useClass: MockGameService}
-      ]
+      providers: [{ provide: 'IGameService', useClass: MockGameService }],
     }).compileComponents();
   });
 
@@ -40,7 +38,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('.navbar-brand').textContent).toContain(
-      'SteamBuddy'
+      'Steambuddy (ASE2020)'
     );
   });
 });

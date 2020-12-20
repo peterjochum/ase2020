@@ -5,8 +5,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })
-export class FooterComponent implements OnInit {
+/**
+ * FooterComponent shows a footer with additional application information
+ * and links.
+ */
+export class FooterComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }
