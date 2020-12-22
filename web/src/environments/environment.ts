@@ -7,7 +7,7 @@ import { MockGameService } from '../app/services/mock-game.service';
 
 export const environment = {
   production: false,
-  gameService: GameService,
+  gameService: MockGameService,
 };
 
 /*
