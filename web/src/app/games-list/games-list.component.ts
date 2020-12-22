@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Game } from '../interfaces/game';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IGameService } from '../interfaces/gameservice';
-import { GameDTO, GameResourceService } from '../integration';
 
 @Component({
   selector: 'app-games-list',
@@ -11,7 +10,7 @@ import { GameDTO, GameResourceService } from '../integration';
 })
 export class GamesListComponent implements OnInit {
   /** games to be output in the list view */
-  games?: GameDTO[];
+  games?: Game[];
 
   /** serviceError shows an alert on top of the component if set */
   serviceError?: HttpErrorResponse;
@@ -20,7 +19,7 @@ export class GamesListComponent implements OnInit {
    * Initializes GamesListComponent with required services
    * @param gameService Service to retrieve the games from (set in environment)
    */
-  constructor(private gameResource: GameResourceService) {}
+  constructor(@Inject('IGameService') private gameService: IGameService) {}
 
   /**
    * ngOnInit retrieves games on component loading
@@ -35,6 +34,9 @@ export class GamesListComponent implements OnInit {
    * @private
    */
   private getGames(): void {
-    this.gameResource.getGames().subscribe(result => this.games = result);
+    this.gameService.getGames().subscribe(
+      (games) => (this.games = games),
+      (error) => (this.serviceError = error)
+    );
   }
 }

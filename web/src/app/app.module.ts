@@ -9,8 +9,6 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { environment } from '../environments/environment';
 import { ConfigService } from './services/config.service';
-import { APIS, BASE_PATH } from './integration';
-
 
 @NgModule({
   declarations: [
@@ -23,7 +21,7 @@ import { APIS, BASE_PATH } from './integration';
   providers: [
     {
       provide: 'IGameService',
-      useClass: environment.gameService
+      useClass: environment.gameService,
     },
     {
       provide: APP_INITIALIZER,
@@ -35,8 +33,6 @@ import { APIS, BASE_PATH } from './integration';
         };
       },
     },
-    { provide: BASE_PATH, useValue: 'http://localhost:8080/' },
-    APIS
   ],
   bootstrap: [AppComponent, GamesListComponent],
 })
