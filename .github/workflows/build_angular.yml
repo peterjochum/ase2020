@@ -14,7 +14,6 @@ jobs:
   build:
     name: Build and Test
     runs-on: ubuntu-latest
-    environment: default
     env:
       working-directory: ./web
     steps:
@@ -58,6 +57,8 @@ jobs:
       - name: Fix coverage paths (monorepo)
         run: sed -i "s/SF\:/SF\:web\//g" coverage/web/lcov.info
       - name: Test & publish code coverage
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
         uses: paambaati/codeclimate-action@v2.7.5
         with:
           coverageLocations: |
