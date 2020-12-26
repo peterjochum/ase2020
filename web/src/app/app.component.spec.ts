@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MockGameService } from './services/mock-game.service';
+import { GameCardComponent } from './game-card/game-card.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -14,6 +15,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         GamesListComponent,
+        GameCardComponent,
         FooterComponent,
         NavbarComponent,
       ],

@@ -1,0 +1,12 @@
+<!-- Display the game if the input is present -->
+<div *ngIf="game" class="card h-100">
+  <img class="card-img-top" src="{{game.image}}" alt="{{game.name}} title image">
+  <div class="card-body">
+    <div class="float-right badge badge-dark year-badge">{{game.year}}</div>
+    <h5 class="card-title">{{game.name}}</h5>
+    <a href="#" class="card-link">Show details</a>
+  </div>
+</div>
+
+<!-- Show a warning if no input data has been supplied -->
+<div *ngIf="!game" class="alert alert-danger">No game supplied</div>

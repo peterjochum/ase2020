@@ -1,3 +1,4 @@
+<!-- Show a message if there was an error accessing the service -->
 <div class="row" *ngIf="serviceError">
   <div class="col-12">
     <div class="alert alert-danger">
@@ -6,16 +7,9 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-4" *ngFor="let game of games">
-    <div class="card">
-      <img class="card-img-top" src="{{game.image}}" alt="Card image cap">
-      <div class="card-body">
-
-        <h5 class="card-title">{{game.name}}</h5>
-        <p class="card-text">Released: {{game.year}}</p>
-        <a href="#" class="btn btn-primary">Show details</a>
-      </div>
-    </div>
+<!-- Render a responsive card gallery of the received games -->
+<div class="row flex">
+  <div *ngFor="let game of games" class="col-md-3 col-sm-4 col-6 mt-3">
+    <app-game-card [game]="game"></app-game-card>
   </div>
 </div>
