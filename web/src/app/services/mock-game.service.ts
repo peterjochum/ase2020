@@ -34,7 +34,7 @@ export class MockGameService implements IGameService {
         'RPG and sequel to The Witcher 2 (2011), The Witcher 3 follows witcher Geralt of Rivia as' +
         'he seeks out his former lover and his young subject while intermingling with the political' +
         'workings of the wartorn Northern Kingdoms. Geralt has to fight monsters and deal with people' +
-        'of all sorts in order to solve complex problems and settle contentious disputes, each' +
+        'of all sorts in order to solve complex problems and settle contentious disputes, each ' +
         'ranging from the personal to the world-changing.',
     },
     {
@@ -43,12 +43,11 @@ export class MockGameService implements IGameService {
       year: 2021,
       image: 'https://images.igdb.com/igdb/image/upload/t_cover_big/co1jb4.jpg',
       text:
-        'Explore a vast, haunted kingdom in Hollow Knight: Silksong, the sequel to the award winning' +
-        'action-adventure! Discover enchanting secrets and face foes in lethal, acrobatic combat as' +
-        'you ascend to the peak of a land ruled by silk and song.\n' +
-        '\n' +
-        'Hollow Knight: Silksong is the epic sequel to Hollow Knight, the epic action-adventure of' +
-        'bugs and heroes. As the lethal hunter Hornet, journey to all-new lands, discover new powers,' +
+        'Explore a vast, haunted kingdom in Hollow Knight: Silksong, the sequel to the award winning ' +
+        'action-adventure! Discover enchanting secrets and face foes in lethal, acrobatic combat as ' +
+        'you ascend to the peak of a land ruled by silk and song.\n\n' +
+        'Hollow Knight: Silksong is the epic sequel to Hollow Knight, the epic action-adventure of ' +
+        'bugs and heroes. As the lethal hunter Hornet, journey to all-new lands, discover new powers, ' +
         'battle vast hordes of bugs and beasts and uncover ancient secrets tied to your nature' +
         'and your past.',
     },
