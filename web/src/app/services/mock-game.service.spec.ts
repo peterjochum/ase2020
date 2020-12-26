@@ -14,9 +14,9 @@ describe('GamesService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return 3 games', () => {
+  it('should return 4 games', () => {
     service.getGames().subscribe((games) => {
-      expect(games.length).toBe(3);
+      expect(games.length).toBe(4);
     });
   });
 });

@@ -49,11 +49,21 @@ jobs:
         run: ng build
         working-directory: ${{env.working-directory}}
       - name: Unit tests
-        run: ng test --no-watch --no-progress
+        run: ng test --no-watch --no-progress --code-coverage
         working-directory: ${{env.working-directory}}
       - name: End2End tests
         run: npm run e2e -- --protractor-config=e2e/protractor-ci.conf.js
         working-directory: ${{env.working-directory}}
+      - name: Fix coverage paths (monorepo)
+        run: sed -i "s/SF\:/SF\:web\//g" coverage/web/lcov.info
+      - name: Test & publish code coverage
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        uses: paambaati/codeclimate-action@v2.7.5
+        with:
+          coverageLocations: |
+            ${{github.workspace}}/coverage/**/lcov.info:lcov
+
 #      - name: Archive build
 #        if: success()
 #        uses: actions/upload-artifact@v1
