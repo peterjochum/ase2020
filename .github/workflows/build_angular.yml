@@ -16,7 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       working-directory: ./web
-      # CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
