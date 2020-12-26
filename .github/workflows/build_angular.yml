@@ -61,7 +61,7 @@ jobs:
         uses: paambaati/codeclimate-action@v2.7.5
         with:
           coverageLocations: |
-            ${{github.workspace}}/**/lcov.info:lcov
+            ${{github.workspace}}/coverage/**/lcov.info:lcov
 
 #      - name: Archive build
 #        if: success()
