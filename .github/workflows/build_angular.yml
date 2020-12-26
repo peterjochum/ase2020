@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       working-directory: ./web
+      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -58,7 +59,7 @@ jobs:
         run: sed -i "s/SF\:/SF\:web\//g" coverage/web/lcov.info
       - name: Test & publish code coverage
         env:
-          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         uses: paambaati/codeclimate-action@v2.7.5
         with:
           coverageLocations: |
