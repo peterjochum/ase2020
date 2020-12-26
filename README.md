@@ -1,5 +1,8 @@
 # Advanced software engineering 
 
+[![Test Coverage](https://api.codeclimate.com/v1/badges/bf77e633376043283550/test_coverage)](https://codeclimate.com/github/peterjochum/ase2020/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bf77e633376043283550/maintainability)](https://codeclimate.com/github/peterjochum/ase2020/maintainability)
+
 **Date**: 12/2020
 
 **Project**: Steambuddy - Games recommender
