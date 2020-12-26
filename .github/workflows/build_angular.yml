@@ -58,6 +58,7 @@ jobs:
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5
         with:
+          coverageCommand: sed -i "s/SF\:/SF\:web\//g" coverage/web/lcov.info # Monorepo fix for file paths
           coverageLocations: |
             ${{github.workspace}}/**/lcov.info:lcov
 
