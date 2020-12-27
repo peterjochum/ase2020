@@ -1,0 +1,11 @@
+# ----------------------------------------------------------------------------------------------------------------------
+# DEV
+# ----------------------------------------------------------------------------------------------------------------------
+spring.datasource:
+  driverClassName: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/steambuddy_db?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+  username: root
+  password: root
+  platform: mysql
+  initialization-mode: always
+ 
