@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 import { Config } from '../interfaces/config';
 
 @Injectable({
@@ -23,6 +20,9 @@ export class ConfigService {
   /**
    * loadConfig gets the configuration file. It returns a promise to let
    * the application initializer (app.module.ts) know when the Config is ready.
+   *
+   * This should be called on application bootup to make sure the configuration
+   * is ready.
    */
   loadConfig(): Promise<Config> {
     return this.http
@@ -33,10 +33,11 @@ export class ConfigService {
 
   /**
    * getConfig returns a config object
+   * @throws an error if no config was loaded
    */
   getConfig(): Config {
     if (!this.config) {
-      throw Error('Config file not loaded!');
+      throw Error('config file not loaded');
     }
     return this.config;
   }
