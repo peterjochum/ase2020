@@ -39,6 +39,38 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-maven-plugin</artifactId>
 		</plugin>
+		<plugin>
+				<groupId>com.github.kongchen</groupId>
+				<artifactId>swagger-maven-plugin</artifactId>
+				<version>${swagger-maven-plugin.version}</version>
+				<configuration>
+					<apiSources>
+						<apiSource>
+							<springmvc>true</springmvc>
+							<locations>
+								<location>org.steambuddy.api</location>
+							</locations>
+							<info>
+								<title>Steambuddy TypeScript API</title>
+								<version>v1</version>
+							</info>
+							<swaggerFileName>swagger-steambuddy</swaggerFileName>
+							<swaggerDirectory>${swagger.spec.output}</swaggerDirectory>
+							<outputFormats>json</outputFormats>
+						</apiSource>
+					</apiSources>
+				</configuration>
+				<executions>
+					<execution>
+						<id>Generate Swagger JSON</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<phase>generate-resources</phase>
+					</execution>
+				</executions>
+			</plugin>
   	</plugins>
   </build>
+  
 </project>
