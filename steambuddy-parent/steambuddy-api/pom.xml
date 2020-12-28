@@ -85,27 +85,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>io.swagger</groupId>
-				<artifactId>swagger-codegen-maven-plugin</artifactId>
-				<configuration>
-					<language>typescript-angular</language>
-					<configOptions>
-						<ngVersion>11</ngVersion>
-					</configOptions>
-					<inputSpec>${swagger.spec.output}/swagger-steambuddy.json</inputSpec>
-					<output>${swagger.ts.output}</output>
-				</configuration>
-				<executions>
-					<execution>
-						<id>Generate Steambuddy Typescript API</id>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<phase>generate-resources</phase>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
 
