@@ -10,6 +10,7 @@ on:
     
 jobs:
   build:
+    name: Build and Test
     runs-on: ubuntu-latest
     env:
       working-directory: ./steambuddy-parent
@@ -21,9 +22,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11.0.6
-      - name: Install Project
-        run: mvn clean install --file pom.xml
-        working-directory: ${{env.working-directory}}
       - name: Build and Test Project
         run: mvn -B package --file pom.xml
         working-directory: ${{env.working-directory}}
