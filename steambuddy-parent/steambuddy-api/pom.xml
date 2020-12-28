@@ -64,7 +64,8 @@
 							<language>typescript-angular</language>
 							<configOptions>
 								<ngVersion>11</ngVersion>
-							</configOptions>
+								<withInterfaces>true</withInterfaces>
+							</configOptions>							
 							<inputSpec>${swagger.spec.output}/swagger-steambuddy.json</inputSpec>
 							<output>${swagger.ts.output}</output>
 						</configuration>
