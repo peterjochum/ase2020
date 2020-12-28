@@ -1,43 +1,29 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
 name: Build ASE Backend
-
 on:
   workflow_dispatch:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
+    
 jobs:
-  compile:
-    runs-on: ubuntu-latest
-    env:
-      working-directory: ./steambuddy-parent
-    name: Java 11 compile
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup Java
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11.0.6
-      - name: compile
-        run: mvn -f pom.xml clean compile
-        working-directory: ${{env.working-directory}}
-
   build:
     runs-on: ubuntu-latest
-    needs: compile
     env:
       working-directory: ./steambuddy-parent
     
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Set up JDK 11.0.6
         uses: actions/setup-java@v1
         with:
           java-version: 11.0.6
-      - name: Build and Test
-        run: mvn -f pom.xml clean verify
+      - name: Install Project
+        run: mvn clean install --file pom.xml
+        working-directory: ${{env.working-directory}}
+      - name: Build and Test Project
+        run: mvn -B package --file pom.xml
         working-directory: ${{env.working-directory}}
