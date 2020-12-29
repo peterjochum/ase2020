@@ -51,62 +51,37 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.github.kongchen</groupId>
-				<artifactId>swagger-maven-plugin</artifactId>
-				<version>${swagger-maven-plugin.version}</version>
-				<configuration>
-					<apiSources>
-						<apiSource>
-							<springmvc>true</springmvc>
-							<locations>
-								<location>org.steambuddy.api</location>
-							</locations>
-							<info>
-								<title>Steambuddy TypeScript API</title>
-								<version>v1</version>
-							</info>
-							<swaggerFileName>swagger-steambuddy</swaggerFileName>
-							<swaggerDirectory>${swagger.spec.output}</swaggerDirectory>
-							<outputFormats>json</outputFormats>
-						</apiSource>
-					</apiSources>
-				</configuration>
-				<executions>
-					<execution>
-						<id>Generate Swagger JSON</id>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<phase>generate-resources</phase>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>io.swagger</groupId>
-				<artifactId>swagger-codegen-maven-plugin</artifactId>
-				<configuration>
-					<language>typescript-angular</language>
-					<configOptions>
-						<ngVersion>11</ngVersion>
-					</configOptions>
-					<inputSpec>${swagger.spec.output}/swagger-steambuddy.json</inputSpec>
-					<output>${swagger.ts.output}</output>
-				</configuration>
-				<executions>
-					<execution>
-						<id>Generate Steambuddy Typescript API</id>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<phase>generate-resources</phase>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+	
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-codegen-maven-plugin</artifactId>
+						<configuration>
+							<language>typescript-angular</language>
+							<configOptions>
+								<ngVersion>11</ngVersion>
+								<withInterfaces>true</withInterfaces>
+							</configOptions>							
+							<inputSpec>${swagger.spec.output}/swagger-steambuddy.json</inputSpec>
+							<output>${swagger.ts.output}</output>
+						</configuration>
+						<executions>
+							<execution>
+								<id>Generate Steambuddy Typescript API</id>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+								<phase>generate-resources</phase>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>

@@ -1,0 +1,55 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "v1",
+    "title" : "Steambuddy TypeScript API"
+  },
+  "tags" : [ {
+    "name" : "GameResource"
+  } ],
+  "paths" : {
+    "internal/api/game/games" : {
+      "get" : {
+        "tags" : [ "GameResource" ],
+        "summary" : "Get the list of all games.",
+        "description" : "Returns all games.",
+        "operationId" : "getGames",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/GameDTO"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "GameDTO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "year" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "image" : {
+          "type" : "string"
+        },
+        "text" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
