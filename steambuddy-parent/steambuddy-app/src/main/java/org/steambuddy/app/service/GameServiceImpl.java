@@ -13,6 +13,7 @@ import org.steambuddy.app.repository.GameRepository;
 @Service
 public class GameServiceImpl implements GameService{
 
+	@Autowired
 	private GameRepository gameRepository;
 	
 	@Autowired
@@ -23,6 +24,7 @@ public class GameServiceImpl implements GameService{
 		List<GameEntity> games = new ArrayList<GameEntity>();
 		
 		// TODO: call Repository
+		games = (List<GameEntity>) gameRepository.findAll();
 		
 		games.add(new GameEntity("Cyberpunk 2077", 2020,
 				"https://images.igdb.com/igdb/image/upload/t_cover_big/co2mjs.jpg",

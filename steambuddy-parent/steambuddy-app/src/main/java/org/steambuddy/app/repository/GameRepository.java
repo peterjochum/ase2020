@@ -1,6 +1,9 @@
 package org.steambuddy.app.repository;
 
-public interface GameRepository // extends CrudRepository<GameEntity, Long>
+import org.springframework.data.repository.CrudRepository;
+import org.steambuddy.app.entity.GameEntity;
+
+public interface GameRepository extends CrudRepository<GameEntity, Long>
 {
 
 }
