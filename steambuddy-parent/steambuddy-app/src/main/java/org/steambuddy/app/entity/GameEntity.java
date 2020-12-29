@@ -1,16 +1,27 @@
 package org.steambuddy.app.entity;
 
-// TODO: annotate with JPA
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "game")
 public class GameEntity {
 
+	@Id
 	private Long id;
 
+	@Column(name = "name")
 	private String name;
 
+	@Column(name = "year")
 	private int year;
 
+	@Column(name = "image")
 	private String image;
 
+	@Column(name = "text")
 	private String text;
 
 	public Long getId() {
@@ -58,6 +69,9 @@ public class GameEntity {
 		this.year = year;
 		this.image = image;
 		this.text = text;
+	}
+
+	public GameEntity() {
 	}
 
 }

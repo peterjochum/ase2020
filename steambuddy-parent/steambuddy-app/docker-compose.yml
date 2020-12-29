@@ -1,0 +1,26 @@
+version: "3"
+services:
+  mysqldb:
+    hostname: steambuddyDb
+    image: mysql:5.7
+    ports:
+      - 3310:3306
+    networks:
+      - steambuddy-infrastructure
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=steambuddy_db
+
+  steambuddy:
+    hostname: steambuddyApp
+    image: steambuddy
+    ports:
+      - "8080:8080"
+    networks:
+      - steambuddy-infrastructure
+    restart: on-failure
+    depends_on:
+      - mysqldb
+
+networks:
+  steambuddy-infrastructure:
