@@ -15,16 +15,16 @@ public class GameEntity {
 	@Id
 	private Long id;
 
-	@Column(name = "name")
+	@Column(name = "name", nullable = false)
 	private String name;
 
 	@Column(name = "year")
-	private int year;
+	private Integer year;
 
 	@Column(name = "image")
 	private String image;
 
-	@Column(name = "text")
+	@Column(name = "text", columnDefinition = "TEXT")
 	private String text;
 
 	@ManyToMany(targetEntity = GenreEntity.class)
@@ -46,11 +46,11 @@ public class GameEntity {
 		this.name = name;
 	}
 
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 
@@ -78,7 +78,7 @@ public class GameEntity {
 		this.genres = genres;
 	}
 
-	public GameEntity(String name, int year, String image, String text) {
+	public GameEntity(String name, Integer year, String image, String text) {
 		this.name = name;
 		this.year = year;
 		this.image = image;

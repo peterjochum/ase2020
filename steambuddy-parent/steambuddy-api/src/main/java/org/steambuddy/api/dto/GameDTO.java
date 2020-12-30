@@ -6,7 +6,7 @@ public class GameDTO {
 
 	private String name;
 
-	private int year;
+	private Integer year;
 
 	private String image;
 
@@ -28,11 +28,11 @@ public class GameDTO {
 		this.name = name;
 	}
 
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 
@@ -52,7 +52,7 @@ public class GameDTO {
 		this.text = text;
 	}
 
-	public static GameDTO getInstance(String name, int year, String image, String text) {
+	public static GameDTO getInstance(String name, Integer year, String image, String text) {
 		GameDTO instance = new GameDTO();
 		instance.setName(name);
 		instance.setYear(year);
