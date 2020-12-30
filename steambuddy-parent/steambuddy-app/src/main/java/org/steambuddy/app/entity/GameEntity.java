@@ -1,8 +1,11 @@
 package org.steambuddy.app.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +26,9 @@ public class GameEntity {
 
 	@Column(name = "text")
 	private String text;
+
+	@ManyToMany(targetEntity = GenreEntity.class)
+	private Set<GenreEntity> genres;
 
 	public Long getId() {
 		return id;
@@ -62,6 +68,14 @@ public class GameEntity {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Set<GenreEntity> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(Set<GenreEntity> genres) {
+		this.genres = genres;
 	}
 
 	public GameEntity(String name, int year, String image, String text) {
