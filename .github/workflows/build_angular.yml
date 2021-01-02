@@ -25,6 +25,13 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+      - name: Download swagger-codegen-cli
+        uses: wei/wget@v1
+        with:
+          args: -O ${{env.working-directory}}/swagger-codegen-cli-2.4.17.jar  https://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/2.4.17/swagger-codegen-cli-2.4.17.jar
+      - name: Generate REST Clients
+        run: java -jar swagger-codegen-cli-2.4.17.jar generate -i src/assets/swagger/swagger-steambuddy.json -l typescript-angular -o src/app/integration -c src/assets/swagger/config.json
+        working-directory: ${{env.working-directory}}
       - name: Use Node 12.x
         uses: actions/setup-node@v1
         with:
