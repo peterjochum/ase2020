@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.steambuddy.api.dto.GameDTO;
 import org.steambuddy.app.entity.GameEntity;
 import org.steambuddy.app.mapper.GameMapper;
 import org.steambuddy.app.repository.GameRepository;
 
 @Service
+@Transactional
 public class GameServiceImpl implements GameService{
 
 	@Autowired
