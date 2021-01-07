@@ -61,6 +61,7 @@ public class UserServiceImpl implements UserService {
 		temp.setName(user.getName());
 		temp.setFriends(user.getFriends());
 		temp.setFriends(null);
+		temp.setGroups(user.getGroups());
 		return temp;
 	}
 

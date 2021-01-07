@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.steambuddy.api.dto.UserDTO;
 import org.steambuddy.app.entity.UserEntity;
@@ -11,6 +12,9 @@ import org.steambuddy.app.entity.UserEntity;
 @Service
 public class UserMapper {
 
+	@Autowired
+	private GroupMapper groupMapper;
+	
 	public List<UserDTO> mapEntityToDTO(List<UserEntity> from) {
 		return from.stream().map(g -> entityToDTO(g)).collect(Collectors.toList());
 	}
@@ -29,7 +33,10 @@ public class UserMapper {
 		to.setName(from.getName());
 		if (from.getFriends() != null) {
 			to.setFriends(mapEntityToDTO(from.getFriends()));
-		}	
+		}
+		if (from.getGroups() != null) {
+			to.setGroups(groupMapper.mapEntityToDTO(from.getGroups()));
+		}
 		return to;
 	}
 	
@@ -41,6 +48,9 @@ public class UserMapper {
 		if (from.getFriends() != null) {
 			to.setFriends(mapDTOtoEntity(from.getFriends()));
 		}
+		if (from.getGroups() != null) {
+			to.setGroups(groupMapper.mapDTOtoEntity(from.getGroups()));
+		}
 		return to;
 	}
 	
@@ -48,6 +58,9 @@ public class UserMapper {
 		toUpdate.setName(from.getName());
 		if (from.getFriends() != null) {
 			toUpdate.setFriends(mapDTOtoEntity(from.getFriends()));
+		}
+		if (from.getGroups() != null) {
+			toUpdate.setGroups(groupMapper.mapDTOtoEntity(from.getGroups()));
 		}
 		return toUpdate;
 	}

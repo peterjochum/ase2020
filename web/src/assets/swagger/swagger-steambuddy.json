@@ -144,6 +144,24 @@
         }
       }
     },
+    "GroupDTO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "owner" : {
+          "$ref" : "#/definitions/UserDTO"
+        }
+      }
+    },
     "UserDTO" : {
       "type" : "object",
       "properties" : {
@@ -162,6 +180,13 @@
           "uniqueItems" : true,
           "items" : {
             "$ref" : "#/definitions/UserDTO"
+          }
+        },
+        "groups" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/GroupDTO"
           }
         }
       }
