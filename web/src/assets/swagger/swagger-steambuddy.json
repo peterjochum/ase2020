@@ -100,6 +100,25 @@
           }
         }
       }
+    },
+    "internal/api/user/users" : {
+      "put" : {
+        "tags" : [ "UserResource" ],
+        "summary" : "Get all users.",
+        "description" : "Returns all Users.",
+        "operationId" : "getUsers",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/UserDTO"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions" : {

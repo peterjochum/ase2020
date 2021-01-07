@@ -1,5 +1,7 @@
 package org.steambuddy.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.steambuddy.api.UserResource;
@@ -25,6 +27,11 @@ public class UserController implements UserResource{
 	@Override
 	public UserDTO updateUser(UserDTO user) {
 		return userService.updateUser(user);
+	}
+
+	@Override
+	public List<UserDTO> getUsers() {
+		return userService.getUsers();
 	}
 
 }

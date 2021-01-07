@@ -2,6 +2,8 @@ package org.steambuddy.api;
 
 import static org.steambuddy.api.ModuleConfigurationConstants.INTERNAL_PATH_PREFIX;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,4 +62,19 @@ public interface UserResource {
 	@ResponseBody
 	@PutMapping("/update")
 	UserDTO updateUser(@RequestBody UserDTO user);
+	
+	/**
+	 * Get all Users for friend search
+	 * 
+	 * @return a List of {@link UserDTO}
+	 */
+	@ApiOperation(value = "Get all users.",
+			nickname = "getUsers",
+			notes = "Returns all Users.",
+			tags = "UserResource",
+			response = UserDTO.class,
+			responseContainer = "List")
+	@ResponseBody
+	@PutMapping("/users")
+	List<UserDTO> getUsers();
 }

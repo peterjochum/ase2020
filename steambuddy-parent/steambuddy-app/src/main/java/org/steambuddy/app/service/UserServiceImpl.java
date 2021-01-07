@@ -1,5 +1,6 @@
 package org.steambuddy.app.service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,11 @@ public class UserServiceImpl implements UserService {
 		temp.setFriends(user.getFriends());
 		temp.setFriends(null);
 		return temp;
+	}
+
+	@Override
+	public List<UserDTO> getUsers() {
+		return mapper.mapEntityToDTO((List<UserEntity>) userRepository.findAll());
 	}
 	
 }
