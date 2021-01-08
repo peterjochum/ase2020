@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'CashCurrency';
+    src: url('../../assets/fonts/CashCurrency.ttf') format('truetype');
+}
+.main-container {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  padding-top: 2.1%;
+  padding-bottom: 2.1%;
+  text-align: center;
+  background: #eae7dc;
+}
+
+
+.logo {
+  width: 85px;
+  padding-bottom: 35px;
+}
+
+.app-title {
+  font-size: 4em;
+  padding: 0;
+  font-family: 'CashCurrency', sans-serif;
+  color:  #e85a4f;
+  text-align: center;
+}
+
+@media (max-width: 360px) {
+  header {
+    font-size: 3.0em;
+  }
+}
+
+.info {
+  margin: 20px;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.0em;
+  color:  #8e8d8a;
+}
+.col-xs-6{
+  display: inline-block;
+  margin: 0 5px;
+}
+.buttons {
+  max-width: 300px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-bottom: 25px;
+}
+
+.btn {
+  color: white;
+  border-style: solid;
+  width:100px;
+  display: inline-block;
+}
+
+.btn:hover {
+  cursor: pointer;
+  //background-color: #e2f5f5;
+}
