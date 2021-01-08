@@ -32,7 +32,7 @@ describe('AppComponent', () => {
   it(`should have the steambuddy title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Steambuddy');
+    expect(app.title).toEqual('Steambuddy (ASE2020)');
   });
 
   it('should render title', () => {
@@ -40,7 +40,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('.navbar-brand').textContent).toContain(
-      'Steambuddy'
+      'Steambuddy (ASE2020)'
     );
   });
 });
