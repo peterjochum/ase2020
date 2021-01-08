@@ -38,7 +38,7 @@ public class UserEntity {
 			@JoinColumn(name  = "user_id", referencedColumnName = "id",  nullable = false)}, inverseJoinColumns = {
 		    @JoinColumn(name  = "group_id", referencedColumnName = "id",  nullable = false)})
 	private Set<GroupEntity> groups;
-		
+
 	public UserEntity(Long id, String name, String password, Set<UserEntity> friends, Set<GroupEntity> groups) {
 		this.id = id;
 		this.name = name;

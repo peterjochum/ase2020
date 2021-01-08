@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.steambuddy.api.dto.GroupDTO;
 import org.steambuddy.app.entity.GroupEntity;
+import org.steambuddy.app.entity.UserEntity;
 
 @Service
 public class GroupMapper {
@@ -32,7 +33,8 @@ public class GroupMapper {
 		to.setId(from.getId());
 		to.setName(from.getName());
 		to.setDescription(from.getDescription());
-		to.setOwner(userMapper.entityToDTO(from.getOwner()));
+		UserEntity owner = ignoreFriendsAndGroups(from.getOwner());
+		to.setOwner(userMapper.entityToDTO(owner));
 		return to;
 	}
 	
@@ -45,4 +47,13 @@ public class GroupMapper {
 		return to;
 	}
 	
+	private UserEntity ignoreFriendsAndGroups(UserEntity user) {
+		UserEntity temp = new UserEntity();
+		temp.setId(user.getId());
+		temp.setName(user.getName());
+		temp.setFriends(user.getFriends());
+		temp.setFriends(null);
+		temp.setGroups(null);
+		return temp;
+	}
 }

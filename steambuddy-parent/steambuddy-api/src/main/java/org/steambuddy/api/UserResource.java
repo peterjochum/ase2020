@@ -4,6 +4,7 @@ import static org.steambuddy.api.ModuleConfigurationConstants.INTERNAL_PATH_PREF
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +31,7 @@ public interface UserResource {
 			tags = "UserResource",
 			response = UserDTO.class)
 	@ResponseBody
-	@PutMapping("/authenticate")
+	@PutMapping("/users/authenticate")
 	UserDTO authenticateUser(@RequestBody UserDTO user);
 	
 	/**
@@ -45,7 +46,7 @@ public interface UserResource {
 			tags = "UserResource",
 			response = UserDTO.class)
 	@ResponseBody
-	@PostMapping("/register")
+	@PostMapping("/users/register")
 	UserDTO registerUser(@RequestBody UserDTO user);
 	
 	/**
@@ -60,13 +61,13 @@ public interface UserResource {
 			tags = "UserResource",
 			response = UserDTO.class)
 	@ResponseBody
-	@PutMapping("/update")
+	@PutMapping("/users")
 	UserDTO updateUser(@RequestBody UserDTO user);
 	
 	/**
-	 * Get all Users for friend search
+	 * Get all {@link UserDTO}s for friend search
 	 * 
-	 * @return a List of {@link UserDTO}
+	 * @return a {@link List} of {@link UserDTO}s
 	 */
 	@ApiOperation(value = "Get all users.",
 			nickname = "getUsers",
@@ -75,6 +76,6 @@ public interface UserResource {
 			response = UserDTO.class,
 			responseContainer = "List")
 	@ResponseBody
-	@PutMapping("/users")
+	@GetMapping("/users")
 	List<UserDTO> getUsers();
 }

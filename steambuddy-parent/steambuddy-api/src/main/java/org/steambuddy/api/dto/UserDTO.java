@@ -58,6 +58,6 @@ public class UserDTO {
 
 	public void setGroups(Set<GroupDTO> groups) {
 		this.groups = groups;
-	}	
+	}
 	
 }

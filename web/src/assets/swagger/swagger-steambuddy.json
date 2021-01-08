@@ -7,6 +7,8 @@
   "tags" : [ {
     "name" : "GameResource"
   }, {
+    "name" : "GroupResource"
+  }, {
     "name" : "UserResource"
   } ],
   "paths" : {
@@ -29,55 +31,114 @@
         }
       }
     },
-    "internal/api/user/authenticate" : {
-      "put" : {
-        "tags" : [ "UserResource" ],
-        "summary" : "Authenticate a user.",
-        "description" : "Returns the logged in User.",
-        "operationId" : "authenticateUser",
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/UserDTO"
-          }
-        } ],
+    "internal/api/group/groups" : {
+      "get" : {
+        "tags" : [ "GroupResource" ],
+        "summary" : "Get all groups.",
+        "description" : "Returns all Groups.",
+        "operationId" : "getGroups",
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/UserDTO"
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/GroupDTO"
+              }
             }
           }
         }
-      }
-    },
-    "internal/api/user/register" : {
+      },
       "post" : {
-        "tags" : [ "UserResource" ],
-        "summary" : "Register a new user.",
-        "description" : "Returns the created User.",
-        "operationId" : "registerUser",
+        "tags" : [ "GroupResource" ],
+        "summary" : "Create a new group.",
+        "description" : "Returns the created Group.",
+        "operationId" : "createGroup",
         "parameters" : [ {
           "in" : "body",
           "name" : "body",
           "required" : false,
           "schema" : {
-            "$ref" : "#/definitions/UserDTO"
+            "$ref" : "#/definitions/GroupDTO"
           }
         } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "$ref" : "#/definitions/UserDTO"
+              "$ref" : "#/definitions/GroupDTO"
             }
           }
         }
       }
     },
-    "internal/api/user/update" : {
+    "internal/api/group/groups/{user_id}" : {
+      "get" : {
+        "tags" : [ "GroupResource" ],
+        "summary" : "Get all owned groups of user.",
+        "description" : "Returns all owned Groups.",
+        "operationId" : "getGroupsByUserId",
+        "parameters" : [ {
+          "name" : "user_id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/GroupDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "internal/api/group/{id}" : {
+      "delete" : {
+        "tags" : [ "GroupResource" ],
+        "summary" : "Delete a Group.",
+        "description" : "Delete a Group.",
+        "operationId" : "deleteGroup",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GroupDTO"
+            }
+          }
+        }
+      }
+    },
+    "internal/api/user/users" : {
+      "get" : {
+        "tags" : [ "UserResource" ],
+        "summary" : "Get all users.",
+        "description" : "Returns all Users.",
+        "operationId" : "getUsers",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/UserDTO"
+              }
+            }
+          }
+        }
+      },
       "put" : {
         "tags" : [ "UserResource" ],
         "summary" : "Update a user.",
@@ -101,20 +162,49 @@
         }
       }
     },
-    "internal/api/user/users" : {
+    "internal/api/user/users/authenticate" : {
       "put" : {
         "tags" : [ "UserResource" ],
-        "summary" : "Get all users.",
-        "description" : "Returns all Users.",
-        "operationId" : "getUsers",
+        "summary" : "Authenticate a user.",
+        "description" : "Returns the logged in User.",
+        "operationId" : "authenticateUser",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UserDTO"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/UserDTO"
-              }
+              "$ref" : "#/definitions/UserDTO"
+            }
+          }
+        }
+      }
+    },
+    "internal/api/user/users/register" : {
+      "post" : {
+        "tags" : [ "UserResource" ],
+        "summary" : "Register a new user.",
+        "description" : "Returns the created User.",
+        "operationId" : "registerUser",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UserDTO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/UserDTO"
             }
           }
         }

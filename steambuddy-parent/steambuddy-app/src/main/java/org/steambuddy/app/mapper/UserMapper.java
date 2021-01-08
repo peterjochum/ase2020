@@ -31,10 +31,10 @@ public class UserMapper {
 		UserDTO to = new UserDTO();
 		to.setId(from.getId());
 		to.setName(from.getName());
-		if (from.getFriends() != null) {
+		if (from.getFriends() != null && !from.getFriends().isEmpty()) {
 			to.setFriends(mapEntityToDTO(from.getFriends()));
 		}
-		if (from.getGroups() != null) {
+		if (from.getGroups() != null && !from.getGroups().isEmpty()) {
 			to.setGroups(groupMapper.mapEntityToDTO(from.getGroups()));
 		}
 		return to;
@@ -45,10 +45,10 @@ public class UserMapper {
 		to.setId(from.getId());
 		to.setName(from.getName());
 		to.setPassword(from.getPassword());
-		if (from.getFriends() != null) {
+		if (from.getFriends() != null && !from.getFriends().isEmpty()) {
 			to.setFriends(mapDTOtoEntity(from.getFriends()));
 		}
-		if (from.getGroups() != null) {
+		if (from.getGroups() != null && !from.getGroups().isEmpty()) {
 			to.setGroups(groupMapper.mapDTOtoEntity(from.getGroups()));
 		}
 		return to;
@@ -56,10 +56,10 @@ public class UserMapper {
 	
 	public UserEntity updateEntity(UserEntity toUpdate, UserDTO from) {
 		toUpdate.setName(from.getName());
-		if (from.getFriends() != null) {
+		if (from.getFriends() != null && !from.getFriends().isEmpty()) {
 			toUpdate.setFriends(mapDTOtoEntity(from.getFriends()));
 		}
-		if (from.getGroups() != null) {
+		if (from.getGroups() != null && !from.getGroups().isEmpty()) {
 			toUpdate.setGroups(groupMapper.mapDTOtoEntity(from.getGroups()));
 		}
 		return toUpdate;
