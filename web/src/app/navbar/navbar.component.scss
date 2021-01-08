@@ -1,0 +1,56 @@
+.navbar{
+   background: black;
+   padding-top: 1em;
+   padding-bottom: 1em;
+   position:relative;
+}
+
+.navbar-brand{
+	font-family: 'WRESTLEMANIA';
+	font-size: 3em;
+	text-transform: uppercase;
+  margin-left: 0.25em;
+  color:#dc3545;
+}
+
+
+#logo-img{
+  padding-left:1%;
+  padding-right:1%;
+	display: inline-block;
+	height:2.75em;
+}
+
+.form-inline{
+    position:absolute;
+    right:2%;
+}
+
+.btn{
+  background: #dc3545;
+  border: 1px solid  #dc3545;
+//  border-radius: 0 5px 5px 0;
+  border-radius:100px;
+  width:150px;
+  font-family: 'Knewave', cursive;
+  display: inline-block;
+  height:3em;
+}
+
+.form-control{
+  background: transparent;
+  border: 1px solid  #dc3545;
+  border-radius: 5px 5px 5px 5px;
+  font-family: 'Knewave', cursive;
+  height:45px;
+  display:inline-block;
+  width:300px;
+
+}
+
+.form-control:focus{
+  color: #dc3545;
+  border: 1px solid  #dc3545;
+  background: transparent;
+  font-family: 'Knewave', cursive;
+}
