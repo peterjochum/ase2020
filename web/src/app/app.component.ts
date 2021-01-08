@@ -10,5 +10,5 @@ import { Component } from '@angular/core';
  */
 export class AppComponent {
   /** title is shown in the menu and set as window title */
-  title = 'Steambuddy (ASE2020)';
+  title = 'Steambuddy';
 }

@@ -1,5 +1,5 @@
 <!-- Show a message if there was an error accessing the service -->
-<div class="row" *ngIf="serviceError">
+<div class="row no-gutters" *ngIf="serviceError">
   <div class="col-12">
     <div class="alert alert-danger">
       Error connecting to service: {{serviceError.message}}
@@ -8,7 +8,7 @@
 </div>
 
 <!-- Render a responsive card gallery of the received games -->
-<div class="row flex">
+<div class="row no-gutters flex">
   <div *ngFor="let game of games" class="col-md-3 col-sm-4 col-6 mt-3">
     <app-game-card [game]="game"></app-game-card>
   </div>
