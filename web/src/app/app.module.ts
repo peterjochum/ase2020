@@ -10,7 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { environment } from '../environments/environment';
 import { ConfigService } from './services/config.service';
 import { GameCardComponent } from './game-card/game-card.component';
-import { APIS, BASE_PATH } from './integration';
+//import { APIS, BASE_PATH } from './integration';
 
 @NgModule({
   declarations: [
@@ -35,9 +35,9 @@ import { APIS, BASE_PATH } from './integration';
           return configService.loadConfig();
         };
       },
-    },
-    { provide: BASE_PATH, useValue: 'http://localhost:8080/' },
-    APIS
+    }//,
+    //{ provide: BASE_PATH, useValue: 'http://localhost:8080/' },
+    //APIS
   ],
   bootstrap: [AppComponent, GamesListComponent],
 })
