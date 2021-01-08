@@ -9,15 +9,13 @@
     <!--adding login button-->
     <div class="col-xs-6">
        <a routerLinkActive="active"
-          routerLink="/register"
-          *ngIf="!authInfo?.isLoggedIn()"
+          routerLink="/register/"
       ><button class="btn btn-danger">Log in</button></a>
     </div>
     <!-- adding signup button-->
     <div class="col-xs-6">
        <a routerLinkActive="active"
-          routerLink="/login"
-          *ngIf="!authInfo?.isLoggedIn()"
+          routerLink="/login/"
       ><button class="btn btn-danger">Sign up</button></a>
     </div>
   </section>
