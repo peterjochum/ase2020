@@ -12,6 +12,7 @@ import { IGameService } from '../interfaces/gameservice';
  * GameService provides access to game information located at a web service
  */
 export class GameService implements IGameService {
+  
   constructor(private http: HttpClient, private configService: ConfigService) {}
 
   /**

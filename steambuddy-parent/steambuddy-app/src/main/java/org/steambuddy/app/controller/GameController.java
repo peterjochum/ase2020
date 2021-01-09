@@ -13,11 +13,15 @@ public class GameController implements GameResource {
 
 	@Autowired
 	private GameService gameService;
-	
+
 	@Override
 	public List<GameDTO> getGames() {
 		return gameService.getGames();
 	}
 
+	@Override
+	public List<GameDTO> getGames(String name) {
+		return gameService.getGames(name);
+	}
 
 }

@@ -26,4 +26,14 @@ public interface GameResource {
 	@GetMapping("/games")
 	List<GameDTO> getGames();
 	
+	@ApiOperation(value = "Get games which contain the given name",
+			nickname = "getGamesByName",
+			notes = "Returns found games.",
+			tags = "GameResource",
+			response = GameDTO.class,
+			responseContainer = "List")
+	@ResponseBody
+	@GetMapping(path = "/games",  params = "name")
+	List<GameDTO> getGames(String name);
+	
 }

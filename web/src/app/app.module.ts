@@ -10,7 +10,10 @@ import { FooterComponent } from './footer/footer.component';
 import { environment } from '../environments/environment';
 import { ConfigService } from './services/config.service';
 import { GameCardComponent } from './game-card/game-card.component';
-import { APIS, BASE_PATH } from './integration';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+//import { APIS, BASE_PATH } from './integration';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { APIS, BASE_PATH } from './integration';
     NavbarComponent,
     FooterComponent,
     GameCardComponent,
+    HomeComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule],
   providers: [
@@ -35,9 +41,9 @@ import { APIS, BASE_PATH } from './integration';
           return configService.loadConfig();
         };
       },
-    },
-    { provide: BASE_PATH, useValue: 'http://localhost:8080/' },
-    APIS
+    }//,
+    //{ provide: BASE_PATH, useValue: 'http://localhost:8080/' },
+    //APIS
   ],
   bootstrap: [AppComponent, GamesListComponent],
 })

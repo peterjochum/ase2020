@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import { Game } from '../interfaces/game';
 import { Observable, of } from 'rxjs';
 import { IGameService } from '../interfaces/gameservice';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class MockGameService implements IGameService {
   constructor() {}
+  //private usersUrl: string;
+  //constructor(private http: HttpClient) {this.usersUrl = 'http://localhost:4200/users';}
 
   /** FakeGames is curated list of fake games */
   FakeGames: Game[] = [
@@ -65,6 +69,7 @@ export class MockGameService implements IGameService {
    * @return some fake games
    */
   getGames(): Observable<Game[]> {
+    //return this.http.get<Game[]>(this.usersUrl, games);
     return of(this.FakeGames);
   }
 }

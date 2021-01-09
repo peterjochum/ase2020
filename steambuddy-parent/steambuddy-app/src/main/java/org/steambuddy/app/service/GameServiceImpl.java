@@ -13,21 +13,21 @@ import org.steambuddy.app.repository.GameRepository;
 
 @Service
 @Transactional
-public class GameServiceImpl implements GameService{
+public class GameServiceImpl implements GameService {
 
 	@Autowired
 	private GameRepository gameRepository;
-	
+
 	@Autowired
 	private GameMapper mapper;
-	
+
 	@Override
 	public List<GameDTO> getGames() {
 		List<GameEntity> games = new ArrayList<GameEntity>();
-		
+
 		// TODO: call Repository
 		games = (List<GameEntity>) gameRepository.findAll();
-		
+
 		games.add(new GameEntity("Cyberpunk 2077", 2020,
 				"https://images.igdb.com/igdb/image/upload/t_cover_big/co2mjs.jpg",
 				"Cyberpunk 2077 is a role-playing video game developed and published by CD Projekt. Adapted from the Cyberpunk franchise, the game is an open world, non-linear RPG with an FPS style in which players are able to heavily customize their character to suit their play style. Gun play, exploration, player choice and activities such as hacking are to feature heavily throughout the game with missions, quests and objectives being completed in a variety of different ways. The world will have dynamic weather and a day/night cycle to make it truly immersive."));
@@ -38,6 +38,11 @@ public class GameServiceImpl implements GameService{
 				"https://images.igdb.com/igdb/image/upload/t_cover_big/co1ycv.jpg",
 				"The long awaited next installment in the Elder Scrolls franchise."));
 		return mapper.mapEntityToDTO(games);
+	}
+
+	@Override
+	public List<GameDTO> getGames(String name) {
+		return mapper.mapEntityToDTO(gameRepository.findByName(name));
 	}
 
 }
