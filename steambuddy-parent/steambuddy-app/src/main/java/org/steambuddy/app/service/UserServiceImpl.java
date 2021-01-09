@@ -1,7 +1,6 @@
 package org.steambuddy.app.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,7 +28,6 @@ public class UserServiceImpl implements UserService {
 	public UserDTO authenticateUser(UserDTO user) {
 		UserEntity u = userRepository.findByName(user.getName());
 		if (u != null) {
-			u.setFriends(u.getFriends().stream().map(friend -> ignoreFriends(friend)).collect(Collectors.toSet()));
 			if (passwordEncoder.matches(user.getPassword(), u.getPassword())) {
 				return mapper.entityToDTO(u);
 			}
@@ -50,19 +48,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDTO updateUser(UserDTO user) {
 		UserEntity u = userRepository.findById(user.getId()).get();
-		u.setFriends(u.getFriends().stream().map(friend -> ignoreFriends(friend)).collect(Collectors.toSet()));
 		u = mapper.updateEntity(u, user);
 		return mapper.entityToDTO(userRepository.save(u));
-	}
-
-	private UserEntity ignoreFriends(UserEntity user) {
-		UserEntity temp = new UserEntity();
-		temp.setId(user.getId());
-		temp.setName(user.getName());
-		temp.setFriends(user.getFriends());
-		temp.setFriends(null);
-		temp.setGroups(user.getGroups());
-		return temp;
 	}
 
 	@Override

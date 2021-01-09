@@ -32,6 +32,7 @@ public class UserMapper {
 		to.setId(from.getId());
 		to.setName(from.getName());
 		if (from.getFriends() != null && !from.getFriends().isEmpty()) {
+			from.setFriends(from.getFriends().stream().map(friend -> ignoreFriends(friend)).collect(Collectors.toSet()));
 			to.setFriends(mapEntityToDTO(from.getFriends()));
 		}
 		if (from.getGroups() != null && !from.getGroups().isEmpty()) {
@@ -57,12 +58,26 @@ public class UserMapper {
 	public UserEntity updateEntity(UserEntity toUpdate, UserDTO from) {
 		toUpdate.setName(from.getName());
 		if (from.getFriends() != null && !from.getFriends().isEmpty()) {
+			toUpdate.setFriends(toUpdate.getFriends().stream().map(friend -> ignoreFriends(friend)).collect(Collectors.toSet()));
 			toUpdate.setFriends(mapDTOtoEntity(from.getFriends()));
+		} else {
+			toUpdate.setFriends(null);
 		}
 		if (from.getGroups() != null && !from.getGroups().isEmpty()) {
 			toUpdate.setGroups(groupMapper.mapDTOtoEntity(from.getGroups()));
+		} else {
+			toUpdate.setGroups(null);
 		}
 		return toUpdate;
+	}
+	
+	private UserEntity ignoreFriends(UserEntity user) {
+		UserEntity temp = new UserEntity();
+		temp.setId(user.getId());
+		temp.setName(user.getName());
+		temp.setFriends(null);
+		temp.setGroups(user.getGroups());
+		return temp;
 	}
 	
 }
