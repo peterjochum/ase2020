@@ -11,8 +11,8 @@ import { environment } from '../environments/environment';
 import { ConfigService } from './services/config.service';
 import { GameCardComponent } from './game-card/game-card.component';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 //import { APIS, BASE_PATH } from './integration';
 
 @NgModule({
@@ -23,8 +23,8 @@ import { LoginComponent } from './login/login.component';
     FooterComponent,
     GameCardComponent,
     HomeComponent,
-    RegisterComponent,
     LoginComponent,
+    SignupComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule],
   providers: [
