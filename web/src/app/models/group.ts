@@ -2,15 +2,14 @@ import {User} from './user';
 
 export class Group {
 
-  constructor(
 
         /* group's id */
-        public id: number,
+        public id: number;
         /* group's name */
-        public name: string,
+        public name: string;
         /* group's description */
-        public description: string,
+        public description: string;
         /* group's owner*/
-        public user: User
-  ) {}
+        public user: User;
+
 }
