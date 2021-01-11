@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('displays the SteamBuddy brand in menu', async () => {
     await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('Steambuddy (ASE2020)');
+    expect(await page.getTitleText()).toEqual('STEAMBUDDY');
   });
 
   afterEach(async () => {

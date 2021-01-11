@@ -1,1 +1,15 @@
-<p>login works!</p>
+<div class="col-lg-5">
+    <h1 class="h1-strong">{{title}}</h1>
+    <div id="msg" class="alert alert-danger" *ngIf="status == 'error'" >Login failed: email or password invalid.</div>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg-12">
+        <p>
+            <label>Username</label>
+            <input id="username" type="text" name="username" class="form-control" required [(ngModel)]="user.name" #name="ngModel"/>
+        </p>
+        <p>
+            <label>Password</label>
+            <input id="password" type="password" name="password" class="form-control" required [(ngModel)]="user.password" #password="ngModel" />
+        </p>
+        <input id="submitBtn" type="submit" value="Login" class="btn btn-danger" [disabled]="!loginForm.form.valid">
+    </form>
+</div>

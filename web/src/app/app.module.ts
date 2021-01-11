@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GamesListComponent } from './games-list/games-list.component';
@@ -12,8 +12,14 @@ import { ConfigService } from './services/config.service';
 import { GameCardComponent } from './game-card/game-card.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { RegisterComponent } from './register/register.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { ProfileComponent } from './profile/profile.component';
+
+
 //import { APIS, BASE_PATH } from './integration';
+
 
 @NgModule({
   declarations: [
@@ -24,9 +30,11 @@ import { SignupComponent } from './signup/signup.component';
     GameCardComponent,
     HomeComponent,
     LoginComponent,
-    SignupComponent,
+    RegisterComponent,
+    UserEditComponent,
+    ProfileComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule,FormsModule],
   providers: [
     {
       provide: 'IGameService',
