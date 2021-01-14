@@ -5,6 +5,8 @@
     "title" : "Steambuddy TypeScript API"
   },
   "tags" : [ {
+    "name" : "FriendRequestResource"
+  }, {
     "name" : "GameResource"
   }, {
     "name" : "GroupResource"
@@ -12,12 +14,137 @@
     "name" : "UserResource"
   } ],
   "paths" : {
+    "internal/api/friend-request/friend-requests" : {
+      "post" : {
+        "tags" : [ "FriendRequestResource" ],
+        "summary" : "Create a new friendRequest.",
+        "description" : "Returns the id of the created friendRequest.",
+        "operationId" : "createRequest",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FriendRequestDTO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "FriendRequestResource" ],
+        "summary" : "Updated a friendRequest.",
+        "description" : "Returns the id of the updated friendRequest.",
+        "operationId" : "updateRequest",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FriendRequestDTO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "integer",
+              "format" : "int64"
+            }
+          }
+        }
+      }
+    },
+    "internal/api/friend-request/friend-requests/incoming" : {
+      "get" : {
+        "tags" : [ "FriendRequestResource" ],
+        "summary" : "Get all incomin friendRequests of a user.",
+        "description" : "Returns all incoming friendRequests.",
+        "operationId" : "getIncoming",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UserDTO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/FriendRequestDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "internal/api/friend-request/friend-requests/outgoing" : {
+      "get" : {
+        "tags" : [ "FriendRequestResource" ],
+        "summary" : "Get all outgoing friendRequests of a user.",
+        "description" : "Returns all outgoing friendRequests.",
+        "operationId" : "getOutgoing",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UserDTO"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/FriendRequestDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "internal/api/friend-request/friend-requests/{id}" : {
+      "get" : {
+        "tags" : [ "FriendRequestResource" ],
+        "summary" : "Get friendRequest by id.",
+        "description" : "Returns the friendRequest with given id.",
+        "operationId" : "getRequestById",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/FriendRequestDTO"
+            }
+          }
+        }
+      }
+    },
     "internal/api/game/games" : {
       "get" : {
         "tags" : [ "GameResource" ],
-        "summary" : "Get the list of all games.",
-        "description" : "Returns all games.",
-        "operationId" : "getGames",
+        "summary" : "Get games which contain the given name",
+        "description" : "Returns found games.",
+        "operationId" : "getGamesByName",
         "responses" : {
           "200" : {
             "description" : "successful operation",
@@ -212,6 +339,28 @@
     }
   },
   "definitions" : {
+    "FriendRequestDTO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "timestamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "accepted" : {
+          "type" : "boolean"
+        },
+        "sender" : {
+          "$ref" : "#/definitions/UserDTO"
+        },
+        "receiver" : {
+          "$ref" : "#/definitions/UserDTO"
+        }
+      }
+    },
     "GameDTO" : {
       "type" : "object",
       "properties" : {
