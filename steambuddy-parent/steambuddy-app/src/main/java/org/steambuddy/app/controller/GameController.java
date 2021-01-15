@@ -29,4 +29,10 @@ public class GameController implements GameResource {
 		return gameService.getGame(id);
 	}
 
+	@Override
+	public GameDTO addGameToCollection(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
