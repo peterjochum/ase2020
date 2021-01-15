@@ -5,6 +5,7 @@ import static org.steambuddy.api.ModuleConfigurationConstants.INTERNAL_PATH_PREF
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -78,4 +79,13 @@ public interface UserResource {
 	@ResponseBody
 	@GetMapping("/users")
 	List<UserDTO> getUsers();
+	
+	@ApiOperation(value = "Get user by id.",
+			nickname = "getUserById",
+			notes = "Returns user with given id.",
+			tags = "UserResource",
+			response = UserDTO.class)
+	@ResponseBody
+	@GetMapping("/users/{id}")
+	UserDTO getUserById(@PathVariable("id") Long id);
 }

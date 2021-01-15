@@ -34,4 +34,9 @@ public class UserController implements UserResource{
 		return userService.getUsers();
 	}
 
+	@Override
+	public UserDTO getUserById(Long id) {
+		return userService.getUserById(id);
+	}
+
 }

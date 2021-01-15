@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.steambuddy.api.dto.FriendRequestDTO;
@@ -24,7 +23,7 @@ public interface FriendRequestResource {
 	/**
 	 * Gets all incoming {@link FriendRequestDTO}s of a {@link UserDTO}
 	 * 
-	 * @param receiver of the friendRequests
+	 * @param id of the sender
 	 * @return a {@link List} of {@link FriendRequestDTO}s
 	 */
 	@ApiOperation(value = "Get all incomin friendRequests of a user.",
@@ -34,13 +33,13 @@ public interface FriendRequestResource {
 			response = FriendRequestDTO.class,
 			responseContainer = "List")
 	@ResponseBody
-	@GetMapping("/friend-requests/incoming")
-	List<FriendRequestDTO> getIncoming(@RequestBody UserDTO receiver);
+	@GetMapping("/friend-requests/incoming/{id}")
+	List<FriendRequestDTO> getIncoming(@PathVariable("id") Long id);
 	
 	/**
 	 * Gets all outgoing {@link FriendRequestDTO}s of a {@link UserDTO}
 	 * 
-	 * @param sender of the friendRequests
+	 * @param id of the receiver
 	 * @return a {@link List} of {@link FriendRequestDTO}s
 	 */
 	@ApiOperation(value = "Get all outgoing friendRequests of a user.",
@@ -50,13 +49,14 @@ public interface FriendRequestResource {
 			response = FriendRequestDTO.class,
 			responseContainer = "List")
 	@ResponseBody
-	@GetMapping("/friend-requests/outgoing")
-	List<FriendRequestDTO> getOutgoing(@RequestBody UserDTO sender);
+	@GetMapping("/friend-requests/outgoing/{id}")
+	List<FriendRequestDTO> getOutgoing(@PathVariable("id") Long id);
 	
 	/**
 	 * Creates a new {@link FriendRequestDTO}
 	 * 
-	 * @param request to be created
+	 * @param sender_id
+	 * @param receiver_id
 	 * @return id of the new {@link FriendRequestDTO}
 	 */
 	@ApiOperation(value = "Create a new friendRequest.",
@@ -65,8 +65,8 @@ public interface FriendRequestResource {
 			tags = "FriendRequestResource",
 			response = Long.class)
 	@ResponseBody
-	@PostMapping("/friend-requests")
-	Long createRequest(@RequestBody FriendRequestDTO request);
+	@PostMapping("/friend-requests/{sender_id}/{receiver_id}")
+	Long createRequest(@PathVariable("sender_id") Long sender_id, @PathVariable("receiver_id") Long receiver_id);
 	
 	/**
 	 * Updates a {@link FriendRequestDTO}
@@ -74,14 +74,29 @@ public interface FriendRequestResource {
 	 * @param request to be updated
 	 * @return the id of the updated {@link FriendRequestDTO}
 	 */
-	@ApiOperation(value = "Updated a friendRequest.",
-			nickname = "updateRequest",
-			notes = "Returns the id of the updated friendRequest.",
+	@ApiOperation(value = "Accept a friendRequest.",
+			nickname = "acceptRequest",
+			notes = "Accept a friendRequest.",
 			tags = "FriendRequestResource",
 			response = Long.class)
 	@ResponseBody
-	@PutMapping("/friend-requests")
-	Long updateRequest(@RequestBody FriendRequestDTO request);
+	@PutMapping("/friend-requests/accept/{id}")
+	void acceptRequest(@PathVariable("id") Long id);
+	
+	/**
+	 * Updates a {@link FriendRequestDTO}
+	 * 
+	 * @param request to be updated
+	 * @return the id of the updated {@link FriendRequestDTO}
+	 */
+	@ApiOperation(value = "Decline a friendRequest.",
+			nickname = "declineRequest",
+			notes = "Decline a friendRequest.",
+			tags = "FriendRequestResource",
+			response = Long.class)
+	@ResponseBody
+	@PutMapping("/friend-requests/decline/{id}")
+	void declineRequest(@PathVariable("id") Long id);
 	
 	/**
 	 * Get the {@link FriendRequestDTO} with the given id

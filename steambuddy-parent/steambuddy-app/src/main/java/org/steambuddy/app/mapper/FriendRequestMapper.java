@@ -18,7 +18,7 @@ public class FriendRequestMapper {
 		return from.stream().map(fr -> entityToDTO(fr)).collect(Collectors.toList());
 	}
 	
-	private FriendRequestDTO entityToDTO(FriendRequestEntity from) {
+	public FriendRequestDTO entityToDTO(FriendRequestEntity from) {
 		FriendRequestDTO to = new FriendRequestDTO();
 		to.setId(from.getId());
 		to.setAccepted(from.getAccepted());
