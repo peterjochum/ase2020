@@ -1,8 +1,11 @@
 package org.steambuddy.app.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +18,9 @@ public class PublisherEntity {
 	@Column(name = "name")
 	private String name;
 
+	@OneToMany(mappedBy = "publisher")
+	private Set<GameEntity> games;
+	
 	public Long getId() {
 		return id;
 	}

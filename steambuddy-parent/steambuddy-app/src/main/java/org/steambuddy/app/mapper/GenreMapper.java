@@ -1,5 +1,6 @@
 package org.steambuddy.app.mapper;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,11 +11,11 @@ import org.steambuddy.app.entity.GenreEntity;
 @Service
 public class GenreMapper {
 
-	public List<GenreDTO> mapEntityToDTO(List<GenreEntity> from) {
+	public List<GenreDTO> mapEntityToDTO(Collection<GenreEntity> from) {
 		return from.stream().map(g -> entityToDTO(g)).collect(Collectors.toList());
 	}
 
-	private GenreDTO entityToDTO(GenreEntity from) {
+	public GenreDTO entityToDTO(GenreEntity from) {
 		GenreDTO to = new GenreDTO();
 		to.setId(from.getId());
 		to.setName(from.getName());

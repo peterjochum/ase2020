@@ -35,5 +35,11 @@ public interface GameResource {
 	@ResponseBody
 	@GetMapping(path = "/games",  params = "name")
 	List<GameDTO> getGames(String name);
+
 	
+
+	@ApiOperation(value = "Get game by id.", nickname = "getGame", notes = "Returns game or null.", tags = "GamesResource", response = GameDTO.class)
+	@ResponseBody
+	@GetMapping(path = "/games", params = "id")
+	GameDTO getGame(Long id);
 }

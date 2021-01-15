@@ -8,5 +8,6 @@ public interface GameService {
 
 	List<GameDTO> getGames();
 	List<GameDTO> getGames(String name);
+	GameDTO getGame(Long id);
 	
 }

@@ -1,16 +1,15 @@
 package org.steambuddy.api.dto;
 
+import java.util.List;
+
 public class GameDTO {
 
 	private Long id;
-
 	private String name;
-
 	private Integer year;
-
 	private String image;
-
 	private String text;
+	private List<GenreDTO> genres;
 
 	public Long getId() {
 		return id;
@@ -50,6 +49,14 @@ public class GameDTO {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public List<GenreDTO> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<GenreDTO> genres) {
+		this.genres = genres;
 	}
 
 	public static GameDTO getInstance(String name, Integer year, String image, String text) {

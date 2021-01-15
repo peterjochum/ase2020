@@ -1,11 +1,13 @@
 package org.steambuddy.app.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +31,9 @@ public class GameEntity {
 
 	@ManyToMany(targetEntity = GenreEntity.class)
 	private Set<GenreEntity> genres;
+
+	@ManyToOne
+	private PublisherEntity publisher;
 
 	public Long getId() {
 		return id;
@@ -71,11 +76,22 @@ public class GameEntity {
 	}
 
 	public Set<GenreEntity> getGenres() {
+		if(genres == null) {
+			genres =  new HashSet<>();
+		}
 		return genres;
 	}
 
 	public void setGenres(Set<GenreEntity> genres) {
 		this.genres = genres;
+	}
+
+	public PublisherEntity getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(PublisherEntity publisher) {
+		this.publisher = publisher;
 	}
 
 	public GameEntity(String name, Integer year, String image, String text) {

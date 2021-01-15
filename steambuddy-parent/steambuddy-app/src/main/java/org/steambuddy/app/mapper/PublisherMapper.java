@@ -14,7 +14,7 @@ public class PublisherMapper {
 		return from.stream().map(g -> entityToDTO(g)).collect(Collectors.toList());
 	}
 
-	private PublisherDTO entityToDTO(PublisherEntity from) {
+	public PublisherDTO entityToDTO(PublisherEntity from) {
 		PublisherDTO to = new PublisherDTO();
 		to.setId(from.getId());
 		to.setName(from.getName());

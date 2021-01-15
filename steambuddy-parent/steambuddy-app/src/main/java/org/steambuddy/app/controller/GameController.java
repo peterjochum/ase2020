@@ -24,4 +24,9 @@ public class GameController implements GameResource {
 		return gameService.getGames(name);
 	}
 
+	@Override
+	public GameDTO getGame(Long id) {
+		return gameService.getGame(id);
+	}
+
 }
