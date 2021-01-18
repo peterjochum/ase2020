@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.steambuddy.api.dto.GameCollectionDTO;
 import org.steambuddy.api.dto.GameDTO;
 
 import io.swagger.annotations.Api;
@@ -32,8 +33,15 @@ public interface GameResource {
 	@GetMapping(path = "/{id}")
 	GameDTO getGame(@PathVariable("id") Long id);
 
-	@ApiOperation(value = "Add a game by id to the gamecollection.", nickname = "addGame", notes = "adds game to collection", tags = "GamesResource", response = Boolean.class)
+	@ApiOperation(value = "Add a game by id to the gamecollection.", nickname = "addGame", notes = "adds game to collection", tags = "GamesResource", response = GameCollectionDTO.class)
+	@ResponseBody
+	@GetMapping(path = "/gamecollection/{id}/{gameId}")
+	GameCollectionDTO addGameToCollection(@PathVariable("id") Long id, @PathVariable("gameId") Long gameId);
+
+	@ApiOperation(value = "Get game gamecollection from user.", nickname = "getGamecollection", notes = "get gamecollection from user", tags = "GamesResource", response = GameCollectionDTO.class)
 	@ResponseBody
 	@GetMapping(path = "/gamecollection/{id}")
-	GameDTO addGameToCollection(@PathVariable("id") Long id);
+	GameCollectionDTO getCollection(@PathVariable("id") Long userId);
+
+	
 }

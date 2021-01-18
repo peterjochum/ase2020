@@ -2,6 +2,7 @@ package org.steambuddy.app.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -40,7 +41,7 @@ public class UserEntity {
 					@JoinColumn(name = "group_id", referencedColumnName = "id", nullable = false) })
 	private Set<GroupEntity> groups;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private GameCollectionEntity gameCollection;
 
 	public UserEntity(Long id, String name, String password, Set<UserEntity> friends, Set<GroupEntity> groups) {

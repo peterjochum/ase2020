@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.steambuddy.api.GameResource;
+import org.steambuddy.api.dto.GameCollectionDTO;
 import org.steambuddy.api.dto.GameDTO;
 import org.steambuddy.app.service.GameService;
 
@@ -30,9 +31,14 @@ public class GameController implements GameResource {
 	}
 
 	@Override
-	public GameDTO addGameToCollection(Long id) {
+	public GameCollectionDTO addGameToCollection(Long id, Long gameId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public GameCollectionDTO getCollection(Long userId) {
+		return gameService.getGameCollection(userId);
 	}
 
 }
