@@ -13,7 +13,9 @@ public interface GameService {
 
 	GameDTO getGame(Long id);
 
-	GameCollectionDTO getGameCollection(Long userId);
+	GameCollectionDTO getGameCollectionByUserId(Long userId);
 
 	GameCollectionDTO addGameToGameCollection(Long gameCollection, Long gameId);
+
+	GameCollectionDTO removeGameFromGameCollection(Long userId, Long gameId);
 }

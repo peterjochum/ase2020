@@ -31,14 +31,18 @@ public class GameController implements GameResource {
 	}
 
 	@Override
-	public GameCollectionDTO addGameToCollection(Long id, Long gameId) {
-		// TODO Auto-generated method stub
-		return null;
+	public GameCollectionDTO addGameToCollection(Long userId, Long gameId) {
+		return gameService.addGameToGameCollection(userId, gameId);
 	}
 
 	@Override
 	public GameCollectionDTO getCollection(Long userId) {
-		return gameService.getGameCollection(userId);
+		return gameService.getGameCollectionByUserId(userId);
+	}
+
+	@Override
+	public GameCollectionDTO removeGameToCollection(Long id, Long gameId) {
+		return gameService.removeGameFromGameCollection(id, gameId);
 	}
 
 }

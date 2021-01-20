@@ -43,6 +43,10 @@ public class GameCollectionEntity {
 	public void addGame(GameEntity game) {
 		getGames().add(game);
 	}
+	
+	public void removeGame(GameEntity gameEntity) {
+		getGames().remove(gameEntity);
+	}
 
 	@Override
 	public int hashCode() {
@@ -62,5 +66,7 @@ public class GameCollectionEntity {
 			return false;
 		return gce.getId().equals(getId());
 	}
+
+	
 
 }

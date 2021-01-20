@@ -4,8 +4,10 @@ import static org.steambuddy.api.ModuleConfigurationConstants.INTERNAL_PATH_PREF
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.steambuddy.api.dto.GameCollectionDTO;
@@ -35,9 +37,14 @@ public interface GameResource {
 
 	@ApiOperation(value = "Add a game by id to the gamecollection.", nickname = "addGame", notes = "adds game to collection", tags = "GamesResource", response = GameCollectionDTO.class)
 	@ResponseBody
-	@GetMapping(path = "/gamecollection/{id}/{gameId}")
+	@PutMapping(path = "/gamecollection/{id}/{gameId}")
 	GameCollectionDTO addGameToCollection(@PathVariable("id") Long id, @PathVariable("gameId") Long gameId);
 
+	@ApiOperation(value = "Add a game by id to the gamecollection.", nickname = "addGame", notes = "adds game to collection", tags = "GamesResource", response = GameCollectionDTO.class)
+	@ResponseBody
+	@DeleteMapping(path = "/gamecollection/{id}/{gameId}")
+	GameCollectionDTO removeGameToCollection(@PathVariable("id") Long id, @PathVariable("gameId") Long gameId);
+	
 	@ApiOperation(value = "Get game gamecollection from user.", nickname = "getGamecollection", notes = "get gamecollection from user", tags = "GamesResource", response = GameCollectionDTO.class)
 	@ResponseBody
 	@GetMapping(path = "/gamecollection/{id}")
