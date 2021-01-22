@@ -32,7 +32,7 @@ public class GameRetriever {
 		int maxId = 500;
 		List<String> games = new ArrayList<>();
 
-		for (int i = 1; i < 1000; i++) {
+		for (int i = 1; i < 100; i++) {
 			games.addAll(getGameInfos(maxId * i));
 		}
 		writeToData("insert ignore into publisher (id, name) values ", publisher, fw);
@@ -77,7 +77,7 @@ public class GameRetriever {
 		OkHttpClient client = new OkHttpClient();
 
 		RequestBody rb = RequestBody.create(MediaType.parse("text/plain"),
-				"fields name, cover, release_dates.human, summary, genres, involved_companies ; where platforms = 6 & rating > 60 & id < "
+				"fields name, cover, release_dates.human, summary, genres, involved_companies ; where platforms = (6) & rating > 74 & id < "
 						+ maxId + " & id >= " + (maxId - 500) + "; limit 500 ;");
 //				"fields * ; where platforms = 6 & rating > 74; limit 500;");
 
@@ -97,7 +97,7 @@ public class GameRetriever {
 			// System.out.println(jo.toString());
 			Integer id = jo.getInt("id");
 			String name = "'" + jo.getString("name").replaceAll("'", "`") + "'";
-
+			System.out.println("Found: " + id + " " + name);
 			String year = jo.getJSONArray("release_dates").getJSONObject(0).getString("human");
 
 			if (year.length() < 4) {
@@ -158,7 +158,7 @@ public class GameRetriever {
 
 		OkHttpClient client = new OkHttpClient();
 
-		RequestBody rb = RequestBody.create(MediaType.parse("text/plain"), "fields * ; where published = " + id + ";");
+		RequestBody rb = RequestBody.create(MediaType.parse("text/plain"), "fields * ; where published = (" + id + ");");
 
 		Request gameRequest = new Request.Builder().url("https://api.igdb.com/v4/companies")
 				.addHeader("Client-ID", "aagdqwj9ymhot013cfc6kro5xsn920")

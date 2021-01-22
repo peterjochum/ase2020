@@ -5,6 +5,7 @@ import static org.steambuddy.api.ModuleConfigurationConstants.INTERNAL_PATH_PREF
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.steambuddy.api.dto.GenreDTO;
@@ -16,18 +17,18 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping(value = INTERNAL_PATH_PREFIX + "/api/genre")
 public interface GenreResource {
 
-	@ApiOperation(value = "Get the list of all genres.", nickname = "getGenre", notes = "Returns all genres.", tags = "GenreResource", response = GenreDTO.class, responseContainer = "List")
+	@ApiOperation(value = "Get the list of all genres.", nickname = "getGenres", notes = "Returns all genres.", tags = "GenreResource", response = GenreDTO.class, responseContainer = "List")
 	@ResponseBody
-	@GetMapping("/genre")
+	@GetMapping("/genres")
 	List<GenreDTO> getGenres();
 
 	@ApiOperation(value = "Get publisher which contain the given name", nickname = "getGenreByName", notes = "Returns found genres.", tags = "GenreResource", response = GenreDTO.class, responseContainer = "List")
 	@ResponseBody
-	@GetMapping(path = "/genre", params = "name")
-	List<GenreDTO> getGenres(String name);
+	@GetMapping(path = "/genres/{name}")
+	List<GenreDTO> getGenres(@PathVariable("name") String name);
 
 	@ApiOperation(value = "Get genre by id.", nickname = "getGenre", notes = "Returns genre or null.", tags = "GenreResource", response = GenreDTO.class)
 	@ResponseBody
-	@GetMapping(path = "/genre", params = "id")
-	GenreDTO getGenre(Long id);
+	@GetMapping(path = "/{id}")
+	GenreDTO getGenre(@PathVariable("id") Long id);
 }

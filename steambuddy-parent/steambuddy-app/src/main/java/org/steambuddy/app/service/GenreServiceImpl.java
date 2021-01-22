@@ -23,19 +23,19 @@ public class GenreServiceImpl implements GenreService {
 
 	@Override
 	public List<GenreDTO> getGenres() {
-		return genreMapper.mapEntityToDTO(((List<GenreEntity>) genreRepository.findAll()));
+		return genreMapper.mapEntityToDTOWithGames(((List<GenreEntity>) genreRepository.findAll()));
 	}
 
 	@Override
 	public List<GenreDTO> getGenresLikeName(String name) {
-		return genreMapper.mapEntityToDTO(genreRepository.findByName(name));
+		return genreMapper.mapEntityToDTOWithGames(genreRepository.findByName(name));
 	}
 
 	@Override
 	public GenreDTO getGenre(Long id) {
 		Optional<GenreEntity> optGenre = genreRepository.findById(id);
 		if (optGenre.isPresent())
-			return genreMapper.entityToDTO(optGenre.get());
+			return genreMapper.entityToDTO(optGenre.get(), true);
 		return null;
 	}
 
