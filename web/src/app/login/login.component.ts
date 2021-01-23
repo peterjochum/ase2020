@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import {User} from '../models/user';
@@ -14,8 +13,8 @@ import {UserService} from '../services/user.service';
 export class LoginComponent implements OnInit {
   title = 'Login';
 
-  public user = new User();
-  public status: string;
+  public user = new User(1, "testuser", "");
+  public status: string | undefined;
 
   constructor(private userService : UserService, private router : Router) {}
 
@@ -35,10 +34,8 @@ export class LoginComponent implements OnInit {
    });
 
    onSubmit(){
-        var inputName = (<HTMLInputElement>document.getElementById("username")).value;
-        this.user.name = inputName;
-        var inputPassword = (<HTMLInputElement>document.getElementById("password")).value;
-        this.user.password = inputPassword;
+     this.user.name = (<HTMLInputElement>document.getElementById("username")).value;
+     this.user.password = (<HTMLInputElement>document.getElementById("password")).value;
         this.userService.login(this.user).subscribe(
           response => {
               let result =  response.json();
@@ -56,7 +53,7 @@ export class LoginComponent implements OnInit {
                 this.status = 'error';
               }
           },
-          error => {
+          _ => {
               console.log("Error in authentication");
           }
         );

@@ -14,6 +14,17 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
+## Build the container
+
+Run `docker build -t steambuddy_web:local .`
+
+## Run the container
+
+- The application is available on port 80 in the container
+- Set the steambuddy api using the environment variable `STEAMBUDDY_API_URL`
+
+Run `docker run --rm -p 8080:80 -e STEAMBUDDY_API_URL=http://steambuddy.info steambuddy_web:local`
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
