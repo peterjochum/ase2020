@@ -12,7 +12,6 @@ import { ConfigService } from './services/config.service';
 import { GameCardComponent } from './game-card/game-card.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { RegisterComponent } from './register/register.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { ProfileComponent } from './profile/profile.component';
