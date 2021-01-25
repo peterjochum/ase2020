@@ -12,7 +12,7 @@ public interface GameService {
 
 	List<GameDTO> getGames(String name);
 	
-	List<GameDTO> getGameSuggestions(UserDTO user);
+	List<GameDTO> getGameSuggestions(Long userId);
 
 	GameDTO getGame(Long id);
 

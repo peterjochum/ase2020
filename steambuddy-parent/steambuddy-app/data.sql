@@ -14817,4 +14817,17 @@ insert ignore into game_genres (genres_id, game_id) values (32, 40524),
 (24, 26189),
 (25, 41047),
 (26, 22023),
-(31, 46980);
+(31, 46980),
+(1,1),
+(2,2),
+(2,1),
+;
+
+insert ignore into game_collection (id) values (1);
+
+insert ignore into user (name, password,game_collection_id) values ('Bob', '123', 1);
+
+insert ignore into game_collection_games (game_collection_entity_id,games_id) values (1,1),
+(1,2);
+
+

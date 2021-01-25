@@ -1,10 +1,18 @@
 package org.steambuddy.app.service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,8 +70,90 @@ public class GameServiceImpl implements GameService {
 	}
 	
 	@Override
-	public List<GameDTO> getGameSuggestions(UserDTO user) {
+	public List<GameDTO> getGameSuggestions(Long id) {
 		//get user
+		
+		
+		//-> Get nullpointer exeption, why? GameCollectionEntity collection=getGameCollectionEntityByUserId(id);
+		
+		//quickfix, manual copying, fix problem later
+		Optional<UserEntity> optUser = userRepository.findById(id);
+		GameCollectionEntity collection=new GameCollectionEntity();
+		if (optUser.isPresent())
+			collection= optUser.get().getGameCollection();
+		else 
+			System.out.println("User not found!");
+		
+		Set<GameEntity> userGames=collection.getGames();
+		
+		System.out.println("Games " + userGames.size());
+		
+		
+		//get preferred changes based on user collection
+		SortedMap<Long,Long> genrePrefs=new TreeMap<Long,Long>();
+		long genreID;
+		for (GameEntity game: userGames) {
+			Set<GenreEntity> genres=game.getGenres();
+			for (GenreEntity genre: genres) {
+				genreID=genre.getId();
+				if(!genrePrefs.containsKey(genreID)) 
+					genrePrefs.put(genreID,1L);
+				else 
+					genrePrefs.put(genreID,genrePrefs.get(genreID)+1L);
+						
+			}
+		}
+		
+
+		System.out.println("Genreprefs " + userGames.size());
+		
+		List<Long> bestGenres=new LinkedList<Long>();
+		int genreCount=0;
+		long worstGenreCount=0;
+
+		
+
+		//find 5 most common genres of user
+		for (long genre: genrePrefs.keySet()) {
+			if(genreCount<5) {
+				bestGenres.add(genre);
+				genreCount++;
+			}
+			else {
+				
+			}
+			if(genrePrefs.get(genre)>worstGenreCount) {//if genre is more common, remove currently least common genre and add new one instead
+				for (long genre2: bestGenres) {
+					if(genrePrefs.get(genre2)==worstGenreCount) {
+						bestGenres.remove(genre2);
+						bestGenres.add(genre);
+						break;
+					}
+					
+				}
+				worstGenreCount=Long.MAX_VALUE;//set new worst value
+				for (long genre2: bestGenres) {
+					if(genrePrefs.get(genre2)<worstGenreCount) {
+						worstGenreCount=genrePrefs.get(genre2);
+					}
+				}
+				
+			}
+			
+		}
+		
+		
+		//debug
+		if(bestGenres.isEmpty()) {
+			System.out.println("No games with genres found!");
+			return null;
+		}
+		
+		
+		
+		return mapper.mapEntityToDTO(gameRepository.findByCategory(bestGenres));
+		
+		/*
 		UserEntity userE=new UserEntity();
 		
 		//get games of user
@@ -95,6 +185,7 @@ public class GameServiceImpl implements GameService {
 		
 		
 		return mapper.mapEntityToDTO(gameRepository.findByCategory(new HashSet<GenreEntity>()));
+	*/
 	}
 
 	@Override

@@ -74,43 +74,30 @@ public class ServiceTest
 	//	Mockito.when(gameRepository.findByName("Quake")).thenReturn(new ArrayList<GameEntity>());
 	//}
 	
+
+	
+	
 	@Test
     public void getAllGames()
     {
 		
     	List<GameDTO> entities=gameController.getGames();
     	System.out.println("EntitiesFound: " + entities.size());
-    	
-    	//Set<GenreEntity> categories=new HashSet<GenreEntity>();
-    	//categories.add(new GenreEntity());
-    	//List<GameEntity> entities=gameRepository.findByCategory(categories);
-    	//(categories);
-    	/*for (GameEntity e:(gameRepository.findByCategory(new HashSet<GenreEntity>()))) {
-    		System.out.println(e.getName());
-    	}*/
-    	/*UserDTO user=new UserDTO(1L,"Test", "dasfedsf", new HashSet<UserDTO>(), new HashSet<GroupDTO>());
-    	GameService service=new GameServiceImpl();
-    	service.getGameSuggestions(user);*/
         assertTrue( true );
     }
+	
+	
 	
 	@Test
     public void getGamesOfUser()
     {
-		UserDTO user=new UserDTO(1L,"Test", "dasfedsf", new HashSet<UserDTO>(), new HashSet<GroupDTO>());
-    	List<GameDTO> entities=gameController.getGameSuggestions(user);
-    	System.out.println("EntitiesFound: " + entities.size());
+		
+    	List<GameDTO> entities=gameController.getGameSuggestions(1L);
     	
-    	//Set<GenreEntity> categories=new HashSet<GenreEntity>();
-    	//categories.add(new GenreEntity());
-    	//List<GameEntity> entities=gameRepository.findByCategory(categories);
-    	//(categories);
-    	/*for (GameEntity e:(gameRepository.findByCategory(new HashSet<GenreEntity>()))) {
-    		System.out.println(e.getName());
-    	}*/
-    	/*UserDTO user=new UserDTO(1L,"Test", "dasfedsf", new HashSet<UserDTO>(), new HashSet<GroupDTO>());
-    	GameService service=new GameServiceImpl();
-    	service.getGameSuggestions(user);*/
+    	for (GameDTO game: entities) {
+    		System.out.println("Game " + game.getName() + ", description: " + game.getText());
+    	}
+    	
         assertTrue( true );
     }
 }

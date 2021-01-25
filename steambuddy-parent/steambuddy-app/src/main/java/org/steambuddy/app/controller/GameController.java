@@ -33,8 +33,8 @@ public class GameController implements GameResource {
 	
 
 	@Override
-	public List<GameDTO> getGameSuggestions(UserDTO user) {
-		return gameService.getGameSuggestions(user);
+	public List<GameDTO> getGameSuggestions(Long id) {
+		return gameService.getGameSuggestions(id);
 	}
 
 	@Override

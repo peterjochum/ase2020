@@ -30,23 +30,11 @@ public interface GameResource {
 	@GetMapping("/games")
 	List<GameDTO> getGames();
 
-
-	@ApiOperation(value = "Get game by id.", nickname = "getGame", notes = "Returns game or null.", tags = "GamesResource", response = GameDTO.class)
+	@ApiOperation(value = "Get a list of suggested games.",nickname = "getSuggestedGames",notes = "Returns a list of suggested games.",tags = "GameResource",response = GameDTO.class,responseContainer = "List")
 	@ResponseBody
-	@GetMapping(path = "/games", params = "id")
-	GameDTO getGame(Long id);
+	@GetMapping(path="/games/suggested/{id}")
+	List<GameDTO> getGameSuggestions(@PathVariable("id") Long userId);
 	
-	@ApiOperation(value = "Get a list of suggested games.",
-			nickname = "getSuggestedGames",
-			notes = "Returns a list of suggested games.",
-			tags = "GameResource",
-			response = GameDTO.class,
-			responseContainer = "List")
-	@ResponseBody
-	@GetMapping(path="/games/suggested",params="user")
-	List<GameDTO> getGameSuggestions(@RequestBody UserDTO user);
-	
-
 	@ApiOperation(value = "Get games which contain the given name", nickname = "getGamesByName", notes = "Returns found games.", tags = "GameResource", response = GameDTO.class, responseContainer = "List")
 	@ResponseBody
 	@GetMapping(path = "/games/{name}")
