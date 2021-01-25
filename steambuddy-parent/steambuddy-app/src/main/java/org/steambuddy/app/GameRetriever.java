@@ -22,7 +22,7 @@ public class GameRetriever {
 
 	// rating 74
 
-	private static Map<Integer, String> publisher = new HashMap<>();
+	/*private static Map<Integer, String> publisher = new HashMap<>();
 	private static Map<Integer, String> genres = new HashMap<>();
 	private static Map<Integer, Integer> genreGames = new HashMap<>();
 
@@ -209,6 +209,6 @@ public class GameRetriever {
 			genres.put(pid, name);
 			genreGames.put(pid, gameId);
 		}
-	}
+	}*/
 
 }
