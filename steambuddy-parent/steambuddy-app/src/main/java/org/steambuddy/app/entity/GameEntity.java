@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -15,6 +17,7 @@ import javax.persistence.Table;
 public class GameEntity {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "name", nullable = false)
@@ -76,8 +79,8 @@ public class GameEntity {
 	}
 
 	public Set<GenreEntity> getGenres() {
-		if(genres == null) {
-			genres =  new HashSet<>();
+		if (genres == null) {
+			genres = new HashSet<>();
 		}
 		return genres;
 	}
@@ -94,11 +97,15 @@ public class GameEntity {
 		this.publisher = publisher;
 	}
 
-	public GameEntity(String name, Integer year, String image, String text) {
+	public GameEntity(Long id, String name, Integer year, String image, String text, Set<GenreEntity> genres,
+			PublisherEntity publisher) {
+		this.id = id;
 		this.name = name;
 		this.year = year;
 		this.image = image;
 		this.text = text;
+		this.genres = genres;
+		this.publisher = publisher;
 	}
 
 	public GameEntity() {

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.steambuddy.api.GameResource;
+import org.steambuddy.api.dto.GameCollectionDTO;
 import org.steambuddy.api.dto.GameDTO;
 import org.steambuddy.api.dto.UserDTO;
 import org.steambuddy.app.service.GameService;
@@ -34,6 +35,21 @@ public class GameController implements GameResource {
 	@Override
 	public List<GameDTO> getGameSuggestions(UserDTO user) {
 		return gameService.getGameSuggestions(user);
+	}
+
+	@Override
+	public GameCollectionDTO addGameToCollection(Long userId, Long gameId) {
+		return gameService.addGameToGameCollection(userId, gameId);
+	}
+
+	@Override
+	public GameCollectionDTO getCollection(Long userId) {
+		return gameService.getGameCollectionByUserId(userId);
+	}
+
+	@Override
+	public GameCollectionDTO removeGameToCollection(Long id, Long gameId) {
+		return gameService.removeGameFromGameCollection(id, gameId);
 	}
 
 }

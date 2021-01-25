@@ -5,6 +5,7 @@ import static org.steambuddy.api.ModuleConfigurationConstants.INTERNAL_PATH_PREF
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.steambuddy.api.dto.PublisherDTO;
@@ -23,11 +24,11 @@ public interface PublisherResource {
 
 	@ApiOperation(value = "Get publisher which contain the given name", nickname = "getPublisherByName", notes = "Returns found publisher.", tags = "PublisherResource", response = PublisherDTO.class, responseContainer = "List")
 	@ResponseBody
-	@GetMapping(path = "/publisher", params = "name")
-	List<PublisherDTO> getPublishers(String name);
+	@GetMapping(path = "/{name}")
+	List<PublisherDTO> getPublishers(@PathVariable("name") String name);
 
 	@ApiOperation(value = "Get publisher by id.", nickname = "getPublisher", notes = "Returns publisher or null.", tags = "PublisherResource", response = PublisherDTO.class)
 	@ResponseBody
-	@GetMapping(path = "/publisher", params = "id")
-	PublisherDTO getPublisher(Long id);
+	@GetMapping(path = "/{id}")
+	PublisherDTO getPublisher(@PathVariable("id") Long id);
 }

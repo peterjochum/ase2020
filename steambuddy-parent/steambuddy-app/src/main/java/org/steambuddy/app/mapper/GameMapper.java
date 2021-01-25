@@ -1,5 +1,6 @@
 package org.steambuddy.app.mapper;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,7 +15,7 @@ public class GameMapper {
 	@Autowired
 	private GenreMapper genreMapper;
 	
-	public List<GameDTO> mapEntityToDTO(List<GameEntity> from) {
+	public List<GameDTO> mapEntityToDTO(Collection<GameEntity> from) {
 		return from.stream().map(g -> entityToDTO(g)).collect(Collectors.toList());
 	}
 	
@@ -29,4 +30,4 @@ public class GameMapper {
 		return to;
 	}
 	
-}
+	}

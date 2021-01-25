@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import {User} from '../models/user';
@@ -13,8 +12,8 @@ import {UserService} from '../services/user.service';
 export class RegisterComponent implements OnInit {
   title = 'Sign Up';
 
-  public user = new User();
-  public status: string;
+  public user = new User(1, "Testuser", "");
+  public status: string | undefined;
 
 
   constructor(private userService : UserService, private router : Router) { }
@@ -46,7 +45,7 @@ export class RegisterComponent implements OnInit {
                   this.status = 'error';
               }
           },
-          error => {
+          _ => {
               console.log("Error!");
           }
         );

@@ -9,7 +9,9 @@ public interface GameService {
 
 	List<GameDTO> getGames();
 	List<GameDTO> getGames(String name);
-	List<GameDTO> getGameSuggestions(UserDTO user);
-	GameDTO getGame(Long id);
 	
+	List<GameDTO> getGameSuggestions(UserDTO user);
+
+	GameDTO getGame(Long id);
+
 }

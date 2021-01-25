@@ -1,10 +1,13 @@
 package org.steambuddy.api.dto;
 
+import java.util.List;
+
 public class GenreDTO {
 
 	private Long id;
 
 	private String name;
+	private List<GameDTO> games;
 
 	public String getName() {
 		return name;
@@ -20,6 +23,14 @@ public class GenreDTO {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<GameDTO> getGames() {
+		return games;
+	}
+
+	public void setGames(List<GameDTO> games) {
+		this.games = games;
 	}
 
 }
