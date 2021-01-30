@@ -9,8 +9,6 @@
   }, {
     "name" : "GameResource"
   }, {
-    "name" : "GamesResource"
-  }, {
     "name" : "GenreResource"
   }, {
     "name" : "GroupResource"
@@ -175,7 +173,7 @@
     },
     "internal/api/game/gamecollection/{id}" : {
       "get" : {
-        "tags" : [ "GamesResource" ],
+        "tags" : [ "GameResource" ],
         "summary" : "Get game gamecollection from user.",
         "description" : "get gamecollection from user",
         "operationId" : "getGamecollection",
@@ -198,7 +196,7 @@
     },
     "internal/api/game/gamecollection/{id}/{gameId}" : {
       "put" : {
-        "tags" : [ "GamesResource" ],
+        "tags" : [ "GameResource" ],
         "summary" : "Add a game by id to the gamecollection.",
         "description" : "adds game to collection",
         "operationId" : "addGame",
@@ -225,7 +223,7 @@
         }
       },
       "delete" : {
-        "tags" : [ "GamesResource" ],
+        "tags" : [ "GameResource" ],
         "summary" : "Add a game by id to the gamecollection.",
         "description" : "adds game to collection",
         "operationId" : "addGame",
@@ -298,7 +296,7 @@
     },
     "internal/api/game/{id}" : {
       "get" : {
-        "tags" : [ "GamesResource" ],
+        "tags" : [ "GameResource" ],
         "summary" : "Get game by id.",
         "description" : "Returns game or null.",
         "operationId" : "getGame",
