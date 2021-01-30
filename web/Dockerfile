@@ -8,11 +8,15 @@ WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy rest of the project
+# Copy source
 COPY src src
-COPY angular.json tsconfig.* ./
+
+# Copy build/test support files
+COPY angular.json karma.conf.js tsconfig.* ./
 
 # Build the project
+# TODO: test during build (requires Chrome Headless)
+# RUN npm run test
 RUN npm run build -- --prod
 
 ###
