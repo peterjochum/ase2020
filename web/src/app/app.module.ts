@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { ProfileComponent } from './profile/profile.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 //import { APIS, BASE_PATH } from './integration';
@@ -32,6 +33,7 @@ import { ProfileComponent } from './profile/profile.component';
     RegisterComponent,
     UserEditComponent,
     ProfileComponent,
+    WelcomeComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule,FormsModule],
   providers: [
