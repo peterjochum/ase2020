@@ -19,4 +19,11 @@ describe('MockGameService', () => {
       expect(games.length).toBe(4);
     });
   });
+
+  it('should return a game by id', () => {
+    service.get(1).subscribe(game => {
+      expect(game.id).toBe(1)
+      expect(game.name).toBe('Cyberpunk 2077')
+    })
+  })
 });

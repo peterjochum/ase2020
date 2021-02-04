@@ -8,6 +8,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=steambuddy_db
+    volumes:
+      - mysql_data:/var/lib/mysql
 
   steambuddyapp:
     hostname: steambuddyapp
@@ -28,3 +30,6 @@ services:
       - STEAMBUDDY_API_URL=http://localhost:8080/internal/api/game/games
     depends_on:
       - steambuddyapp
+
+volumes:
+  mysql_data:

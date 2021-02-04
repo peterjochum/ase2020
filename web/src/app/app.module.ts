@@ -16,6 +16,8 @@ import { RegisterComponent } from './register/register.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { ProfileComponent } from './profile/profile.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { GameDetailComponent } from './game-detail/game-detail.component';
+import { RouterModule } from '@angular/router';
 
 
 //import { APIS, BASE_PATH } from './integration';
@@ -34,8 +36,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
     UserEditComponent,
     ProfileComponent,
     WelcomeComponent,
+    GameDetailComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule,FormsModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule, RouterModule],
   providers: [
     {
       provide: 'IGameService',
@@ -56,4 +59,5 @@ import { WelcomeComponent } from './welcome/welcome.component';
   ],
   bootstrap: [AppComponent, GamesListComponent],
 })
-export class AppModule {}
+export class AppModule {
+}
