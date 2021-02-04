@@ -35,7 +35,7 @@ export class GamesListComponent implements OnInit {
    */
   private getGames(): void {
     this.gameService.getGames().subscribe(
-      (games) => (this.games = games),
+      (games) => (this.games = games.slice(0,100)),
       (error) => (this.serviceError = error)
     );
   }
