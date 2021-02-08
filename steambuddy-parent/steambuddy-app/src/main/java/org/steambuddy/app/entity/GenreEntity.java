@@ -4,33 +4,18 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "genre")
-public class GenreEntity {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+public class GenreEntity extends AbstractEntity {
 
 	@Column(name = "name")
 	private String name;
 
 	@ManyToMany(targetEntity = GameEntity.class, mappedBy = "genres")
 	private Set<GameEntity> games;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;

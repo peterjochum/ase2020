@@ -5,20 +5,14 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "friendRequest")
-public class FriendRequestEntity {
+public class FriendRequestEntity extends AbstractEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 	
 	@Column(name = "timestamp")
 	private Timestamp timestamp;
@@ -43,14 +37,6 @@ public class FriendRequestEntity {
 	}
 	
 	public FriendRequestEntity() {}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Timestamp getTimestamp() {
 		return timestamp;
