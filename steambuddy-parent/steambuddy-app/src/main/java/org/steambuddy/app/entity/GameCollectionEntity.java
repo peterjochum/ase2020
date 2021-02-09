@@ -4,33 +4,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "game_collection")
-public class GameCollectionEntity {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+public class GameCollectionEntity extends AbstractEntity {
 
 	@ManyToMany
 	private Set<GameEntity> games;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public Set<GameEntity> getGames() {
-		if(games == null) {
+		if (games == null) {
 			games = new HashSet<>();
 		}
 		return games;
@@ -43,7 +28,7 @@ public class GameCollectionEntity {
 	public void addGame(GameEntity game) {
 		getGames().add(game);
 	}
-	
+
 	public void removeGame(GameEntity gameEntity) {
 		getGames().remove(gameEntity);
 	}
@@ -66,7 +51,5 @@ public class GameCollectionEntity {
 			return false;
 		return gce.getId().equals(getId());
 	}
-
-	
 
 }

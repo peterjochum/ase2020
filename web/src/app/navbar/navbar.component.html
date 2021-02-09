@@ -1,9 +1,25 @@
-<nav class="navbar navbar-expand-lg  ">
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
 	<!-- adding the logo image -->
-	<img id="logo-img" src="../assets/images/logo3.png" alt="Logo">
+	<img id="logo-img" class="px-2" src="/assets/images/logo3.png" alt="Steambuddy text logo">
 	<!-- adding the logo text -->
-	<a class="navbar-brand" href="#">{{brand}}</a>
+	<a class="navbar-brand" routerLink="/welcome">{{brand}}</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/welcome">Home <span class="sr-only">(current)</span></a>
+      </li>
 
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/games">Games</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/register">Register</a>
+      </li>
+    </ul>
+  </div>
 
   <form id="search-bar" class="form-inline my-2 my-lg-0">
     <input class="form-control" type="search" placeholder="Search" aria-label="Search">

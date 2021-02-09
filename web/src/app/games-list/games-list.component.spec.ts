@@ -6,6 +6,7 @@ import { MockGameService } from '../services/mock-game.service';
 import { IGameService } from '../interfaces/gameservice';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { throwError } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('GamesListComponent', () => {
   let component: GamesListComponent;
@@ -15,7 +16,7 @@ describe('GamesListComponent', () => {
     // const spy = jasmine.createSpyObj('IGameService', 'getGames');
     TestBed.configureTestingModule({
       declarations: [GamesListComponent, GameCardComponent],
-      imports: [HttpClientModule],
+      imports: [HttpClientModule, RouterTestingModule],
       providers: [{ provide: 'IGameService', useClass: MockGameService }],
     }).compileComponents();
   });

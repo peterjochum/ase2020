@@ -40,22 +40,22 @@ public interface GameResource {
 	@GetMapping(path = "/games/{name}")
 	List<GameDTO> getGames(@PathVariable("name") String name);
 
-	@ApiOperation(value = "Get game by id.", nickname = "getGame", notes = "Returns game or null.", tags = "GamesResource", response = GameDTO.class)
+	@ApiOperation(value = "Get game by id.", nickname = "getGame", notes = "Returns game or null.", tags = "GameResource", response = GameDTO.class)
 	@ResponseBody
 	@GetMapping(path = "/{id}")
 	GameDTO getGame(@PathVariable("id") Long id);
 
-	@ApiOperation(value = "Add a game by id to the gamecollection.", nickname = "addGame", notes = "adds game to collection", tags = "GamesResource", response = GameCollectionDTO.class)
+	@ApiOperation(value = "Add a game by id to the gamecollection.", nickname = "addGame", notes = "adds game to collection", tags = "GameResource", response = GameCollectionDTO.class)
 	@ResponseBody
 	@PutMapping(path = "/gamecollection/{id}/{gameId}")
 	GameCollectionDTO addGameToCollection(@PathVariable("id") Long id, @PathVariable("gameId") Long gameId);
 
-	@ApiOperation(value = "Add a game by id to the gamecollection.", nickname = "addGame", notes = "adds game to collection", tags = "GamesResource", response = GameCollectionDTO.class)
+	@ApiOperation(value = "Add a game by id to the gamecollection.", nickname = "addGame", notes = "adds game to collection", tags = "GameResource", response = GameCollectionDTO.class)
 	@ResponseBody
 	@DeleteMapping(path = "/gamecollection/{id}/{gameId}")
 	GameCollectionDTO removeGameToCollection(@PathVariable("id") Long id, @PathVariable("gameId") Long gameId);
 	
-	@ApiOperation(value = "Get game gamecollection from user.", nickname = "getGamecollection", notes = "get gamecollection from user", tags = "GamesResource", response = GameCollectionDTO.class)
+	@ApiOperation(value = "Get game gamecollection from user.", nickname = "getGamecollection", notes = "get gamecollection from user", tags = "GameResource", response = GameCollectionDTO.class)
 	@ResponseBody
 	@GetMapping(path = "/gamecollection/{id}")
 	GameCollectionDTO getCollection(@PathVariable("id") Long userId);

@@ -9,7 +9,11 @@
   }, {
     "name" : "GameResource"
   }, {
+    "name" : "GenreResource"
+  }, {
     "name" : "GroupResource"
+  }, {
+    "name" : "PublisherResource"
   }, {
     "name" : "UserResource"
   } ],
@@ -167,12 +171,91 @@
         }
       }
     },
+    "internal/api/game/gamecollection/{id}" : {
+      "get" : {
+        "tags" : [ "GameResource" ],
+        "summary" : "Get game gamecollection from user.",
+        "description" : "get gamecollection from user",
+        "operationId" : "getGamecollection",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GameCollectionDTO"
+            }
+          }
+        }
+      }
+    },
+    "internal/api/game/gamecollection/{id}/{gameId}" : {
+      "put" : {
+        "tags" : [ "GameResource" ],
+        "summary" : "Add a game by id to the gamecollection.",
+        "description" : "adds game to collection",
+        "operationId" : "addGame",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "gameId",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GameCollectionDTO"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "GameResource" ],
+        "summary" : "Add a game by id to the gamecollection.",
+        "description" : "adds game to collection",
+        "operationId" : "addGame",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        }, {
+          "name" : "gameId",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GameCollectionDTO"
+            }
+          }
+        }
+      }
+    },
     "internal/api/game/games" : {
       "get" : {
         "tags" : [ "GameResource" ],
-        "summary" : "Get games which contain the given name",
-        "description" : "Returns found games.",
-        "operationId" : "getGamesByName",
+        "summary" : "Get the list of all games.",
+        "description" : "Returns all games.",
+        "operationId" : "getGames",
         "responses" : {
           "200" : {
             "description" : "successful operation",
@@ -181,6 +264,121 @@
               "items" : {
                 "$ref" : "#/definitions/GameDTO"
               }
+            }
+          }
+        }
+      }
+    },
+    "internal/api/game/games/{name}" : {
+      "get" : {
+        "tags" : [ "GameResource" ],
+        "summary" : "Get games which contain the given name",
+        "description" : "Returns found games.",
+        "operationId" : "getGamesByName",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/GameDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "internal/api/game/{id}" : {
+      "get" : {
+        "tags" : [ "GameResource" ],
+        "summary" : "Get game by id.",
+        "description" : "Returns game or null.",
+        "operationId" : "getGame",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GameDTO"
+            }
+          }
+        }
+      }
+    },
+    "internal/api/genre/genres" : {
+      "get" : {
+        "tags" : [ "GenreResource" ],
+        "summary" : "Get the list of all genres.",
+        "description" : "Returns all genres.",
+        "operationId" : "getGenres",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/GenreDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "internal/api/genre/genres/{name}" : {
+      "get" : {
+        "tags" : [ "GenreResource" ],
+        "summary" : "Get publisher which contain the given name",
+        "description" : "Returns found genres.",
+        "operationId" : "getGenreByName",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/GenreDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "internal/api/genre/{id}" : {
+      "get" : {
+        "tags" : [ "GenreResource" ],
+        "summary" : "Get genre by id.",
+        "description" : "Returns genre or null.",
+        "operationId" : "getGenre",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GenreDTO"
             }
           }
         }
@@ -271,6 +469,73 @@
             "description" : "successful operation",
             "schema" : {
               "$ref" : "#/definitions/GroupDTO"
+            }
+          }
+        }
+      }
+    },
+    "internal/api/publisher/publisher" : {
+      "get" : {
+        "tags" : [ "PublisherResource" ],
+        "summary" : "Get the list of all publisher.",
+        "description" : "Returns all publisher.",
+        "operationId" : "getPublisher",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/PublisherDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "internal/api/publisher/{id}" : {
+      "get" : {
+        "tags" : [ "PublisherResource" ],
+        "summary" : "Get publisher by id.",
+        "description" : "Returns publisher or null.",
+        "operationId" : "getPublisher",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/PublisherDTO"
+            }
+          }
+        }
+      }
+    },
+    "internal/api/publisher/{name}" : {
+      "get" : {
+        "tags" : [ "PublisherResource" ],
+        "summary" : "Get publisher which contain the given name",
+        "description" : "Returns found publisher.",
+        "operationId" : "getPublisherByName",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/PublisherDTO"
+              }
             }
           }
         }
@@ -412,6 +677,21 @@
         }
       }
     },
+    "GameCollectionDTO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "games" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/GameDTO"
+          }
+        }
+      }
+    },
     "GameDTO" : {
       "type" : "object",
       "properties" : {
@@ -431,6 +711,30 @@
         },
         "text" : {
           "type" : "string"
+        },
+        "genres" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/GenreDTO"
+          }
+        }
+      }
+    },
+    "GenreDTO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "games" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/GameDTO"
+          }
         }
       }
     },
@@ -449,6 +753,18 @@
         },
         "owner" : {
           "$ref" : "#/definitions/UserDTO"
+        }
+      }
+    },
+    "PublisherDTO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "name" : {
+          "type" : "string"
         }
       }
     },

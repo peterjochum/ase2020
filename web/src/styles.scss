@@ -1,18 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Required for bootstrap */
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
-
-/* Additional bootstrap modules */
-@import "~bootstrap/scss/alert";
-@import "~bootstrap/scss/badge";
-@import "~bootstrap/scss/buttons";
-@import "~bootstrap/scss/card";
-@import "~bootstrap/scss/dropdown";
-@import "~bootstrap/scss/grid";
-@import "~bootstrap/scss/nav";
-@import "~bootstrap/scss/navbar";
-@import "~bootstrap/scss/reboot";
-@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/bootstrap";

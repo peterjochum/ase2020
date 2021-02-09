@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Game } from '../interfaces/game';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { IGameService } from '../interfaces/gameservice';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -71,5 +71,13 @@ export class MockGameService implements IGameService {
   getGames(): Observable<Game[]> {
     //return this.http.get<Game[]>(this.usersUrl, games);
     return of(this.FakeGames);
+  }
+
+  get(id: number): Observable<Game> {
+    const game = this.FakeGames.find(x=>x.id == 1)
+    if (game === undefined) {
+      return throwError("game not found");
+    }
+    return of(game);
   }
 }

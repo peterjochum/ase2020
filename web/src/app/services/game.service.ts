@@ -12,7 +12,7 @@ import { IGameService } from '../interfaces/gameservice';
  * GameService provides access to game information located at a web service
  */
 export class GameService implements IGameService {
-  
+
   constructor(private http: HttpClient, private configService: ConfigService) {}
 
   /**
@@ -22,4 +22,10 @@ export class GameService implements IGameService {
   getGames(): Observable<Game[]> {
     return this.http.get<Game[]>(this.configService.getConfig().gamesUrl);
   }
+
+  get(id: number): Observable<Game> {
+    return this.http.get<Game>(this.configService.getConfig().gamesUrl + "/" + id);
+  }
+
+
 }
