@@ -1,12 +1,14 @@
 package org.steambuddy.app.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -15,6 +17,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.steambuddy.api.dto.GameCollectionDTO;
@@ -71,121 +74,103 @@ public class GameServiceImpl implements GameService {
 	
 	@Override
 	public List<GameDTO> getGameSuggestions(Long id) {
-		//get user
-		
-		
-		//-> Get nullpointer exeption, why? GameCollectionEntity collection=getGameCollectionEntityByUserId(id);
-		
-		//quickfix, manual copying, fix problem later
-		Optional<UserEntity> optUser = userRepository.findById(id);
-		GameCollectionEntity collection=new GameCollectionEntity();
-		if (optUser.isPresent())
-			collection= optUser.get().getGameCollection();
-		else 
+
+		//get collection of user
+		GameCollectionEntity collection=getGameCollectionEntityByUserId(id);
+		if(collection==null) {
 			System.out.println("User not found!");
-		
-		Set<GameEntity> userGames=collection.getGames();
-		
-		System.out.println("Games " + userGames.size());
-		
-		
-		//get preferred changes based on user collection
-		SortedMap<Long,Long> genrePrefs=new TreeMap<Long,Long>();
-		long genreID;
-		for (GameEntity game: userGames) {
-			Set<GenreEntity> genres=game.getGenres();
-			for (GenreEntity genre: genres) {
-				genreID=genre.getId();
-				if(!genrePrefs.containsKey(genreID)) 
-					genrePrefs.put(genreID,1L);
-				else 
-					genrePrefs.put(genreID,genrePrefs.get(genreID)+1L);
-						
-			}
+			return new ArrayList<GameDTO>();
 		}
 		
-
-		System.out.println("Genreprefs " + userGames.size());
-		
-		List<Long> bestGenres=new LinkedList<Long>();
-		int genreCount=0;
-		long worstGenreCount=0;
-
-		
-
-		//find 5 most common genres of user
-		for (long genre: genrePrefs.keySet()) {
-			if(genreCount<5) {
-				bestGenres.add(genre);
-				genreCount++;
-			}
-			else {
-				
-			}
-			if(genrePrefs.get(genre)>worstGenreCount) {//if genre is more common, remove currently least common genre and add new one instead
-				for (long genre2: bestGenres) {
-					if(genrePrefs.get(genre2)==worstGenreCount) {
-						bestGenres.remove(genre2);
-						bestGenres.add(genre);
-						break;
-					}
-					
-				}
-				worstGenreCount=Long.MAX_VALUE;//set new worst value
-				for (long genre2: bestGenres) {
-					if(genrePrefs.get(genre2)<worstGenreCount) {
-						worstGenreCount=genrePrefs.get(genre2);
-					}
-				}
-				
-			}
-			
-		}
+		//get top genres of user
+		List<Long> bestGenres=collection.getBestGenres();
 		
 		
-		//debug
 		if(bestGenres.isEmpty()) {
-			System.out.println("No games with genres found!");
-			return null;
+			//no best genres = no games in library
+			System.out.println("No games in user library!");
+			return new ArrayList<GameDTO>();
+		}
+		
+		//Find a certain number of games with the specified categories (at least one in common)
+		List<GameEntity> allSuggestions=gameRepository.findByCategoryRandomly(bestGenres,PageRequest.of(0, 20));
+		System.out.println("Number of suggestions: " + allSuggestions.size());
+		//map gameids to gameEntities
+		HashMap<Long,GameEntity> gameIdToGame=new HashMap<Long,GameEntity>();
+		for (GameEntity game: allSuggestions) 
+			gameIdToGame.put(game.getId(),game);
+		
+		List<Entry<Long, Integer>> gameRatings=getGameRatings(id,allSuggestions);
+		
+		//get the suggested games based on its ratings and the number of games that we want 
+		List<GameEntity> result=getBestGameSuggestions(gameIdToGame,gameRatings,2);
+		System.out.println("Number of suggestions: " + result.size());
+		//map to output
+		return mapper.mapEntityToDTO(result);
+	     
+	}
+	
+	
+	private List<GameEntity> getBestGameSuggestions(HashMap<Long,GameEntity> gameIdToGame,List<Entry<Long, Integer>> gameRatings,int numberOfSuggestions){
+
+	     List<GameEntity> bestGames=new ArrayList<GameEntity>();
+	     for (Entry<Long, Integer> gameCount: gameRatings) {
+	    	 if(numberOfSuggestions>0) {
+	    		 bestGames.add(gameIdToGame.get(gameCount.getKey()));
+	    		 numberOfSuggestions--;
+	    	 }
+	    	 else {
+	    		 break;
+	    	 }
+	    	 
+	     }
+	     
+	     return bestGames;
+	     
+	     
+	}
+	private List<Entry<Long, Integer>> getGameRatings(long userId,List<GameEntity> allSuggestions) {
+		UserEntity user = userRepository.findById(userId).get();
+		Set<UserEntity> friends=user.getFriends();
+		
+		HashMap<Long, Integer> gameRating=new HashMap<Long,Integer>();
+		
+		Set<GameCollectionEntity> friendCols=new HashSet<GameCollectionEntity>();
+		for (UserEntity friend: friends) {
+			friendCols.add(friend.getGameCollection());
 		}
 		
 		
+		//count how many friends have this game too
+		long curID;
+		HashMap<Long,GameEntity> gameIdToGame=new HashMap<Long,GameEntity>();
 		
-		return mapper.mapEntityToDTO(gameRepository.findByCategory(bestGenres));
-		
-		/*
-		UserEntity userE=new UserEntity();
-		
-		//get games of user
-		//get game categories of these games
-		Set<GenreEntity> userGenres=new HashSet<GenreEntity>();
-		//find games with these categories
-		
-		//gameRepository.findByCategory(new HashSet<GenreEntity>()
-		//returns candidates
-		List<GameEntity> candidates=new ArrayList<GameEntity>();
-		
-
-		//get friends
-		Set<UserEntity> friends=userE.getFriends();
-		
-		
-		
-		
-		
-		
-		Set<GenreEntity> genres;
-		
-		//Map<long,>
-		for(GameEntity candidate: candidates) {
-			genres=candidate.getGenres();
+		for (GameEntity game: allSuggestions) {
+			curID=game.getId();
+			gameRating.put(curID,0);
+			
+			for (GameCollectionEntity friendCol: friendCols) {
+				if(friendCol.containsGame(game)) {
+					System.out.println("A friend has the same game! Id: " + curID);
+					gameRating.put(curID, gameRating.get(curID)+1);
+				}
+			}
 			
 		}
-		
-		
-		
-		return mapper.mapEntityToDTO(gameRepository.findByCategory(new HashSet<GenreEntity>()));
-	*/
+		//add comparator for sorting
+		 Comparator<Entry<Long, Integer>> valueComparator = new Comparator<Entry<Long,Integer>>() {
+	            
+	            @Override
+	            public int compare(Entry<Long, Integer> e1, Entry<Long, Integer> e2) {
+	                Integer v1 = e1.getValue();
+	                Integer v2 = e2.getValue();
+	                return -1*v1.compareTo(v2);//descending order
+	            }
+	        };
+	     //sort
+	     List<Entry<Long, Integer>> sortedEntities=new ArrayList<Entry<Long, Integer>>(gameRating.entrySet());
+	     Collections.sort(sortedEntities,valueComparator);
+	     return sortedEntities;
 	}
 
 	@Override

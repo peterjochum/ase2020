@@ -58,7 +58,6 @@ public class ServiceTest
 	@Autowired 
 	private GameController gameController;
 	
-
 	//@Autowired 
 	//private GameService gameService;
 	
@@ -77,19 +76,19 @@ public class ServiceTest
 
 	
 	
-	@Test
-    public void getAllGames()
-    {
-		
-    	List<GameDTO> entities=gameController.getGames();
-    	System.out.println("EntitiesFound: " + entities.size());
-        assertTrue( true );
-    }
+//	@Test
+//    public void getAllGames()
+//    {
+//		
+//    	List<GameDTO> entities=gameController.getGames();
+//    	System.out.println("EntitiesFound: " + entities.size());
+//        assertTrue( true );
+//    }
 	
 	
 	
 	@Test
-    public void getGamesOfUser()
+    public void getGameSuggestions()
     {
 		
     	List<GameDTO> entities=gameController.getGameSuggestions(1L);
