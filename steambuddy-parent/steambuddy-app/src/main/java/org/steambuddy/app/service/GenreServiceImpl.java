@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.steambuddy.api.dto.GenreDTO;
@@ -22,13 +23,13 @@ public class GenreServiceImpl implements GenreService {
 	private GenreRepository genreRepository;
 
 	@Override
-	public List<GenreDTO> getGenres() {
-		return genreMapper.mapEntityToDTOWithGames(((List<GenreEntity>) genreRepository.findAll()));
+	public List<GenreDTO> getGenres(Pageable pageable) {
+		return genreMapper.mapEntityToDTOWithGames(((List<GenreEntity>) genreRepository.findAll(pageable).getContent()));
 	}
 
 	@Override
-	public List<GenreDTO> getGenresLikeName(String name) {
-		return genreMapper.mapEntityToDTOWithGames(genreRepository.findByName(name));
+	public List<GenreDTO> getGenresLikeName(String name, Pageable pageable) {
+		return genreMapper.mapEntityToDTOWithGames(genreRepository.findByName(name, pageable));
 	}
 
 	@Override

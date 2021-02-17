@@ -177,6 +177,14 @@
         "summary" : "Get the list of all games.",
         "description" : "Returns all games.",
         "operationId" : "getGames",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Pageable"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
@@ -329,6 +337,13 @@
           "in" : "path",
           "required" : true,
           "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Pageable"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -349,6 +364,14 @@
         "summary" : "Get the list of all genres.",
         "description" : "Returns all genres.",
         "operationId" : "getGenres",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Pageable"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
@@ -396,6 +419,13 @@
           "in" : "path",
           "required" : true,
           "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Pageable"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -506,6 +536,14 @@
         "summary" : "Get the list of all publisher.",
         "description" : "Returns all publisher.",
         "operationId" : "getPublisher",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Pageable"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
@@ -553,6 +591,13 @@
           "in" : "path",
           "required" : true,
           "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Pageable"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -782,6 +827,32 @@
         }
       }
     },
+    "Pageable" : {
+      "type" : "object",
+      "properties" : {
+        "offset" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "sort" : {
+          "$ref" : "#/definitions/Sort"
+        },
+        "pageNumber" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "pageSize" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "unpaged" : {
+          "type" : "boolean"
+        },
+        "paged" : {
+          "type" : "boolean"
+        }
+      }
+    },
     "PublisherDTO" : {
       "type" : "object",
       "properties" : {
@@ -791,6 +862,20 @@
         },
         "name" : {
           "type" : "string"
+        }
+      }
+    },
+    "Sort" : {
+      "type" : "object",
+      "properties" : {
+        "sorted" : {
+          "type" : "boolean"
+        },
+        "unsorted" : {
+          "type" : "boolean"
+        },
+        "empty" : {
+          "type" : "boolean"
         }
       }
     },

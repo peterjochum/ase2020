@@ -4,8 +4,10 @@ import static org.steambuddy.api.ModuleConfigurationConstants.INTERNAL_PATH_PREF
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.steambuddy.api.dto.GenreDTO;
@@ -20,12 +22,12 @@ public interface GenreResource {
 	@ApiOperation(value = "Get the list of all genres.", nickname = "getGenres", notes = "Returns all genres.", tags = "GenreResource", response = GenreDTO.class, responseContainer = "List")
 	@ResponseBody
 	@GetMapping("/")
-	List<GenreDTO> getGenres();
+	List<GenreDTO> getGenres(@RequestBody Pageable pageable);
 
 	@ApiOperation(value = "Get publisher which contain the given name", nickname = "getGenreByName", notes = "Returns found genres.", tags = "GenreResource", response = GenreDTO.class, responseContainer = "List")
 	@ResponseBody
 	@GetMapping(path = "/{name}")
-	List<GenreDTO> getGenres(@PathVariable("name") String name);
+	List<GenreDTO> getGenres(@PathVariable("name") String name, @RequestBody Pageable pageable);
 
 	@ApiOperation(value = "Get genre by id.", nickname = "getGenre", notes = "Returns genre or null.", tags = "GenreResource", response = GenreDTO.class)
 	@ResponseBody
