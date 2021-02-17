@@ -46,7 +46,7 @@ public interface GameResource {
 
 	@ApiOperation(value = "Get game by id.", nickname = "getGame", notes = "Returns game or null.", tags = "GameResource", response = GameDTO.class)
 	@ResponseBody
-	@GetMapping(path = "/{id}")
+	@GetMapping(path = "/game/{id}")
 	GameDTO getGame(@PathVariable("id") Long id);
 
 	@ApiOperation(value = "Add a game by id to the gamecollection.", nickname = "addGame", notes = "adds game to collection", tags = "GameResource", response = GameCollectionDTO.class)

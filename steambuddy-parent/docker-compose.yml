@@ -27,7 +27,7 @@ services:
     ports:
       - "8081:80"
     environment:
-      - STEAMBUDDY_API_URL=http://localhost:8080/internal/api/game/games
+      - STEAMBUDDY_API_URL=http://localhost:8080/internal/api/games
     depends_on:
       - steambuddyapp
 

@@ -20,11 +20,11 @@ export class GameService implements IGameService {
    * @return a list of games
    */
   getGames(): Observable<Game[]> {
-    return this.http.get<Game[]>(this.configService.getConfig().gamesUrl);
+    return this.http.get<Game[]>(this.configService.getConfig().gamesUrl + "/");
   }
 
   get(id: number): Observable<Game> {
-    return this.http.get<Game>(this.configService.getConfig().gamesUrl + "/" + id);
+    return this.http.get<Game>(this.configService.getConfig().gamesUrl + "/game/" + id);
   }
 
 
