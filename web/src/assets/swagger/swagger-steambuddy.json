@@ -18,7 +18,7 @@
     "name" : "UserResource"
   } ],
   "paths" : {
-    "internal/api/friend-request/friend-requests/accept/{id}" : {
+    "internal/api/friend-requests/accept/{id}" : {
       "put" : {
         "tags" : [ "FriendRequestResource" ],
         "summary" : "Accept a friendRequest.",
@@ -42,7 +42,7 @@
         }
       }
     },
-    "internal/api/friend-request/friend-requests/decline/{id}" : {
+    "internal/api/friend-requests/decline/{id}" : {
       "put" : {
         "tags" : [ "FriendRequestResource" ],
         "summary" : "Decline a friendRequest.",
@@ -66,7 +66,7 @@
         }
       }
     },
-    "internal/api/friend-request/friend-requests/incoming/{id}" : {
+    "internal/api/friend-requests/incoming/{id}" : {
       "get" : {
         "tags" : [ "FriendRequestResource" ],
         "summary" : "Get all incomin friendRequests of a user.",
@@ -92,7 +92,7 @@
         }
       }
     },
-    "internal/api/friend-request/friend-requests/outgoing/{id}" : {
+    "internal/api/friend-requests/outgoing/{id}" : {
       "get" : {
         "tags" : [ "FriendRequestResource" ],
         "summary" : "Get all outgoing friendRequests of a user.",
@@ -118,7 +118,7 @@
         }
       }
     },
-    "internal/api/friend-request/friend-requests/{id}" : {
+    "internal/api/friend-requests/{id}" : {
       "get" : {
         "tags" : [ "FriendRequestResource" ],
         "summary" : "Get friendRequest by id.",
@@ -141,7 +141,7 @@
         }
       }
     },
-    "internal/api/friend-request/friend-requests/{sender_id}/{receiver_id}" : {
+    "internal/api/friend-requests/{sender_id}/{receiver_id}" : {
       "post" : {
         "tags" : [ "FriendRequestResource" ],
         "summary" : "Create a new friendRequest.",
@@ -171,7 +171,34 @@
         }
       }
     },
-    "internal/api/game/gamecollection/{id}" : {
+    "internal/api/games/" : {
+      "get" : {
+        "tags" : [ "GameResource" ],
+        "summary" : "Get the list of all games.",
+        "description" : "Returns all games.",
+        "operationId" : "getGames",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Pageable"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/GameDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "internal/api/games/gamecollection/{id}" : {
       "get" : {
         "tags" : [ "GameResource" ],
         "summary" : "Get game gamecollection from user.",
@@ -194,7 +221,7 @@
         }
       }
     },
-    "internal/api/game/gamecollection/{id}/{gameId}" : {
+    "internal/api/games/gamecollection/{id}/{gameId}" : {
       "put" : {
         "tags" : [ "GameResource" ],
         "summary" : "Add a game by id to the gamecollection.",
@@ -224,9 +251,9 @@
       },
       "delete" : {
         "tags" : [ "GameResource" ],
-        "summary" : "Add a game by id to the gamecollection.",
-        "description" : "adds game to collection",
-        "operationId" : "addGame",
+        "summary" : "Delete a game by id to the gamecollection.",
+        "description" : "deletes game to collection",
+        "operationId" : "deleteGame",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
@@ -250,36 +277,18 @@
         }
       }
     },
-    "internal/api/game/games" : {
+    "internal/api/games/suggested/{id}" : {
       "get" : {
         "tags" : [ "GameResource" ],
-        "summary" : "Get the list of all games.",
-        "description" : "Returns all games.",
-        "operationId" : "getGames",
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/definitions/GameDTO"
-              }
-            }
-          }
-        }
-      }
-    },
-    "internal/api/game/games/{name}" : {
-      "get" : {
-        "tags" : [ "GameResource" ],
-        "summary" : "Get games which contain the given name",
-        "description" : "Returns found games.",
-        "operationId" : "getGamesByName",
+        "summary" : "Get a list of suggested games.",
+        "description" : "Returns a list of suggested games.",
+        "operationId" : "getSuggestedGames",
         "parameters" : [ {
-          "name" : "name",
+          "name" : "id",
           "in" : "path",
           "required" : true,
-          "type" : "string"
+          "type" : "integer",
+          "format" : "int64"
         } ],
         "responses" : {
           "200" : {
@@ -294,7 +303,7 @@
         }
       }
     },
-    "internal/api/game/{id}" : {
+    "internal/api/games/{id}" : {
       "get" : {
         "tags" : [ "GameResource" ],
         "summary" : "Get game by id.",
@@ -317,36 +326,51 @@
         }
       }
     },
-    "internal/api/genre/genres" : {
+    "internal/api/games/{name}" : {
       "get" : {
-        "tags" : [ "GenreResource" ],
-        "summary" : "Get the list of all genres.",
-        "description" : "Returns all genres.",
-        "operationId" : "getGenres",
+        "tags" : [ "GameResource" ],
+        "summary" : "Get games which contain the given name",
+        "description" : "Returns found games.",
+        "operationId" : "getGamesByName",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Pageable"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
             "schema" : {
               "type" : "array",
               "items" : {
-                "$ref" : "#/definitions/GenreDTO"
+                "$ref" : "#/definitions/GameDTO"
               }
             }
           }
         }
       }
     },
-    "internal/api/genre/genres/{name}" : {
+    "internal/api/genres/" : {
       "get" : {
         "tags" : [ "GenreResource" ],
-        "summary" : "Get publisher which contain the given name",
-        "description" : "Returns found genres.",
-        "operationId" : "getGenreByName",
+        "summary" : "Get the list of all genres.",
+        "description" : "Returns all genres.",
+        "operationId" : "getGenres",
         "parameters" : [ {
-          "name" : "name",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Pageable"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -361,7 +385,7 @@
         }
       }
     },
-    "internal/api/genre/{id}" : {
+    "internal/api/genres/{id}" : {
       "get" : {
         "tags" : [ "GenreResource" ],
         "summary" : "Get genre by id.",
@@ -384,7 +408,39 @@
         }
       }
     },
-    "internal/api/group/groups" : {
+    "internal/api/genres/{name}" : {
+      "get" : {
+        "tags" : [ "GenreResource" ],
+        "summary" : "Get publisher which contain the given name",
+        "description" : "Returns found genres.",
+        "operationId" : "getGenreByName",
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Pageable"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/GenreDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "internal/api/groups/" : {
       "get" : {
         "tags" : [ "GroupResource" ],
         "summary" : "Get all groups.",
@@ -425,7 +481,30 @@
         }
       }
     },
-    "internal/api/group/groups/{user_id}" : {
+    "internal/api/groups/{id}" : {
+      "delete" : {
+        "tags" : [ "GroupResource" ],
+        "summary" : "Delete a Group.",
+        "description" : "Delete a Group.",
+        "operationId" : "deleteGroup",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int64"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/GroupDTO"
+            }
+          }
+        }
+      }
+    },
+    "internal/api/groups/{user_id}" : {
       "get" : {
         "tags" : [ "GroupResource" ],
         "summary" : "Get all owned groups of user.",
@@ -451,35 +530,20 @@
         }
       }
     },
-    "internal/api/group/{id}" : {
-      "delete" : {
-        "tags" : [ "GroupResource" ],
-        "summary" : "Delete a Group.",
-        "description" : "Delete a Group.",
-        "operationId" : "deleteGroup",
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/GroupDTO"
-            }
-          }
-        }
-      }
-    },
-    "internal/api/publisher/publisher" : {
+    "internal/api/publisher/" : {
       "get" : {
         "tags" : [ "PublisherResource" ],
         "summary" : "Get the list of all publisher.",
         "description" : "Returns all publisher.",
         "operationId" : "getPublisher",
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Pageable"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "successful operation",
@@ -527,6 +591,13 @@
           "in" : "path",
           "required" : true,
           "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Pageable"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -541,7 +612,7 @@
         }
       }
     },
-    "internal/api/user/users" : {
+    "internal/api/users/" : {
       "get" : {
         "tags" : [ "UserResource" ],
         "summary" : "Get all users.",
@@ -582,7 +653,7 @@
         }
       }
     },
-    "internal/api/user/users/authenticate" : {
+    "internal/api/users/authenticate" : {
       "put" : {
         "tags" : [ "UserResource" ],
         "summary" : "Authenticate a user.",
@@ -606,7 +677,7 @@
         }
       }
     },
-    "internal/api/user/users/register" : {
+    "internal/api/users/register" : {
       "post" : {
         "tags" : [ "UserResource" ],
         "summary" : "Register a new user.",
@@ -630,7 +701,7 @@
         }
       }
     },
-    "internal/api/user/users/{id}" : {
+    "internal/api/users/{id}" : {
       "get" : {
         "tags" : [ "UserResource" ],
         "summary" : "Get user by id.",
@@ -756,6 +827,32 @@
         }
       }
     },
+    "Pageable" : {
+      "type" : "object",
+      "properties" : {
+        "offset" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "sort" : {
+          "$ref" : "#/definitions/Sort"
+        },
+        "pageNumber" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "pageSize" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "unpaged" : {
+          "type" : "boolean"
+        },
+        "paged" : {
+          "type" : "boolean"
+        }
+      }
+    },
     "PublisherDTO" : {
       "type" : "object",
       "properties" : {
@@ -765,6 +862,20 @@
         },
         "name" : {
           "type" : "string"
+        }
+      }
+    },
+    "Sort" : {
+      "type" : "object",
+      "properties" : {
+        "sorted" : {
+          "type" : "boolean"
+        },
+        "unsorted" : {
+          "type" : "boolean"
+        },
+        "empty" : {
+          "type" : "boolean"
         }
       }
     },

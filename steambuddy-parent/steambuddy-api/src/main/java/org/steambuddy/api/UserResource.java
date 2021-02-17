@@ -17,7 +17,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @Api(value = "UserResource")
-@RequestMapping(value = INTERNAL_PATH_PREFIX + "/api/user")
+@RequestMapping(value = INTERNAL_PATH_PREFIX + "/api/users")
 public interface UserResource {
 
 	/**
@@ -32,7 +32,7 @@ public interface UserResource {
 			tags = "UserResource",
 			response = UserDTO.class)
 	@ResponseBody
-	@PutMapping("/users/authenticate")
+	@PutMapping("/authenticate")
 	UserDTO authenticateUser(@RequestBody UserDTO user);
 	
 	/**
@@ -47,7 +47,7 @@ public interface UserResource {
 			tags = "UserResource",
 			response = UserDTO.class)
 	@ResponseBody
-	@PostMapping("/users/register")
+	@PostMapping("/register")
 	UserDTO registerUser(@RequestBody UserDTO user);
 	
 	/**
@@ -62,7 +62,7 @@ public interface UserResource {
 			tags = "UserResource",
 			response = UserDTO.class)
 	@ResponseBody
-	@PutMapping("/users")
+	@PutMapping("/")
 	UserDTO updateUser(@RequestBody UserDTO user);
 	
 	/**
@@ -77,7 +77,7 @@ public interface UserResource {
 			response = UserDTO.class,
 			responseContainer = "List")
 	@ResponseBody
-	@GetMapping("/users")
+	@GetMapping("/")
 	List<UserDTO> getUsers();
 	
 	@ApiOperation(value = "Get user by id.",
@@ -86,6 +86,6 @@ public interface UserResource {
 			tags = "UserResource",
 			response = UserDTO.class)
 	@ResponseBody
-	@GetMapping("/users/{id}")
+	@GetMapping("/{id}")
 	UserDTO getUserById(@PathVariable("id") Long id);
 }
