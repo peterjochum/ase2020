@@ -23,6 +23,8 @@ export class GameDetailComponent implements OnInit {
     this.gameService.get(gameId).subscribe(game => {
       this.game = game;
     });
-  }
+
+}
+
 
 }
