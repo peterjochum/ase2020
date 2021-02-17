@@ -3,6 +3,7 @@ package org.steambuddy.app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RestController;
 import org.steambuddy.api.GameResource;
@@ -18,7 +19,7 @@ public class GameController implements GameResource {
 
 	@Override
 	public List<GameDTO> getGames(Pageable pageable) {
-		return gameService.getGames(pageable);
+		return gameService.getGames(PageRequest.of(1, 20));
 	}
 
 	@Override

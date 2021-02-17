@@ -132,7 +132,7 @@ public class GameServiceImpl implements GameService {
 
 		// count how many friends have this game too
 		long curID;
-		HashMap<Long, GameEntity> gameIdToGame = new HashMap<Long, GameEntity>();
+		//HashMap<Long, GameEntity> gameIdToGame = new HashMap<Long, GameEntity>();
 
 		for (GameEntity game : allSuggestions) {
 			curID = game.getId();
