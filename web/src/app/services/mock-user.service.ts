@@ -1,7 +1,9 @@
 import { Injectable, Optional } from '@angular/core';
-import { Configuration, UserDTO, UserResourceServiceInterface } from '../integration';
+import { Configuration} from '../integration';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
+import { UserResourceServiceInterface } from '../integration/api/userResource.serviceInterface';
+import { UserDTO } from '../integration/model/userDTO';
 
 @Injectable({
   providedIn: 'root'
