@@ -243,9 +243,9 @@
       },
       "delete" : {
         "tags" : [ "GameResource" ],
-        "summary" : "Add a game by id to the gamecollection.",
-        "description" : "adds game to collection",
-        "operationId" : "addGame",
+        "summary" : "Delete a game by id to the gamecollection.",
+        "description" : "deletes game to collection",
+        "operationId" : "deleteGame",
         "parameters" : [ {
           "name" : "id",
           "in" : "path",

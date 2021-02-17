@@ -48,7 +48,7 @@ public class GameController implements GameResource {
 	}
 
 	@Override
-	public GameCollectionDTO removeGameToCollection(Long id, Long gameId) {
+	public GameCollectionDTO removeGameFromCollection(Long id, Long gameId) {
 		return gameService.removeGameFromGameCollection(id, gameId);
 	}
 

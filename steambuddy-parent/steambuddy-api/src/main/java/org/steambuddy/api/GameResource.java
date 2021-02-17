@@ -50,10 +50,10 @@ public interface GameResource {
 	@PutMapping(path = "/gamecollection/{id}/{gameId}")
 	GameCollectionDTO addGameToCollection(@PathVariable("id") Long id, @PathVariable("gameId") Long gameId);
 
-	@ApiOperation(value = "Add a game by id to the gamecollection.", nickname = "addGame", notes = "adds game to collection", tags = "GameResource", response = GameCollectionDTO.class)
+	@ApiOperation(value = "Delete a game by id to the gamecollection.", nickname = "deleteGame", notes = "deletes game to collection", tags = "GameResource", response = GameCollectionDTO.class)
 	@ResponseBody
 	@DeleteMapping(path = "/gamecollection/{id}/{gameId}")
-	GameCollectionDTO removeGameToCollection(@PathVariable("id") Long id, @PathVariable("gameId") Long gameId);
+	GameCollectionDTO removeGameFromCollection(@PathVariable("id") Long id, @PathVariable("gameId") Long gameId);
 	
 	@ApiOperation(value = "Get game gamecollection from user.", nickname = "getGamecollection", notes = "get gamecollection from user", tags = "GameResource", response = GameCollectionDTO.class)
 	@ResponseBody
