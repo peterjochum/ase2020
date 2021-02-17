@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.steambuddy.api.dto.GameCollectionDTO;
 import org.steambuddy.api.dto.GameDTO;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 @Api(value = "GameResource")
@@ -24,8 +25,11 @@ public interface GameResource {
 
 	@ApiOperation(value = "Get the list of all games.", nickname = "getGames", notes = "Returns all games.", tags = "GameResource", response = GameDTO.class, responseContainer = "List")
 	@ResponseBody
+	@ApiImplicitParams({
+	    @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
+	            value = "Results page you want to retrieve (0..N)")})
 	@GetMapping("/")
-	List<GameDTO> getGames(@RequestBody Pageable pageable);
+	List<GameDTO> getGames(Pageable pageable);
 
 	@ApiOperation(value = "Get a list of suggested games.", nickname = "getSuggestedGames", notes = "Returns a list of suggested games.", tags = "GameResource", response = GameDTO.class, responseContainer = "List")
 	@ResponseBody
@@ -35,7 +39,10 @@ public interface GameResource {
 	@ApiOperation(value = "Get games which contain the given name", nickname = "getGamesByName", notes = "Returns found games.", tags = "GameResource", response = GameDTO.class, responseContainer = "List")
 	@ResponseBody
 	@GetMapping(path = "/{name}")
-	List<GameDTO> getGames(@PathVariable("name") String name, @RequestBody Pageable pageable);
+	@ApiImplicitParams({
+	    @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
+	            value = "Results page you want to retrieve (0..N)")})
+	List<GameDTO> getGames(@PathVariable("name") String name, Pageable pageable);
 
 	@ApiOperation(value = "Get game by id.", nickname = "getGame", notes = "Returns game or null.", tags = "GameResource", response = GameDTO.class)
 	@ResponseBody

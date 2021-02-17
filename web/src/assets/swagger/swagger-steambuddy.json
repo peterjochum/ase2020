@@ -178,12 +178,11 @@
         "description" : "Returns all games.",
         "operationId" : "getGames",
         "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N)",
           "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/Pageable"
-          }
+          "type" : "integer"
         } ],
         "responses" : {
           "200" : {
@@ -338,12 +337,11 @@
           "required" : true,
           "type" : "string"
         }, {
-          "in" : "body",
-          "name" : "body",
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N)",
           "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/Pageable"
-          }
+          "type" : "integer"
         } ],
         "responses" : {
           "200" : {
@@ -365,12 +363,11 @@
         "description" : "Returns all genres.",
         "operationId" : "getGenres",
         "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N)",
           "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/Pageable"
-          }
+          "type" : "integer"
         } ],
         "responses" : {
           "200" : {
@@ -420,12 +417,11 @@
           "required" : true,
           "type" : "string"
         }, {
-          "in" : "body",
-          "name" : "body",
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N)",
           "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/Pageable"
-          }
+          "type" : "integer"
         } ],
         "responses" : {
           "200" : {
@@ -537,12 +533,11 @@
         "description" : "Returns all publisher.",
         "operationId" : "getPublisher",
         "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N)",
           "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/Pageable"
-          }
+          "type" : "integer"
         } ],
         "responses" : {
           "200" : {
@@ -592,12 +587,11 @@
           "required" : true,
           "type" : "string"
         }, {
-          "in" : "body",
-          "name" : "body",
+          "name" : "page",
+          "in" : "query",
+          "description" : "Results page you want to retrieve (0..N)",
           "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/Pageable"
-          }
+          "type" : "integer"
         } ],
         "responses" : {
           "200" : {
@@ -827,32 +821,6 @@
         }
       }
     },
-    "Pageable" : {
-      "type" : "object",
-      "properties" : {
-        "offset" : {
-          "type" : "integer",
-          "format" : "int64"
-        },
-        "sort" : {
-          "$ref" : "#/definitions/Sort"
-        },
-        "pageNumber" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "pageSize" : {
-          "type" : "integer",
-          "format" : "int32"
-        },
-        "unpaged" : {
-          "type" : "boolean"
-        },
-        "paged" : {
-          "type" : "boolean"
-        }
-      }
-    },
     "PublisherDTO" : {
       "type" : "object",
       "properties" : {
@@ -862,20 +830,6 @@
         },
         "name" : {
           "type" : "string"
-        }
-      }
-    },
-    "Sort" : {
-      "type" : "object",
-      "properties" : {
-        "sorted" : {
-          "type" : "boolean"
-        },
-        "unsorted" : {
-          "type" : "boolean"
-        },
-        "empty" : {
-          "type" : "boolean"
         }
       }
     },
