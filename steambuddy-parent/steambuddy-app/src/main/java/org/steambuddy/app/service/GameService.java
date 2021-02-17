@@ -2,15 +2,17 @@ package org.steambuddy.app.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.steambuddy.api.dto.GameCollectionDTO;
 import org.steambuddy.api.dto.GameDTO;
-import org.steambuddy.api.dto.UserDTO;
 
 public interface GameService {
 
-	List<GameDTO> getGames();
+	public static int PAGE_SIZE = 25;
+	
+	List<GameDTO> getGames(Pageable pageable);
 
-	List<GameDTO> getGames(String name);
+	List<GameDTO> getGames(String name, Pageable pageable);
 	
 	List<GameDTO> getGameSuggestions(Long userId);
 

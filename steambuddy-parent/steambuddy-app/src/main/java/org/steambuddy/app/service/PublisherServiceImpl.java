@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.steambuddy.api.dto.PublisherDTO;
@@ -22,13 +23,14 @@ public class PublisherServiceImpl implements PublisherService {
 	private PublisherRepository publisherRepository;
 
 	@Override
-	public List<PublisherDTO> getPublisher() {
-		return publisherMapper.mapEntityToDTO((List<PublisherEntity>) publisherRepository.findAll());
+	public List<PublisherDTO> getPublisher(Pageable pageable) {
+		return publisherMapper
+				.mapEntityToDTO((List<PublisherEntity>) publisherRepository.findAll(pageable).getContent());
 	}
 
 	@Override
-	public List<PublisherDTO> getPublisherLikeName(String name) {
-		return publisherMapper.mapEntityToDTO(publisherRepository.findByName(name));
+	public List<PublisherDTO> getPublisherLikeName(String name, Pageable pageable) {
+		return publisherMapper.mapEntityToDTO(publisherRepository.findByName(name, pageable));
 	}
 
 	@Override

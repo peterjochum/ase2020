@@ -4,19 +4,15 @@ import static org.steambuddy.api.ModuleConfigurationConstants.INTERNAL_PATH_PREF
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import org.springframework.web.bind.annotation.RequestBody;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.steambuddy.api.dto.GameCollectionDTO;
 import org.steambuddy.api.dto.GameDTO;
-import org.steambuddy.api.dto.UserDTO;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,17 +24,17 @@ public interface GameResource {
 	@ApiOperation(value = "Get the list of all games.", nickname = "getGames", notes = "Returns all games.", tags = "GameResource", response = GameDTO.class, responseContainer = "List")
 	@ResponseBody
 	@GetMapping("/games")
-	List<GameDTO> getGames();
+	List<GameDTO> getGames(Pageable pageable);
 
-	@ApiOperation(value = "Get a list of suggested games.",nickname = "getSuggestedGames",notes = "Returns a list of suggested games.",tags = "GameResource",response = GameDTO.class,responseContainer = "List")
+	@ApiOperation(value = "Get a list of suggested games.", nickname = "getSuggestedGames", notes = "Returns a list of suggested games.", tags = "GameResource", response = GameDTO.class, responseContainer = "List")
 	@ResponseBody
-	@GetMapping(path="/games/suggested/{id}")
+	@GetMapping(path = "/games/suggested/{id}")
 	List<GameDTO> getGameSuggestions(@PathVariable("id") Long userId);
-	
+
 	@ApiOperation(value = "Get games which contain the given name", nickname = "getGamesByName", notes = "Returns found games.", tags = "GameResource", response = GameDTO.class, responseContainer = "List")
 	@ResponseBody
 	@GetMapping(path = "/games/{name}")
-	List<GameDTO> getGames(@PathVariable("name") String name);
+	List<GameDTO> getGames(@PathVariable("name") String name, Pageable pageable);
 
 	@ApiOperation(value = "Get game by id.", nickname = "getGame", notes = "Returns game or null.", tags = "GameResource", response = GameDTO.class)
 	@ResponseBody
@@ -54,7 +50,7 @@ public interface GameResource {
 	@ResponseBody
 	@DeleteMapping(path = "/gamecollection/{id}/{gameId}")
 	GameCollectionDTO removeGameToCollection(@PathVariable("id") Long id, @PathVariable("gameId") Long gameId);
-	
+
 	@ApiOperation(value = "Get game gamecollection from user.", nickname = "getGamecollection", notes = "get gamecollection from user", tags = "GameResource", response = GameCollectionDTO.class)
 	@ResponseBody
 	@GetMapping(path = "/gamecollection/{id}")
