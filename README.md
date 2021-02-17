@@ -18,7 +18,7 @@ Refer to the [frontend README](web/README.md)
 
 ### Backend
 
-TODO
+Refer to the [backend README](steambuddy-parent/README.md)
 
 ## Technology choices
 
