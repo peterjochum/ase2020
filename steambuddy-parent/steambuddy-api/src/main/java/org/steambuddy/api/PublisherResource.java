@@ -19,7 +19,7 @@ public interface PublisherResource {
 
 	@ApiOperation(value = "Get the list of all publisher.", nickname = "getPublisher", notes = "Returns all publisher.", tags = "PublisherResource", response = PublisherDTO.class, responseContainer = "List")
 	@ResponseBody
-	@GetMapping("/publisher")
+	@GetMapping("/")
 	List<PublisherDTO> getPublisher();
 
 	@ApiOperation(value = "Get publisher which contain the given name", nickname = "getPublisherByName", notes = "Returns found publisher.", tags = "PublisherResource", response = PublisherDTO.class, responseContainer = "List")

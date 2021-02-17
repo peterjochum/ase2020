@@ -22,22 +22,22 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @Api(value = "GameResource")
-@RequestMapping(value = INTERNAL_PATH_PREFIX + "/api/game")
+@RequestMapping(value = INTERNAL_PATH_PREFIX + "/api/games")
 public interface GameResource {
 
 	@ApiOperation(value = "Get the list of all games.", nickname = "getGames", notes = "Returns all games.", tags = "GameResource", response = GameDTO.class, responseContainer = "List")
 	@ResponseBody
-	@GetMapping("/games")
+	@GetMapping("/")
 	List<GameDTO> getGames();
 
 	@ApiOperation(value = "Get a list of suggested games.",nickname = "getSuggestedGames",notes = "Returns a list of suggested games.",tags = "GameResource",response = GameDTO.class,responseContainer = "List")
 	@ResponseBody
-	@GetMapping(path="/games/suggested/{id}")
+	@GetMapping(path="/suggested/{id}")
 	List<GameDTO> getGameSuggestions(@PathVariable("id") Long userId);
 	
 	@ApiOperation(value = "Get games which contain the given name", nickname = "getGamesByName", notes = "Returns found games.", tags = "GameResource", response = GameDTO.class, responseContainer = "List")
 	@ResponseBody
-	@GetMapping(path = "/games/{name}")
+	@GetMapping(path = "/{name}")
 	List<GameDTO> getGames(@PathVariable("name") String name);
 
 	@ApiOperation(value = "Get game by id.", nickname = "getGame", notes = "Returns game or null.", tags = "GameResource", response = GameDTO.class)

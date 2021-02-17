@@ -17,7 +17,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @Api(value = "FriendRequestResource")
-@RequestMapping(value = INTERNAL_PATH_PREFIX + "/api/friend-request")
+@RequestMapping(value = INTERNAL_PATH_PREFIX + "/api/friend-requests")
 public interface FriendRequestResource {
 
 	/**
@@ -33,7 +33,7 @@ public interface FriendRequestResource {
 			response = FriendRequestDTO.class,
 			responseContainer = "List")
 	@ResponseBody
-	@GetMapping("/friend-requests/incoming/{id}")
+	@GetMapping("/incoming/{id}")
 	List<FriendRequestDTO> getIncoming(@PathVariable("id") Long id);
 	
 	/**
@@ -49,7 +49,7 @@ public interface FriendRequestResource {
 			response = FriendRequestDTO.class,
 			responseContainer = "List")
 	@ResponseBody
-	@GetMapping("/friend-requests/outgoing/{id}")
+	@GetMapping("/outgoing/{id}")
 	List<FriendRequestDTO> getOutgoing(@PathVariable("id") Long id);
 	
 	/**
@@ -65,7 +65,7 @@ public interface FriendRequestResource {
 			tags = "FriendRequestResource",
 			response = Long.class)
 	@ResponseBody
-	@PostMapping("/friend-requests/{sender_id}/{receiver_id}")
+	@PostMapping("/{sender_id}/{receiver_id}")
 	Long createRequest(@PathVariable("sender_id") Long sender_id, @PathVariable("receiver_id") Long receiver_id);
 	
 	/**
@@ -80,7 +80,7 @@ public interface FriendRequestResource {
 			tags = "FriendRequestResource",
 			response = Long.class)
 	@ResponseBody
-	@PutMapping("/friend-requests/accept/{id}")
+	@PutMapping("/accept/{id}")
 	void acceptRequest(@PathVariable("id") Long id);
 	
 	/**
@@ -95,7 +95,7 @@ public interface FriendRequestResource {
 			tags = "FriendRequestResource",
 			response = Long.class)
 	@ResponseBody
-	@PutMapping("/friend-requests/decline/{id}")
+	@PutMapping("/decline/{id}")
 	void declineRequest(@PathVariable("id") Long id);
 	
 	/**
@@ -110,7 +110,7 @@ public interface FriendRequestResource {
 			tags = "FriendRequestResource",
 			response = FriendRequestDTO.class)
 	@ResponseBody
-	@GetMapping("/friend-requests/{id}")
+	@GetMapping("/{id}")
 	FriendRequestDTO getRequestById(@PathVariable("id") Long id);
 	
 }

@@ -17,7 +17,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @Api(value = "GroupResource")
-@RequestMapping(value = INTERNAL_PATH_PREFIX + "/api/group")
+@RequestMapping(value = INTERNAL_PATH_PREFIX + "/api/groups")
 public interface GroupResource {
 
 	/**
@@ -32,7 +32,7 @@ public interface GroupResource {
 			response = GroupDTO.class,
 			responseContainer = "List")
 	@ResponseBody
-	@GetMapping("/groups")
+	@GetMapping("/")
 	List<GroupDTO> getGroups();
 	
 	/**
@@ -47,7 +47,7 @@ public interface GroupResource {
 			tags = "GroupResource",
 			response = GroupDTO.class)
 	@ResponseBody
-	@PostMapping("/groups")
+	@PostMapping("/")
 	GroupDTO createGroup(@RequestBody GroupDTO group);
 	
 	/**
@@ -77,7 +77,7 @@ public interface GroupResource {
 			response = GroupDTO.class,
 			responseContainer = "List")
 	@ResponseBody
-	@GetMapping("/groups/{user_id}")
+	@GetMapping("/{user_id}")
 	List<GroupDTO> getGroupsByUserId(@PathVariable("user_id") Long user_id);
 	
 }

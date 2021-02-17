@@ -14,17 +14,17 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @Api(value = "GenreResource")
-@RequestMapping(value = INTERNAL_PATH_PREFIX + "/api/genre")
+@RequestMapping(value = INTERNAL_PATH_PREFIX + "/api/genres")
 public interface GenreResource {
 
 	@ApiOperation(value = "Get the list of all genres.", nickname = "getGenres", notes = "Returns all genres.", tags = "GenreResource", response = GenreDTO.class, responseContainer = "List")
 	@ResponseBody
-	@GetMapping("/genres")
+	@GetMapping("/")
 	List<GenreDTO> getGenres();
 
 	@ApiOperation(value = "Get publisher which contain the given name", nickname = "getGenreByName", notes = "Returns found genres.", tags = "GenreResource", response = GenreDTO.class, responseContainer = "List")
 	@ResponseBody
-	@GetMapping(path = "/genres/{name}")
+	@GetMapping(path = "/{name}")
 	List<GenreDTO> getGenres(@PathVariable("name") String name);
 
 	@ApiOperation(value = "Get genre by id.", nickname = "getGenre", notes = "Returns genre or null.", tags = "GenreResource", response = GenreDTO.class)
