@@ -15,8 +15,8 @@ describe('GameService', () => {
   let service: GameService;
   let httpMock: HttpTestingController;
   let configServiceSpy: jasmine.SpyObj<ConfigService>;
-  const fakeGamesUrl = '/api/games';
-  const fakeConfig: Config = { gamesUrl: fakeGamesUrl };
+  const fakeGamesUrl = '/api/';
+  const fakeConfig: Config = { gamesUrl: '/api' };
 
   beforeEach(() => {
     const spy = jasmine.createSpyObj('ConfigService', ['getConfig']);
