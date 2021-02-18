@@ -1,9 +1,8 @@
 import { Injectable, Optional } from '@angular/core';
 import { Game } from '../interfaces/game';
 import { Observable, of, throwError } from 'rxjs';
-import { IGameService } from '../interfaces/gameservice';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Configuration, GameCollectionDTO, GameDTO, GameResourceServiceInterface, Pageable } from '../integration';
+import { HttpHeaders } from '@angular/common/http';
+import { Configuration, GameCollectionDTO, GameDTO, GameResourceServiceInterface } from '../integration';
 
 
 @Injectable({
@@ -71,10 +70,6 @@ export class MockGameService implements GameResourceServiceInterface {
     }
   }
 
-  getGames(body?: Pageable, extraHttpRequestParams?: any): Observable<GameDTO[]> {
-    return of(this.FakeGames);
-  }
-
   addGame(id: number, gameId: number, extraHttpRequestParams?: any): Observable<GameCollectionDTO> {
     throw new Error('Method not implemented.');
   }
@@ -95,11 +90,16 @@ export class MockGameService implements GameResourceServiceInterface {
     throw new Error('Method not implemented.');
   }
 
-  getGamesByName(name: string, body?: Pageable, extraHttpRequestParams?: any): Observable<GameDTO[]> {
+
+  getSuggestedGames(id: number, extraHttpRequestParams?: any): Observable<GameDTO[]> {
     throw new Error('Method not implemented.');
   }
 
-  getSuggestedGames(id: number, extraHttpRequestParams?: any): Observable<GameDTO[]> {
+  getGames(page?: number, extraHttpRequestParams?: any): Observable<Array<GameDTO>> {
+    return of(this.FakeGames);
+  }
+
+  getGamesByName(name: string, page?: number, extraHttpRequestParams?: any): Observable<Array<GameDTO>> {
     throw new Error('Method not implemented.');
   }
 }
