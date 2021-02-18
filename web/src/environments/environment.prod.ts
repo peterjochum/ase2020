@@ -1,4 +1,3 @@
-import { GameService } from '../app/services/game.service';
 import { GameResourceService, UserResourceService } from '../app/integration';
 
 export const environment = {

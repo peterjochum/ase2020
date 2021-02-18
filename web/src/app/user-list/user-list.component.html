@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-12 mt-3">
+    <h3>Contacts</h3>
+    <div *ngIf="!users" class="alert alert-warning">No friends :(</div>
+    <div *ngIf="users">
+      <ul class="list-group" *ngFor="let user of users">
+        <li *ngIf="user.name" class="list-group-item d-flex justify-content-start align-items-center">
+          <div class="d-flex w-100 justify-content-between">
+          <span>
+            <fa-icon class="mr-2 fa-2x text-muted" [icon]="faUser"></fa-icon>
+            {{user.name}}
+            </span>
+            <span class="text-muted text-right">
+              <span *ngIf="user.name.length%2==0">Last seen: 1 day ago</span>
+              <span *ngIf="user.name.length%2!=0" class="text-success">online</span>
+              <br>
+
+              <span *ngIf="user"> {{user.name.length*2}} games</span>
+            </span>
+          </div>
+          <p>
+            <span class="text-muted" *ngFor="let g of user.groups">{{g.name}}</span>
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

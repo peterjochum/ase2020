@@ -4,6 +4,8 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { UserResourceServiceInterface } from '../integration/api/userResource.serviceInterface';
 import { UserDTO } from '../integration/model/userDTO';
+import { Group } from '../models/group';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,8 @@ export class MockUserService implements UserResourceServiceInterface {
       this.configuration = configuration
     }
   }
+
+  gPuzzles = new Group(1, "Puzzle", "Puzzle group - puzzlers welcome", new User(1, "Peter", "", undefined, undefined))
 
   userdata: UserDTO[] = [{"id":1,"name":"Peter","password":undefined,"friends":[{"id":3,"name":"Daniel","password":undefined,"friends":undefined,"groups":undefined},{"id":5,"name":"Florian","password":undefined,"friends":undefined,"groups":undefined},{"id":2,"name":"Keti","password":undefined,"friends":undefined,"groups":undefined}],"groups":undefined},{"id":2,"name":"Keti","password":undefined,"friends":[{"id":1,"name":"Peter","password":undefined,"friends":undefined,"groups":undefined},{"id":4,"name":"Phillip","password":undefined,"friends":undefined,"groups":undefined}],"groups":undefined},{"id":3,"name":"Daniel","password":undefined,"friends":[{"id":5,"name":"Florian","password":undefined,"friends":undefined,"groups":undefined}],"groups":undefined},{"id":4,"name":"Phillip","password":undefined,"friends":undefined,"groups":undefined},{"id":5,"name":"Florian","password":undefined,"friends":[{"id":3,"name":"Daniel","password":undefined,"friends":undefined,"groups":undefined}],"groups":undefined}];
 

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Game } from '../interfaces/game';
+import { GameDTO } from '../integration';
 
 @Component({
   selector: 'app-game-card',
@@ -14,7 +15,7 @@ export class GameCardComponent implements OnInit {
   /**
    * Game interface containing game data
    */
-  @Input() game?: Game;
+  @Input() game?: GameDTO;
 
   constructor() {}
 
