@@ -30,7 +30,12 @@ export class MockUserService implements UserResourceServiceInterface {
   }
 
   getUserById(id: number, extraHttpRequestParams?: any): Observable<UserDTO> {
-    return throwError("not implemented");
+    console.log("Getting user "+ id);
+    const user = this.userdata.find(x => x.id == id);
+    if (user === undefined) {
+      return throwError("user not found")
+    }
+    return of(user);
   }
 
   getUsers(extraHttpRequestParams?: any): Observable<Array<UserDTO>> {

@@ -92,7 +92,7 @@ export class MockGameService implements GameResourceServiceInterface {
 
 
   getSuggestedGames(id: number, extraHttpRequestParams?: any): Observable<GameDTO[]> {
-    throw new Error('Method not implemented.');
+    return of(this.FakeGames.slice(0,2));
   }
 
   getGames(page?: number, extraHttpRequestParams?: any): Observable<Array<GameDTO>> {

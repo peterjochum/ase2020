@@ -23,9 +23,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BASE_PATH } from './integration';
 
 
-//import { APIS, BASE_PATH } from './integration';
-
-
 @NgModule({
   declarations: [
     AppComponent,
