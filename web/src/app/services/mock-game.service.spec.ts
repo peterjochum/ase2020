@@ -21,7 +21,7 @@ describe('MockGameService', () => {
   });
 
   it('should return a game by id', () => {
-    service.get(1).subscribe(game => {
+    service.getGame(1).subscribe(game => {
       expect(game.id).toBe(1)
       expect(game.name).toBe('Cyberpunk 2077')
     })

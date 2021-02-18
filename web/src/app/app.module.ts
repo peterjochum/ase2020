@@ -18,6 +18,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { GameDetailComponent } from './game-detail/game-detail.component';
 import { RouterModule } from '@angular/router';
+import { UserListComponent } from './user-list/user-list.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BASE_PATH } from './integration';
 
 
 //import { APIS, BASE_PATH } from './integration';
@@ -37,12 +40,17 @@ import { RouterModule } from '@angular/router';
     ProfileComponent,
     WelcomeComponent,
     GameDetailComponent,
+    UserListComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule, RouterModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule, RouterModule, FontAwesomeModule],
   providers: [
     {
       provide: 'IGameService',
       useClass: environment.gameService,
+    },
+    {
+      provide: 'IUserResourceService',
+      useClass: environment.userService,
     },
     {
       provide: APP_INITIALIZER,
@@ -53,8 +61,8 @@ import { RouterModule } from '@angular/router';
           return configService.loadConfig();
         };
       },
-    }//,
-    //{ provide: BASE_PATH, useValue: 'http://localhost:8080/' },
+    },
+    { provide: BASE_PATH, useValue: 'http://localhost:8080/' },
     //APIS
   ],
   bootstrap: [AppComponent, GamesListComponent],

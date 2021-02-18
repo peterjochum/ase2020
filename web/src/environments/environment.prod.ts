@@ -1,8 +1,7 @@
-import { GameService } from '../app/services/game.service';
-import { UserResourceService } from '../app/integration';
+import { GameResourceService, UserResourceService } from '../app/integration';
 
 export const environment = {
   production: true,
-  gameService: GameService,
+  gameService: GameResourceService,
   userService: UserResourceService
 };

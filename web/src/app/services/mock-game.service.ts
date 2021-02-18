@@ -1,19 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { Game } from '../interfaces/game';
 import { Observable, of, throwError } from 'rxjs';
-import { IGameService } from '../interfaces/gameservice';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+import { Configuration, GameCollectionDTO, GameDTO, GameResourceServiceInterface } from '../integration';
 
 
 @Injectable({
   providedIn: 'root',
 })
-export class MockGameService implements IGameService {
-  constructor() {}
-  //private usersUrl: string;
-  //constructor(private http: HttpClient) {this.usersUrl = 'http://localhost:4200/users';}
+export class MockGameService implements GameResourceServiceInterface {
 
-  /** FakeGames is curated list of fake games */
   FakeGames: Game[] = [
     {
       id: 1,
@@ -64,20 +60,46 @@ export class MockGameService implements IGameService {
     },
   ];
 
-  /**
-   * getGames returns a list of fake games for development
-   * @return some fake games
-   */
-  getGames(): Observable<Game[]> {
-    //return this.http.get<Game[]>(this.usersUrl, games);
+
+  public defaultHeaders = new HttpHeaders();
+  public configuration = new Configuration();
+
+  constructor(@Optional() configuration: Configuration) {
+    if (configuration) {
+      this.configuration = configuration;
+    }
+  }
+
+  addGame(id: number, gameId: number, extraHttpRequestParams?: any): Observable<GameCollectionDTO> {
+    throw new Error('Method not implemented.');
+  }
+
+  deleteGame(id: number, gameId: number, extraHttpRequestParams?: any): Observable<GameCollectionDTO> {
+    throw new Error('Method not implemented.');
+  }
+
+  getGame(id: number, extraHttpRequestParams?: any): Observable<GameDTO> {
+    const game = this.FakeGames.find(x => x.id == id);
+    if (game === undefined) {
+      return throwError('game not found');
+    }
+    return of(game);
+  }
+
+  getGamecollection(id: number, extraHttpRequestParams?: any): Observable<GameCollectionDTO> {
+    throw new Error('Method not implemented.');
+  }
+
+
+  getSuggestedGames(id: number, extraHttpRequestParams?: any): Observable<GameDTO[]> {
+    throw new Error('Method not implemented.');
+  }
+
+  getGames(page?: number, extraHttpRequestParams?: any): Observable<Array<GameDTO>> {
     return of(this.FakeGames);
   }
 
-  get(id: number): Observable<Game> {
-    const game = this.FakeGames.find(x=>x.id == 1)
-    if (game === undefined) {
-      return throwError("game not found");
-    }
-    return of(game);
+  getGamesByName(name: string, page?: number, extraHttpRequestParams?: any): Observable<Array<GameDTO>> {
+    throw new Error('Method not implemented.');
   }
 }

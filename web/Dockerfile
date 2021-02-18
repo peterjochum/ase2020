@@ -27,7 +27,6 @@ COPY angular.json karma.conf.js tsconfig.* ./
 
 # Build the project
 COPY --from=swagger-codegen /swagger/integration src/app/
-RUN ls src/app/integration
 
 # RUN npm run test
 RUN npm run build -- --prod

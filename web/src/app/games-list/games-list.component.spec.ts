@@ -7,6 +7,8 @@ import { IGameService } from '../interfaces/gameservice';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { throwError } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FontAwesomeTestingModule } from '@fortawesome/angular-fontawesome/testing';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('GamesListComponent', () => {
   let component: GamesListComponent;
