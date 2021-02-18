@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WelcomeComponent } from './welcome.component';
+import { UserListComponent } from '../user-list/user-list.component';
 
 describe('WelcomeComponent', () => {
   let component: WelcomeComponent;

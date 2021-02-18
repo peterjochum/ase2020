@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Game } from '../interfaces/game';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IGameService } from '../interfaces/gameservice';
@@ -11,6 +11,8 @@ import { GameDTO, GameResourceService, GameResourceServiceInterface } from '../i
 })
 export class GamesListComponent implements OnInit {
   /** games to be output in the list view */
+
+  @Input()
   games?: GameDTO[];
 
   /** serviceError shows an alert on top of the component if set */
@@ -26,7 +28,9 @@ export class GamesListComponent implements OnInit {
    * ngOnInit retrieves games on component loading
    */
   ngOnInit(): void {
-    this.getGames();
+    if (this.games == undefined) {
+      this.getGames();
+    }
   }
 
   /**

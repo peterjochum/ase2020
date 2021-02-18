@@ -1,1 +1,30 @@
-<p>profile works!</p>
+<div class="row">
+  <div class="col-12 mt-3">
+    <div *ngIf="user">
+      <h2>Steambuddy profile of {{user.name}}</h2>
+      <p *ngIf="user.name">Member since {{2020 - user.name.length}}<br> Level {{user.name.length}}
+      </p>
+
+      <h3>Game collection of {{user.name}}</h3>
+      <div *ngIf="collectedGames">
+        <app-games-list *ngIf="collectedGames.length > 0" [games]="collectedGames"></app-games-list>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="!collectedGames">User does not have any collected games yet.</div>
+
+      <h3>{{user.name}}s recommended games</h3>
+      <app-games-list [games]="suggestedGames"></app-games-list>
+      <div *ngIf="suggestedGames.length">
+        <div *ngIf="suggestedGames.length == 0" class="alert alert-warning">Unfortunately there are no suggestions for
+          you.
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!user" class="alert alert-warning">
+      No user profile found
+    </div>
+  </div>
+</div>
+
+
