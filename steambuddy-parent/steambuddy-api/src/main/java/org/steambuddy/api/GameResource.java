@@ -2,17 +2,21 @@ package org.steambuddy.api;
 
 import static org.steambuddy.api.ModuleConfigurationConstants.INTERNAL_PATH_PREFIX;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.steambuddy.api.dto.GameCollectionDTO;
 import org.steambuddy.api.dto.GameDTO;
+import org.steambuddy.api.dto.RatingDTO;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -48,7 +52,12 @@ public interface GameResource {
 	@ResponseBody
 	@GetMapping(path = "/game/{id}")
 	GameDTO getGame(@PathVariable("id") Long id);
-
+	
+	@ApiOperation(value = "Add a rating plus optional text to a specific game", nickname = "addRating", notes = "Add a new rating", tags = "GameResource", response = GameDTO.class)
+	@ResponseBody
+	@PostMapping(path = "/rating")
+	RatingDTO addRating(@RequestBody RatingDTO rating);
+	
 	@ApiOperation(value = "Add a game by id to the gamecollection.", nickname = "addGame", notes = "adds game to collection", tags = "GameResource", response = GameCollectionDTO.class)
 	@ResponseBody
 	@PutMapping(path = "/gamecollection/{id}/{gameId}")
@@ -63,5 +72,8 @@ public interface GameResource {
 	@ResponseBody
 	@GetMapping(path = "/gamecollection/{id}")
 	GameCollectionDTO getCollection(@PathVariable("id") Long userId);
+	
+	
+	
 
 }

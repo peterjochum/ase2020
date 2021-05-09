@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.steambuddy.api.dto.GameCollectionDTO;
 import org.steambuddy.api.dto.GameDTO;
+import org.steambuddy.api.dto.RatingDTO;
 
 public interface GameService {
 
@@ -16,6 +17,8 @@ public interface GameService {
 	
 	List<GameDTO> getGameSuggestions(Long userId);
 
+	RatingDTO addRating(RatingDTO rating);
+	
 	GameDTO getGame(Long id);
 
 	GameCollectionDTO getGameCollectionByUserId(Long userId);

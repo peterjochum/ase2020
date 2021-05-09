@@ -16,13 +16,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.steambuddy.api.dto.GameCollectionDTO;
 import org.steambuddy.api.dto.GameDTO;
+import org.steambuddy.api.dto.RatingDTO;
+import org.steambuddy.app.compositekeys.GameRatingKey;
 import org.steambuddy.app.entity.GameCollectionEntity;
 import org.steambuddy.app.entity.GameEntity;
+import org.steambuddy.app.entity.RatingEntity;
 import org.steambuddy.app.entity.UserEntity;
 import org.steambuddy.app.mapper.GameCollectionMapper;
 import org.steambuddy.app.mapper.GameMapper;
+import org.steambuddy.app.mapper.RatingMapper;
 import org.steambuddy.app.repository.GameCollectionRepository;
 import org.steambuddy.app.repository.GameRepository;
+import org.steambuddy.app.repository.RatingRepository;
 import org.steambuddy.app.repository.UserRepository;
 
 @Service
@@ -31,6 +36,9 @@ public class GameServiceImpl implements GameService {
 
 	@Autowired
 	private GameRepository gameRepository;
+	
+	@Autowired
+	private RatingRepository ratingRepository;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -40,6 +48,9 @@ public class GameServiceImpl implements GameService {
 
 	@Autowired
 	private GameMapper mapper;
+	
+	@Autowired
+	private RatingMapper ratingMapper;
 
 	@Autowired
 	private GameCollectionMapper gameCollectionMapper;
@@ -62,6 +73,15 @@ public class GameServiceImpl implements GameService {
 		return null;
 	}
 
+	
+	@Override
+	public RatingDTO addRating(RatingDTO rating) {
+        GameRatingKey key = new GameRatingKey(10000L,10000L);
+        RatingEntity ratingE = new RatingEntity(key,5L,"Test");
+        ratingRepository.save(ratingE);
+		return ratingMapper.entityToDTO(ratingRepository.findAll().iterator().next());  //Change later, test for now
+	}
+	
 	@Override
 	public List<GameDTO> getGameSuggestions(Long id) {
 

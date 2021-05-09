@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.steambuddy.api.GameResource;
 import org.steambuddy.api.dto.GameCollectionDTO;
 import org.steambuddy.api.dto.GameDTO;
+import org.steambuddy.api.dto.RatingDTO;
 import org.steambuddy.app.service.GameService;
 
 @RestController
@@ -51,6 +52,12 @@ public class GameController implements GameResource {
 	@Override
 	public GameCollectionDTO removeGameFromCollection(Long id, Long gameId) {
 		return gameService.removeGameFromGameCollection(id, gameId);
+	}
+
+	@Override
+	public RatingDTO addRating(RatingDTO rating) {
+		// TODO Auto-generated method stub
+		return gameService.addRating(rating);
 	}
 
 }

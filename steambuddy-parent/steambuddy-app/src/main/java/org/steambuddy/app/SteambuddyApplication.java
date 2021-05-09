@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.steambuddy.api.dto.GroupDTO;
 import org.steambuddy.api.dto.UserDTO;
 import org.steambuddy.app.config.BackendConfiguration;
@@ -24,7 +25,7 @@ import org.steambuddy.app.service.GameServiceImpl;
 @SpringBootApplication
 @ComponentScan(basePackages = {"org.steambuddy"})
 //@EnableAutoConfiguration(exclude = {ObjectPostProcessor.class,SecurityFilterAutoConfiguration.class, SpringBootWebSecurityConfiguration.class})
-@EnableJpaRepositories("org.steambuddy")
+@EnableJpaRepositories//("org.steambuddy")
 @EnableWebSecurity
 @Import(value = { BackendConfiguration.class, WebConfiguration.class, SecurityConfig.class })
 public class SteambuddyApplication 
