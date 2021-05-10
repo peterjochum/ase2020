@@ -44,12 +44,14 @@ public class UserEntity extends AbstractEntity {
 	@OneToOne(cascade = CascadeType.ALL)
 	private GameCollectionEntity gameCollection;
 
-	public UserEntity(Long id, String name, String password, Set<UserEntity> friends, Set<GroupEntity> groups) {
+	public UserEntity(Long id, String name, String password, Set<UserEntity> friends, Set<GroupEntity> groups,Set<RatingEntity> ratings,Set<RatingEntity> messages) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
 		this.friends = friends;
 		this.groups = groups;
+		this.ratings=ratings;
+		this.messages=messages;
 	}
 
 	public UserEntity() {
@@ -96,6 +98,22 @@ public class UserEntity extends AbstractEntity {
 
 	public void setGameCollection(GameCollectionEntity gameCollection) {
 		this.gameCollection = gameCollection;
+	}
+
+	public Set<RatingEntity> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(Set<RatingEntity> messages) {
+		this.messages = messages;
+	}
+
+	public Set<RatingEntity> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(Set<RatingEntity> ratings) {
+		this.ratings = ratings;
 	}
 
 }
