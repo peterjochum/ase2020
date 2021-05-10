@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.steambuddy.api.dto.GameDTO;
+import org.steambuddy.api.dto.MessageDTO;
+import org.steambuddy.api.dto.RatingDTO;
 import org.steambuddy.api.dto.UserDTO;
 
 import io.swagger.annotations.Api;
@@ -88,4 +91,9 @@ public interface UserResource {
 	@ResponseBody
 	@GetMapping("/{id}")
 	UserDTO getUserById(@PathVariable("id") Long id);
+	 
+	@ApiOperation(value = "Send message from User to User", nickname = "sendMessage", notes = "Send messages between users", tags = "UserResource", response = MessageDTO.class)
+	@ResponseBody
+	@PostMapping(path = "/message")
+	MessageDTO sendMessage(@RequestBody MessageDTO message);
 }

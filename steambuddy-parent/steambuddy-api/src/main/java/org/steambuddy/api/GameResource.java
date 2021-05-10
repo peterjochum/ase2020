@@ -53,7 +53,7 @@ public interface GameResource {
 	@GetMapping(path = "/game/{id}")
 	GameDTO getGame(@PathVariable("id") Long id);
 	
-	@ApiOperation(value = "Add a rating plus optional text to a specific game", nickname = "addRating", notes = "Add a new rating", tags = "GameResource", response = GameDTO.class)
+	@ApiOperation(value = "Add a rating plus optional text to a specific game", nickname = "addRating", notes = "Add a new rating", tags = "GameResource", response = RatingDTO.class)
 	@ResponseBody
 	@PostMapping(path = "/rating")
 	RatingDTO addRating(@RequestBody RatingDTO rating);

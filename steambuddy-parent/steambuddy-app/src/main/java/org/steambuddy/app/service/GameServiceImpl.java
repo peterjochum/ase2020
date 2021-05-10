@@ -76,10 +76,11 @@ public class GameServiceImpl implements GameService {
 	
 	@Override
 	public RatingDTO addRating(RatingDTO rating) {
-        GameRatingKey key = new GameRatingKey(10000L,10000L);
-        RatingEntity ratingE = new RatingEntity(key,5L,"Test");
+        GameRatingKey key = new GameRatingKey(rating.getGameId(),rating.getUserId());
+        RatingEntity ratingE = new RatingEntity(key,rating.getRating(),rating.getRatingText());
         ratingRepository.save(ratingE);
-		return ratingMapper.entityToDTO(ratingRepository.findAll().iterator().next());  //Change later, test for now
+        
+		return ratingMapper.entityToDTO(ratingE);
 	}
 	
 	@Override

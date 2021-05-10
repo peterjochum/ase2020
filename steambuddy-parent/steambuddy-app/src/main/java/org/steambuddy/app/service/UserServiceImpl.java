@@ -1,5 +1,6 @@
 package org.steambuddy.app.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
@@ -7,9 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.steambuddy.api.dto.MessageDTO;
 import org.steambuddy.api.dto.UserDTO;
+import org.steambuddy.app.compositekeys.GameRatingKey;
+import org.steambuddy.app.compositekeys.MessageKey;
+import org.steambuddy.app.entity.MessageEntity;
+import org.steambuddy.app.entity.RatingEntity;
 import org.steambuddy.app.entity.UserEntity;
+import org.steambuddy.app.mapper.MessageMapper;
 import org.steambuddy.app.mapper.UserMapper;
+import org.steambuddy.app.repository.MessageRepository;
 import org.steambuddy.app.repository.UserRepository;
 
 @Service
@@ -20,10 +28,16 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 	
 	@Autowired
+	private MessageRepository messageRepository;
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private UserMapper mapper;
+	
+	@Autowired
+	private MessageMapper messageMapper;
 	
 	@Override
 	public UserDTO authenticateUser(UserDTO user) {
@@ -69,6 +83,18 @@ public class UserServiceImpl implements UserService {
 		friends.add(friend);
 		user.setFriends(friends);
 		userRepository.save(user);
+	}
+	
+	@Override
+	public MessageDTO sendMessage(MessageDTO message) {
+		 
+		Timestamp curTime=new Timestamp(System.currentTimeMillis());
+		MessageKey key = new MessageKey(message.getUserId1(),message.getUserId2(),curTime.getTime());
+	    MessageEntity messageE = new MessageEntity(key,message.getMessage());
+		
+		messageRepository.save(messageE);
+	    //return messageMapper.entityToDTO(messageRepository.findById(key).get());
+		return messageMapper.entityToDTO(messageE);
 	}
 	
 }
