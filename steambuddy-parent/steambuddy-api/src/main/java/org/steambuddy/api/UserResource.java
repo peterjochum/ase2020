@@ -96,4 +96,12 @@ public interface UserResource {
 	@ResponseBody
 	@PostMapping(path = "/message")
 	MessageDTO sendMessage(@RequestBody MessageDTO message);
+	
+	@ApiOperation(value = "Get all messages for a specific user", nickname = "sendMessage", notes = "Send messages between users", tags = "UserResource", response = MessageDTO.class)
+	@ResponseBody
+	@GetMapping(path = "/messages/{id}")
+	List<MessageDTO> getMessages(@PathVariable("id") Long id);
+	
+	
+	
 }

@@ -3,6 +3,7 @@ package org.steambuddy.app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.steambuddy.api.UserResource;
@@ -46,6 +47,12 @@ public class UserController implements UserResource{
 	public MessageDTO sendMessage(MessageDTO message) {
 		return userService.sendMessage(message);
 	}
+	
+	@Override
+	public List<MessageDTO> getMessages(Long id) {
+		return userService.getMessages(id);
+	}
+
 
 
 }

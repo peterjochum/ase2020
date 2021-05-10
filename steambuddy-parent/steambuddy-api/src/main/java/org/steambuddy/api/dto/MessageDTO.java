@@ -17,8 +17,6 @@ public class MessageDTO {
 		return userId1;
 	}
 
-
-
 	public void setUserId1(Long userId1) {
 		this.userId1 = userId1;
 	}

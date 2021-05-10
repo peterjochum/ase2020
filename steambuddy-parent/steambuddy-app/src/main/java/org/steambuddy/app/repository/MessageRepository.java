@@ -1,9 +1,12 @@
 package org.steambuddy.app.repository;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Example;
 import org.springframework.data.repository.CrudRepository;
 import org.steambuddy.app.compositekeys.GameRatingKey;
 import org.steambuddy.app.compositekeys.MessageKey;
@@ -12,5 +15,8 @@ import org.steambuddy.app.entity.RatingEntity;
 
 @Repository
 public interface MessageRepository extends CrudRepository<MessageEntity, MessageKey> {
+	List<MessageEntity> findAll(Example<MessageEntity> message);
+
+	
 	
 }

@@ -22,4 +22,5 @@ public interface UserService {
 	
 	MessageDTO sendMessage(MessageDTO message);
 	
+	List<MessageDTO> getMessages(Long id);
 }

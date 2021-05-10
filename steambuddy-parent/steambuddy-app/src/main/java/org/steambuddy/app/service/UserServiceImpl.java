@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -95,6 +96,18 @@ public class UserServiceImpl implements UserService {
 		messageRepository.save(messageE);
 	    //return messageMapper.entityToDTO(messageRepository.findById(key).get());
 		return messageMapper.entityToDTO(messageE);
+	}
+	
+	@Override
+	public List<MessageDTO> getMessages(Long id) { //get messages send to user
+		MessageKey key = new MessageKey();
+		key.setUserId2(id);
+		
+		MessageEntity example=new MessageEntity();
+		example.setMessageKey(key);
+		List<MessageEntity> messages=messageRepository.findAll(Example.of(example));
+				
+		return  messageMapper.mapEntityToDTO(messages);
 	}
 	
 }

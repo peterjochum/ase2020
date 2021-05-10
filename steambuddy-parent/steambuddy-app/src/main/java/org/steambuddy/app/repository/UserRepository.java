@@ -14,4 +14,5 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
 	@Query(value = "Select u.id, u.name, u.password from user u, group_member g where g.group_id = ?1", nativeQuery = true)
 	List<UserEntity> findGroupMembers(Long group_id);
 	
+	
 }
