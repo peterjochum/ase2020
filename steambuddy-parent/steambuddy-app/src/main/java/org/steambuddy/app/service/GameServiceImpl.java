@@ -126,13 +126,20 @@ public class GameServiceImpl implements GameService {
 	@Override
 	public List<GameDTO> getGameSuggestionsByGenres(Long id) {
 
-		ratingRepository.
-		
-		
+
 		// get collection of user
 		GameCollectionEntity collection = getGameCollectionEntityByUserId(id);
 		if (collection == null) {
 			System.out.println("User not found!");
+			return new ArrayList<GameDTO>();
+		}
+
+		// get top genres of user
+		List<Long> bestGenres = collection.getBestGenres();
+
+		if (bestGenres.isEmpty()) {
+			// no best genres = no games in library
+			System.out.println("No games in user library!");
 			return new ArrayList<GameDTO>();
 		}
 
