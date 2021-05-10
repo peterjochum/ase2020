@@ -15,7 +15,9 @@ public interface GameService {
 
 	List<GameDTO> getGames(String name, Pageable pageable);
 	
-	List<GameDTO> getGameSuggestions(Long userId);
+	List<GameDTO> getGameSuggestionsByGenres(Long userId);
+	
+	List<GameDTO> getGameSuggestionsByRatings(Long userId);
 
 	RatingDTO addRating(RatingDTO rating);
 	

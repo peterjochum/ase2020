@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +29,9 @@ public class GameEntity extends AbstractEntity {
 	@ManyToMany(targetEntity = GenreEntity.class)
 	private Set<GenreEntity> genres;
 
+	@OneToMany(targetEntity = RatingEntity.class)
+	private Set<RatingEntity> ratings;
+	
 	@ManyToOne
 	private PublisherEntity publisher;
 
@@ -82,7 +86,7 @@ public class GameEntity extends AbstractEntity {
 		this.publisher = publisher;
 	}
 
-	public GameEntity(Long id, String name, Integer year, String image, String text, Set<GenreEntity> genres,
+	public GameEntity(Long id, String name, Integer year, String image, String text, Set<GenreEntity> genres,Set<RatingEntity> ratings,
 			PublisherEntity publisher) {
 		this.id = id;
 		this.name = name;
@@ -90,10 +94,19 @@ public class GameEntity extends AbstractEntity {
 		this.image = image;
 		this.text = text;
 		this.genres = genres;
+		this.ratings=ratings;
 		this.publisher = publisher;
 	}
 
 	public GameEntity() {
+	}
+
+	public Set<RatingEntity> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(Set<RatingEntity> ratings) {
+		this.ratings = ratings;
 	}
 
 }

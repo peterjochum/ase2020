@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,6 +23,12 @@ public class UserEntity extends AbstractEntity {
 	@Column(name = "password")
 	private String password;
 
+	@OneToMany(targetEntity = RatingEntity.class)
+	private Set<RatingEntity> ratings;
+	
+	@ManyToMany(targetEntity = RatingEntity.class)
+	private Set<RatingEntity> messages;
+	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "friend", joinColumns = {
 			@JoinColumn(name = "friendLeft", referencedColumnName = "id", nullable = false) }, inverseJoinColumns = {

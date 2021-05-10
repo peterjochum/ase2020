@@ -80,11 +80,11 @@ public class GameServiceImpl implements GameService {
         RatingEntity ratingE = new RatingEntity(key,rating.getRating(),rating.getRatingText());
         ratingRepository.save(ratingE);
         
-		return ratingMapper.entityToDTO(ratingE);
+		return ratingMapper.entityToDTO(ratingE);  
 	}
 	
 	@Override
-	public List<GameDTO> getGameSuggestions(Long id) {
+	public List<GameDTO> getGameSuggestionsByRatings(Long id) {
 
 		// get collection of user
 		GameCollectionEntity collection = getGameCollectionEntityByUserId(id);
@@ -102,6 +102,42 @@ public class GameServiceImpl implements GameService {
 			return new ArrayList<GameDTO>();
 		}
 
+		// Find a certain number of games with the specified categories (at least one in
+		// common)
+		List<GameEntity> allSuggestions = gameRepository.findByCategoryRandomly(bestGenres);
+		System.out.println("Number of suggestions: " + allSuggestions.size());
+		// map gameids to gameEntities
+		HashMap<Long, GameEntity> gameIdToGame = new HashMap<Long, GameEntity>();
+		for (GameEntity game : allSuggestions)
+			gameIdToGame.put(game.getId(), game);
+
+		List<Entry<Long, Integer>> gameRatings = getGameRatings(id, allSuggestions);
+
+		// get the suggested games based on its ratings and the number of games that we
+		// want
+		List<GameEntity> result = getBestGameSuggestions(gameIdToGame, gameRatings, 2);
+		System.out.println("Number of suggestions: " + result.size());
+		// map to output
+		return mapper.mapEntityToDTO(result);
+
+	}
+	
+	
+	@Override
+	public List<GameDTO> getGameSuggestionsByGenres(Long id) {
+
+		ratingRepository.
+		
+		
+		// get collection of user
+		GameCollectionEntity collection = getGameCollectionEntityByUserId(id);
+		if (collection == null) {
+			System.out.println("User not found!");
+			return new ArrayList<GameDTO>();
+		}
+
+
+		
 		// Find a certain number of games with the specified categories (at least one in
 		// common)
 		List<GameEntity> allSuggestions = gameRepository.findByCategoryRandomly(bestGenres);
@@ -161,7 +197,6 @@ public class GameServiceImpl implements GameService {
 
 			for (GameCollectionEntity friendCol : friendCols) {
 				if (friendCol.containsGame(game)) {
-					System.out.println("A friend has the same game! Id: " + curID);
 					gameRating.put(curID, gameRating.get(curID) + 1);
 				}
 			}

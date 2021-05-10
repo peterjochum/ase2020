@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.steambuddy.app.compositekeys.GameRatingKey;
@@ -21,18 +22,6 @@ public class RatingEntity{
 
 	@EmbeddedId
 	private GameRatingKey ratingKey;
-	
-	/*
-	@ManyToOne
-    @MapsId("gameId")
-    @JoinColumn(name = "game_id")
-    GameEntity game;
-	
-	@ManyToOne
-    @MapsId("userId")
-    @JoinColumn(name = "user_id")
-    UserEntity user;
-	*/
 	
 	//@Column(name = "rating", nullable = false)
 	private Long rating;
