@@ -2,6 +2,7 @@ package org.steambuddy.app.service;
 
 import java.util.List;
 
+import org.steambuddy.api.dto.GroupMessageDTO;
 import org.steambuddy.api.dto.MessageDTO;
 import org.steambuddy.api.dto.UserDTO;
 import org.steambuddy.app.entity.UserEntity;
@@ -27,5 +28,9 @@ public interface UserService {
 	List<MessageDTO> getSentMessages(Long id);
 	
 	List<MessageDTO> getAllMessagesSpecific(Long userId, Long partnerId);
+	
+	GroupMessageDTO sendGroupMessage(GroupMessageDTO message);
+	
+	List<GroupMessageDTO> receiveGroupMessages(Long groupId);
 }
 

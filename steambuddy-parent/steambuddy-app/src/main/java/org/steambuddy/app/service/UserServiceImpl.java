@@ -9,15 +9,20 @@ import org.springframework.data.domain.Example;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.steambuddy.api.dto.GroupMessageDTO;
 import org.steambuddy.api.dto.MessageDTO;
 import org.steambuddy.api.dto.UserDTO;
 import org.steambuddy.app.compositekeys.GameRatingKey;
+import org.steambuddy.app.compositekeys.GroupMessageKey;
 import org.steambuddy.app.compositekeys.MessageKey;
+import org.steambuddy.app.entity.GroupMessageEntity;
 import org.steambuddy.app.entity.MessageEntity;
 import org.steambuddy.app.entity.RatingEntity;
 import org.steambuddy.app.entity.UserEntity;
+import org.steambuddy.app.mapper.GroupMessageMapper;
 import org.steambuddy.app.mapper.MessageMapper;
 import org.steambuddy.app.mapper.UserMapper;
+import org.steambuddy.app.repository.GroupMessageRepository;
 import org.steambuddy.app.repository.MessageRepository;
 import org.steambuddy.app.repository.UserRepository;
 
@@ -32,6 +37,9 @@ public class UserServiceImpl implements UserService {
 	private MessageRepository messageRepository;
 	
 	@Autowired
+	private GroupMessageRepository groupMessageRepository;
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
@@ -39,6 +47,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private MessageMapper messageMapper;
+	
+	@Autowired
+	private GroupMessageMapper groupMessageMapper;
 	
 	@Override
 	public UserDTO authenticateUser(UserDTO user) {
@@ -89,8 +100,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public MessageDTO sendMessage(MessageDTO message) {
 		 
-		Timestamp curTime=new Timestamp(System.currentTimeMillis());
-		MessageKey key = new MessageKey(message.getFromId(),message.getToId(),curTime.getTime());
+		MessageKey key = new MessageKey(message.getFromId(),message.getToId(),message.getTimeStamp());
 	    MessageEntity messageE = new MessageEntity(key,message.getMessage());
 		
 		messageRepository.save(messageE);
@@ -140,6 +150,28 @@ public class UserServiceImpl implements UserService {
 		return messageMapper.mapEntityToDTO(messages1);
 	}
 	
+	@Override
+	public GroupMessageDTO sendGroupMessage(GroupMessageDTO message) {
+		
+		GroupMessageKey key = new GroupMessageKey(message.getGroupId(),message.getUserId(),message.getTimeStamp());
+	    GroupMessageEntity messageE = new GroupMessageEntity(key,message.getMessage());
+		
+		groupMessageRepository.save(messageE);
+	    //return messageMapper.entityToDTO(messageRepository.findById(key).get());
+		return groupMessageMapper.entityToDTO(messageE);
+	}
+	
+	 @Override
+	 public List<GroupMessageDTO> receiveGroupMessages(Long groupId){
+		GroupMessageKey key = new GroupMessageKey();
+		key.setGroupId(groupId);
+		
+		GroupMessageEntity example=new GroupMessageEntity();
+		example.setGroupMessageKey(key);
+		List<GroupMessageEntity> messages=groupMessageRepository.findAll(Example.of(example));
+				
+		return  groupMessageMapper.mapEntityToDTO(messages);
+	 }
 	
 	private List<MessageEntity> getMessageEntities(MessageKey key){
 		MessageEntity example=new MessageEntity();

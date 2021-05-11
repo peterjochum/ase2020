@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.steambuddy.api.dto.GameDTO;
+import org.steambuddy.api.dto.GroupMessageDTO;
 import org.steambuddy.api.dto.MessageDTO;
 import org.steambuddy.api.dto.RatingDTO;
 import org.steambuddy.api.dto.UserDTO;
@@ -112,8 +113,14 @@ public interface UserResource {
 	@GetMapping(path = "/messages/all/{userid}/{partnerid}")
 	List<MessageDTO> getAllMessagesSpecific(@PathVariable("userid") Long userId, @PathVariable("partnerid") Long partnerId);
 	
+	@ApiOperation(value = "Send message to all users of a group", nickname = "sendGroupMessage", notes = "Send messages to a group", tags = "UserResource", response = GroupMessageDTO.class)
+	@ResponseBody
+	@PostMapping(path = "/groupmessage")
+	GroupMessageDTO sendGroupMessage(@RequestBody GroupMessageDTO message);
 	
-	
-	
+	@ApiOperation(value = "Receive all messages from a user group", nickname = "receiveGroupMessages", notes = "Receive messages from a group", tags = "UserResource", response = GroupMessageDTO.class)
+	@ResponseBody
+	@GetMapping(path = "/groupmessages/{id}")
+	List<GroupMessageDTO> receiveGroupMessages(@PathVariable("id") Long groupId );
 	
 }

@@ -32,7 +32,12 @@ import static org.junit.Assert.assertTrue;
 @AutoConfigureTestDatabase(replace =  AutoConfigureTestDatabase.Replace.NONE)
 
 public class UserServiceTest {
-	
+	/*
+	 * It is not really possible to do unit tests, because most services are just database queries, so every test would have to use the actual database to make any sense but then it is not a unit test anymore
+	 * 
+	 * 
+	 * 
+	 * 
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -59,29 +64,8 @@ public class UserServiceTest {
     	return repoMessageDTO;
 	}
 	
-	
-
-	//Tests are just too troublesome, there a like 100 different errors when trying to get the databse to run
-	//And there are mostly database tests, so we can't even really do good junit tests, because like every service just asks the database to do something
-	//Therefore these tests are disabled atm
-	
-	/*
-	
-    @Test
-    public void serviceCorrectlySavesSentMessage() {
-    	//sample data creation
-		MessageDTO testMessage=createMessageSample();
-		
-		//send message
-    	userService.sendMessage(testMessage);
-    	
-    	//Try to get message from repo
-    	MessageDTO repoMessageDTO=getRepoDTO(testMessage);
-    	
-    	//check if message was actually send and saved in the database
-    	Assert.assertEquals(testMessage,repoMessageDTO);
-    	
-    }
-    */
-    
+	*/
+   
 }
+
+

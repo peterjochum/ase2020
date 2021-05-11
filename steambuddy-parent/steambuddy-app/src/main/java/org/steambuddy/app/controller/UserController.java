@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.steambuddy.api.UserResource;
+import org.steambuddy.api.dto.GroupMessageDTO;
 import org.steambuddy.api.dto.MessageDTO;
 import org.steambuddy.api.dto.RatingDTO;
 import org.steambuddy.api.dto.UserDTO;
@@ -62,6 +63,16 @@ public class UserController implements UserResource{
 		return userService.getAllMessagesSpecific(userId, partnerId);
 	}
 	
+	@Override
+	public GroupMessageDTO sendGroupMessage(GroupMessageDTO message) {
+		return userService.sendGroupMessage(message);
+	}
+	
+	@Override
+	public List<GroupMessageDTO> receiveGroupMessages(Long groupId) {
+		return userService.receiveGroupMessages(groupId);
+	}	
+
 
 
 }
