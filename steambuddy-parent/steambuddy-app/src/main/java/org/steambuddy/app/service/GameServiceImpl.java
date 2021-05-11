@@ -100,19 +100,36 @@ public class GameServiceImpl implements GameService {
 	@Override
 	public List<GameDTO> getGameSuggestionsByRatings(Long id) {
 
+		// get collection of user
+		GameCollectionEntity collection = getGameCollectionEntityByUserId(id);
+		if (collection == null) {
+			System.out.println("User not found!");
+			return new ArrayList<GameDTO>();
+		}
+		
+		
 		
 		List<Tuple> tupleRatings=ratingRepository.getGameToRatingAggregation();
 		
 		List<GameEntity> suggestions=new ArrayList<GameEntity>();
 		
+		
+		
 		Long suggestedGameId;
+		GameEntity suggestion;
 		for (int i=0; i<10;i++) {
 			
 			if(i>=suggestions.size()) {//if there are too few suggestions, break
 				break;
 			}
+			
 			suggestedGameId=Long.parseLong(tupleRatings.get(0).get(0).toString());
-			suggestions.add(gameRepository.findById(suggestedGameId).get());
+			suggestion=gameRepository.findById(suggestedGameId).get();
+			
+			if(!collection.containsGame(suggestion)) { //only add if the user doesnt already own it
+				suggestions.add(suggestion);
+			}
+
 			
 		}
 		
@@ -157,7 +174,7 @@ public class GameServiceImpl implements GameService {
 
 		// get the suggested games based on its ratings and the number of games that we
 		// want
-		List<GameEntity> result = getBestGameSuggestions(gameIdToGame, gameRatings, 10);
+		List<GameEntity> result = getBestGameSuggestions(gameIdToGame, gameRatings, 10,collection);
 		System.out.println("Number of suggestions: " + result.size());
 		// map to output
 		return mapper.mapEntityToDTO(result);
@@ -165,13 +182,18 @@ public class GameServiceImpl implements GameService {
 	}
 
 	private List<GameEntity> getBestGameSuggestions(HashMap<Long, GameEntity> gameIdToGame,
-			List<Entry<Long, Integer>> gameRatings, int numberOfSuggestions) {
+			List<Entry<Long, Integer>> gameRatings, int numberOfSuggestions,GameCollectionEntity collection) {
 
 		List<GameEntity> bestGames = new ArrayList<GameEntity>();
+		GameEntity suggestion;
 		for (Entry<Long, Integer> gameCount : gameRatings) {
 			if (numberOfSuggestions > 0) {
-				bestGames.add(gameIdToGame.get(gameCount.getKey()));
-				numberOfSuggestions--;
+				suggestion=gameIdToGame.get(gameCount.getKey());
+				if(!collection.containsGame(suggestion)){
+					bestGames.add(suggestion);
+					numberOfSuggestions--;
+				}
+
 			} else {
 				break;
 			}
