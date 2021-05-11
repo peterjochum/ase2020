@@ -64,6 +64,11 @@ public interface GameResource {
 	@PostMapping(path = "/rating")
 	RatingDTO addRating(@RequestBody RatingDTO rating);
 	
+	@ApiOperation(value = "Remove the rating for a specific game and user", nickname = "removeRating", notes = "Remove a rating", tags = "GameResource", response = RatingDTO.class)
+	@ResponseBody
+	@DeleteMapping(path = "/rating/{id}/{gameId}")
+	RatingDTO removeRating(@PathVariable("id") Long id, @PathVariable("gameId") Long gameId);
+	
 	@ApiOperation(value = "Add a game by id to the gamecollection.", nickname = "addGame", notes = "adds game to collection", tags = "GameResource", response = GameCollectionDTO.class)
 	@ResponseBody
 	@PutMapping(path = "/gamecollection/{id}/{gameId}")

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.steambuddy.api.GameResource;
 import org.steambuddy.api.dto.GameCollectionDTO;
@@ -63,5 +64,11 @@ public class GameController implements GameResource {
 		// TODO Auto-generated method stub
 		return gameService.addRating(rating);
 	}
+	
+	@Override
+	public RatingDTO removeRating(Long id,Long gameId) {
+		// TODO Auto-generated method stub
+		return gameService.removeRating(id,gameId);
+	}	
 
 }

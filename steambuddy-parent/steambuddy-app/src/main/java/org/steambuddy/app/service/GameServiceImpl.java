@@ -10,8 +10,11 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.persistence.Tuple;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.steambuddy.api.dto.GameCollectionDTO;
@@ -84,42 +87,37 @@ public class GameServiceImpl implements GameService {
 	}
 	
 	@Override
+	public RatingDTO removeRating(Long id,Long gameId) {
+        GameRatingKey key = new GameRatingKey(gameId,id);
+        RatingEntity ratingE=ratingRepository.findById(key).get(); //we store the variable here to return it back, because the delete function only returns void
+        
+        ratingRepository.delete(ratingE);
+        
+		return ratingMapper.entityToDTO(ratingE);  
+	}	
+	
+	
+	@Override
 	public List<GameDTO> getGameSuggestionsByRatings(Long id) {
 
 		
-		// get collection of user
-		GameCollectionEntity collection = getGameCollectionEntityByUserId(id);
-		if (collection == null) {
-			System.out.println("User not found!");
-			return new ArrayList<GameDTO>();
+		List<Tuple> tupleRatings=ratingRepository.getGameToRatingAggregation();
+		
+		List<GameEntity> suggestions=new ArrayList<GameEntity>();
+		
+		Long suggestedGameId;
+		for (int i=0; i<10;i++) {
+			
+			if(i>=suggestions.size()) {//if there are too few suggestions, break
+				break;
+			}
+			suggestedGameId=Long.parseLong(tupleRatings.get(0).get(0).toString());
+			suggestions.add(gameRepository.findById(suggestedGameId).get());
+			
 		}
-
-		// get top genres of user
-		List<Long> bestGenres = collection.getBestGenres();
-
-		if (bestGenres.isEmpty()) {
-			// no best genres = no games in library
-			System.out.println("No games in user library!");
-			return new ArrayList<GameDTO>();
-		}
-
-		// Find a certain number of games with the specified categories (at least one in
-		// common)
-		List<GameEntity> allSuggestions = gameRepository.findByCategoryRandomly(bestGenres);
-		System.out.println("Number of suggestions: " + allSuggestions.size());
-		// map gameids to gameEntities
-		HashMap<Long, GameEntity> gameIdToGame = new HashMap<Long, GameEntity>();
-		for (GameEntity game : allSuggestions)
-			gameIdToGame.put(game.getId(), game);
-
-		List<Entry<Long, Integer>> gameRatings = getGameRatings(id, allSuggestions);
-
-		// get the suggested games based on its ratings and the number of games that we
-		// want
-		List<GameEntity> result = getBestGameSuggestions(gameIdToGame, gameRatings, 2);
-		System.out.println("Number of suggestions: " + result.size());
-		// map to output
-		return mapper.mapEntityToDTO(result);
+		
+		return mapper.mapEntityToDTO(suggestions);
+		
 
 	}
 	
@@ -159,7 +157,7 @@ public class GameServiceImpl implements GameService {
 
 		// get the suggested games based on its ratings and the number of games that we
 		// want
-		List<GameEntity> result = getBestGameSuggestions(gameIdToGame, gameRatings, 2);
+		List<GameEntity> result = getBestGameSuggestions(gameIdToGame, gameRatings, 10);
 		System.out.println("Number of suggestions: " + result.size());
 		// map to output
 		return mapper.mapEntityToDTO(result);

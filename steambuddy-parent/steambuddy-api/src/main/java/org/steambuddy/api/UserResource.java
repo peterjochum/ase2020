@@ -107,6 +107,12 @@ public interface UserResource {
 	@GetMapping(path = "/messages/sent/{id}")
 	List<MessageDTO> getSentMessages(@PathVariable("id") Long id);
 	
+	@ApiOperation(value = "Get all messages sent between two specific users", nickname = "getAllMessagesSpecific", notes = "Get all messages between two specific users", tags = "UserResource", response = MessageDTO.class)
+	@ResponseBody
+	@GetMapping(path = "/messages/all/{userid}/{partnerid}")
+	List<MessageDTO> getAllMessagesSpecific(@PathVariable("userid") Long userId, @PathVariable("partnerid") Long partnerId);
+	
+	
 	
 	
 	

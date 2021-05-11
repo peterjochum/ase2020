@@ -24,4 +24,8 @@ public interface UserService {
 	
 	List<MessageDTO> getReceivedMessages(Long id);
 	
-	List<MessageDTO> getSentMessages(Long id);}
+	List<MessageDTO> getSentMessages(Long id);
+	
+	List<MessageDTO> getAllMessagesSpecific(Long userId, Long partnerId);
+}
+

@@ -57,6 +57,11 @@ public class UserController implements UserResource{
 	public List<MessageDTO> getSentMessages(Long id) {
 		return userService.getSentMessages(id);
 	}
+	@Override
+	public List<MessageDTO> getAllMessagesSpecific(Long userId, Long partnerId) {
+		return userService.getAllMessagesSpecific(userId, partnerId);
+	}
+	
 
 
 }

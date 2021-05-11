@@ -15,7 +15,6 @@ public interface GameRepository extends PagingAndSortingRepository<GameEntity, L
     List<GameEntity> findByName(String name, Pageable pageable);
     
     //Get games that contain some of the given categories. Of all found rows that randomly *pageable* of them
-    //add later: also make sure that game is not already in users library
     @Query(value="SELECT DISTINCT g FROM GameEntity g INNER JOIN g.genres ge WHERE ge.id in (:categories) ORDER BY RAND()")
     List<GameEntity> findByCategoryRandomly(@Param("categories") List<Long> categories);
 	

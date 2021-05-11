@@ -122,4 +122,31 @@ public class UserServiceImpl implements UserService {
 		return  messageMapper.mapEntityToDTO(messages);
 	}
 	
+	@Override
+	public List<MessageDTO> getAllMessagesSpecific(Long userId, Long partnerId) { //get messages send to user
+		MessageKey key1 = new MessageKey(); 
+		key1.setFromId(userId);
+		key1.setToId(partnerId);
+			
+		MessageKey key2 = new MessageKey();
+		key1.setFromId(partnerId);
+		key1.setToId(userId);
+		
+		List<MessageEntity> messages1=getMessageEntities(key1);
+		List<MessageEntity> messages2=getMessageEntities(key2);
+		
+		messages1.addAll(messages2); //combine list
+				
+		return messageMapper.mapEntityToDTO(messages1);
+	}
+	
+	
+	private List<MessageEntity> getMessageEntities(MessageKey key){
+		MessageEntity example=new MessageEntity();
+		example.setMessageKey(key);
+		List<MessageEntity> messages=messageRepository.findAll(Example.of(example));
+		return messages;
+	}
+
+	
 }

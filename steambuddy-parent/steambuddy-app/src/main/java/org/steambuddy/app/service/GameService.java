@@ -21,6 +21,8 @@ public interface GameService {
 
 	RatingDTO addRating(RatingDTO rating);
 	
+	RatingDTO removeRating(Long id,Long gameId);
+	
 	GameDTO getGame(Long id);
 
 	GameCollectionDTO getGameCollectionByUserId(Long userId);
