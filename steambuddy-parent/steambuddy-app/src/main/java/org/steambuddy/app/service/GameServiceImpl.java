@@ -162,6 +162,7 @@ public class GameServiceImpl implements GameService {
 		}
 		
 		//Find k nearest neighbours, we just take 1 and only look at our friends
+		//We could make it more precise by increasing the size of neighbours and building the mean or median, but the principle stays the same
 		
 		Double smallestDistance=Double.MAX_VALUE;
 		Long bestFriendForAlgo=1L;
@@ -188,13 +189,10 @@ public class GameServiceImpl implements GameService {
 		}
 		
 
-		
 		return mapper.mapEntityToDTO(suggestions);
 		
-
 	}
 	
-
 	@Override
 	public List<GameDTO> getGameSuggestionsByRatings(Long id) {
 

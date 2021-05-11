@@ -58,6 +58,8 @@ public class UserServiceTest {
     	MessageDTO repoMessageDTO=messageMapper.entityToDTO(repoMessage);
     	return repoMessageDTO;
 	}
+	
+	
 
 	//Tests are just too troublesome, there a like 100 different errors when trying to get the databse to run
 	//And there are mostly database tests, so we can't even really do good junit tests, because like every service just asks the database to do something

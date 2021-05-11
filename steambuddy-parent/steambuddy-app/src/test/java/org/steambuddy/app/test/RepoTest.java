@@ -1,5 +1,6 @@
 package org.steambuddy.app.test;
 
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,26 +15,38 @@ import org.steambuddy.app.repository.RatingRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 //@DataJpaTest
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @AutoConfigureTestDatabase(replace =  AutoConfigureTestDatabase.Replace.NONE)
 
-public class ServiceTest {
+public class RepoTest {
     @Autowired RatingRepository repository;
     //@Autowired TestEntityManager testEntityManager;
     @Test
-    public void repoCorrectlySavesGivenSong() {
-        GameRatingKey key = new GameRatingKey(10000L,10000L);
+    public void repoCorrectlySavesRating() {
+        GameRatingKey key = new GameRatingKey(10L,10L);
         RatingEntity rating = new RatingEntity(key,5L,"Test");
-        repository.save(rating);
-        assertTrue(true);
-        //Song result = testEntityManager.find(Song.class, songId);
-        //assertTrue(result.getDownloadUrl().equals(song.getDownloadUrl()));
-        //assertTrue(result.getId().getAlbum().equals(song.getId().getAlbum()));
-        //assertTrue(result.getId().getName().equals(song.getId().getName()));
-       // assertTrue(result.getId().getArtist().equals(song.getId().getArtist()));
+        rating=repository.save(rating);
+        
+        RatingEntity ratingFromR=repository.findById(key).get();
+        assertTrue(key.equals(ratingFromR.getRatingKey()) && rating.getRating()==ratingFromR.getRating() && rating.getRatingText().equals(ratingFromR.getRatingText()));
+    }
+    
+    @Test
+    public void repoCorrectlyRemovesRating() {
+        GameRatingKey key = new GameRatingKey(11L,11L);
+        RatingEntity rating = new RatingEntity(key,5L,"Test");
+        rating=repository.save(rating);
+        
+        RatingEntity ratingFromR=repository.findById(key).get();
+        repository.delete(rating);
+        Optional<RatingEntity> emptyRating=repository.findById(key);
+        assertEquals(emptyRating,Optional.empty());
     }
     
     /*
