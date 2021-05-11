@@ -1,37 +1,21 @@
 package org.steambuddy.api.dto;
 
 public class MessageDTO {
-	private Long userId1;
-	private Long userId2;
+	private Long fromId;
+	private Long toId;
+	private Long timeStamp;
 	private String message;
 	
-	public static MessageDTO getInstance(Long userId1, Long userId2, String message) {
+	public static MessageDTO getInstance(Long fromId, Long toId, String message,Long timeStamp) {
 		MessageDTO instance = new MessageDTO();
-		instance.setUserId1(userId1);
-		instance.setUserId2(userId2);
+		instance.setFromId(fromId);
+		instance.setToId(toId);
 		instance.setMessage(message);
+		instance.setTimeStamp(timeStamp);
 		return instance;
 	}
 
-	public Long getUserId1() {
-		return userId1;
-	}
-
-	public void setUserId1(Long userId1) {
-		this.userId1 = userId1;
-	}
-
-
-
-	public Long getUserId2() {
-		return userId2;
-	}
-
-
-
-	public void setUserId2(Long userId2) {
-		this.userId2 = userId2;
-	}
+	
 
 
 
@@ -43,6 +27,46 @@ public class MessageDTO {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public Long getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(Long timeStamp) {
+		this.timeStamp = timeStamp;
+	}
+
+
+
+
+
+	public Long getFromId() {
+		return fromId;
+	}
+
+
+
+
+
+	public void setFromId(Long fromId) {
+		this.fromId = fromId;
+	}
+
+
+
+
+
+	public Long getToId() {
+		return toId;
+	}
+
+
+
+
+
+	public void setToId(Long toId) {
+		this.toId = toId;
 	}
 
 	

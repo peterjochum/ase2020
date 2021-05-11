@@ -22,9 +22,10 @@ public class MessageMapper {
 	
 	public MessageDTO entityToDTO(MessageEntity from) {
 		MessageDTO to = new MessageDTO();
-		to.setUserId1(from.getMessageKey().getUserId1());
-		to.setUserId2(from.getMessageKey().getUserId2());
+		to.setFromId(from.getMessageKey().getFromId());
+		to.setToId(from.getMessageKey().getToId());
 		to.setMessage(from.getMessage());
+		to.setTimeStamp(from.getMessageKey().getTimeStamp());
 		return to;
 	}
 	

@@ -97,10 +97,16 @@ public interface UserResource {
 	@PostMapping(path = "/message")
 	MessageDTO sendMessage(@RequestBody MessageDTO message);
 	
-	@ApiOperation(value = "Get all messages for a specific user", nickname = "sendMessage", notes = "Send messages between users", tags = "UserResource", response = MessageDTO.class)
+	@ApiOperation(value = "Get all received messages of a specific user", nickname = "getReceivedMessages", notes = "Get received messages", tags = "UserResource", response = MessageDTO.class)
 	@ResponseBody
-	@GetMapping(path = "/messages/{id}")
-	List<MessageDTO> getMessages(@PathVariable("id") Long id);
+	@GetMapping(path = "/messages/received/{id}")
+	List<MessageDTO> getReceivedMessages(@PathVariable("id") Long id);
+	
+	@ApiOperation(value = "Get all sent messages of specific user", nickname = "getSentMessages", notes = "Get sent messages", tags = "UserResource", response = MessageDTO.class)
+	@ResponseBody
+	@GetMapping(path = "/messages/sent/{id}")
+	List<MessageDTO> getSentMessages(@PathVariable("id") Long id);
+	
 	
 	
 	

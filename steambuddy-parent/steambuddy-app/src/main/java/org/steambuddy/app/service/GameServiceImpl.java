@@ -86,6 +86,7 @@ public class GameServiceImpl implements GameService {
 	@Override
 	public List<GameDTO> getGameSuggestionsByRatings(Long id) {
 
+		
 		// get collection of user
 		GameCollectionEntity collection = getGameCollectionEntityByUserId(id);
 		if (collection == null) {
@@ -184,7 +185,9 @@ public class GameServiceImpl implements GameService {
 	}
 
 	private List<Entry<Long, Integer>> getGameRatings(long userId, List<GameEntity> allSuggestions) {
-		UserEntity user = userRepository.findById(userId).get();
+		
+		UserEntity user = userRepository.findById(userId).get(); 
+		
 		Set<UserEntity> friends = user.getFriends();
 
 		HashMap<Long, Integer> gameRating = new HashMap<Long, Integer>();

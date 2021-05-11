@@ -22,5 +22,6 @@ public interface UserService {
 	
 	MessageDTO sendMessage(MessageDTO message);
 	
-	List<MessageDTO> getMessages(Long id);
-}
+	List<MessageDTO> getReceivedMessages(Long id);
+	
+	List<MessageDTO> getSentMessages(Long id);}

@@ -10,16 +10,16 @@ import javax.persistence.Embeddable;
 public class MessageKey implements Serializable {
 
    // @Column(name = "game_id")
-    private Long userId1;
+    private Long fromId;
 
    // @Column(name = "user_id")
-    private Long userId2;
+    private Long toId;
 
     private Long timeStamp;
     
-	public MessageKey(Long userId1, Long userId2,Long timeStamp) {
-		this.userId1 = userId1;
-		this.userId2 = userId2;
+	public MessageKey(Long fromId, Long toId,Long timeStamp) {
+		this.fromId = fromId;
+		this.toId = toId;
 		this.timeStamp=timeStamp;
 		
 	}
@@ -33,30 +33,16 @@ public class MessageKey implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MessageKey key = (MessageKey) o;
-        return userId1.equals(key.userId1) &&
-        		userId2.equals(key.userId2)&&timeStamp.equals(key.timeStamp);
+        return fromId.equals(key.fromId) &&
+        		toId.equals(key.toId)&&timeStamp.equals(key.timeStamp);
     }
 	
     @Override
     public int hashCode() {
-        return Objects.hash(userId1, userId2,timeStamp);
+        return Objects.hash(fromId, toId,timeStamp);
     }
 
-	public Long getUserId1() {
-		return userId1;
-	}
-
-	public void setUserId1(Long userId1) {
-		this.userId1 = userId1;
-	}
-
-	public Long getUserId2() {
-		return userId2;
-	}
-
-	public void setUserId2(Long userId2) {
-		this.userId2 = userId2;
-	}
+	
 
 	public Long getTimeStamp() {
 		return timeStamp;
@@ -64,6 +50,22 @@ public class MessageKey implements Serializable {
 
 	public void setTimeStamp(Long timeStamp) {
 		this.timeStamp = timeStamp;
+	}
+
+	public Long getFromId() {
+		return fromId;
+	}
+
+	public void setFromId(Long fromId) {
+		this.fromId = fromId;
+	}
+
+	public Long getToId() {
+		return toId;
+	}
+
+	public void setToId(Long toId) {
+		this.toId = toId;
 	}
 	
     // standard constructors, getters, and setters

@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
 	public MessageDTO sendMessage(MessageDTO message) {
 		 
 		Timestamp curTime=new Timestamp(System.currentTimeMillis());
-		MessageKey key = new MessageKey(message.getUserId1(),message.getUserId2(),curTime.getTime());
+		MessageKey key = new MessageKey(message.getFromId(),message.getToId(),curTime.getTime());
 	    MessageEntity messageE = new MessageEntity(key,message.getMessage());
 		
 		messageRepository.save(messageE);
@@ -99,9 +99,21 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<MessageDTO> getMessages(Long id) { //get messages send to user
+	public List<MessageDTO> getReceivedMessages(Long id) { //get messages send to user
 		MessageKey key = new MessageKey();
-		key.setUserId2(id);
+		key.setToId(id);
+		
+		MessageEntity example=new MessageEntity();
+		example.setMessageKey(key);
+		List<MessageEntity> messages=messageRepository.findAll(Example.of(example));
+				
+		return  messageMapper.mapEntityToDTO(messages);
+	}
+	
+	@Override
+	public List<MessageDTO> getSentMessages(Long id) { //get messages send to user
+		MessageKey key = new MessageKey();
+		key.setFromId(id);
 		
 		MessageEntity example=new MessageEntity();
 		example.setMessageKey(key);

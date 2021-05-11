@@ -49,10 +49,14 @@ public class UserController implements UserResource{
 	}
 	
 	@Override
-	public List<MessageDTO> getMessages(Long id) {
-		return userService.getMessages(id);
+	public List<MessageDTO> getReceivedMessages(Long id) {
+		return userService.getReceivedMessages(id);
 	}
 
+	@Override
+	public List<MessageDTO> getSentMessages(Long id) {
+		return userService.getSentMessages(id);
+	}
 
 
 }
