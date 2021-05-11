@@ -1,3 +1,10 @@
+Test classes got removed due to 2 reasons:
+-It is barely possible to make unit tests because most functions just use data base queries as an operation -> Might as well just test the database itself
+-Integration tests or system tests (Like below) work in the backend itself, but the automated execution of tests can't handle the creation of the needed instances
+
+Previous test examples:
+
+
 package org.steambuddy.app.test;
 
 
