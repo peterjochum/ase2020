@@ -44,6 +44,12 @@ public class GameController implements GameResource {
 	public List<GameDTO> getGameSuggestionsByRatings(Long id) {
 		return gameService.getGameSuggestionsByRatings(id);
 	}
+	
+	@Override
+	public List<GameDTO> getGameSuggestionsByNeighbourhood( Long userId) {
+		return gameService.getGameSuggestionsByNeighbourhood(userId);
+	}
+
 	@Override
 	public GameCollectionDTO addGameToCollection(Long userId, Long gameId) {
 		return gameService.addGameToGameCollection(userId, gameId);

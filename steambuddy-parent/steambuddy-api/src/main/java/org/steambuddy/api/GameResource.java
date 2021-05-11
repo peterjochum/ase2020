@@ -45,6 +45,11 @@ public interface GameResource {
 	@GetMapping(path="/suggested/byrating/{id}")
 	List<GameDTO> getGameSuggestionsByRatings(@PathVariable("id") Long userId);
 	
+	@ApiOperation(value = "Get a list of suggested games by neighbourhood algorithm.", nickname = "getSuggestedGames", notes = "Returns a list of suggested games.", tags = "GameResource", response = GameDTO.class, responseContainer = "List")
+	@ResponseBody
+	@GetMapping(path="/suggested/byneighbourhood/{id}")
+	List<GameDTO> getGameSuggestionsByNeighbourhood(@PathVariable("id") Long userId);	
+	
 	
 	@ApiOperation(value = "Get games which contain the given name", nickname = "getGamesByName", notes = "Returns found games.", tags = "GameResource", response = GameDTO.class, responseContainer = "List")
 	@ResponseBody

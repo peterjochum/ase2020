@@ -21,4 +21,6 @@ public interface RatingRepository extends CrudRepository<RatingEntity, GameRatin
     @Query(value="SELECT g.ratingKey.gameId,AVG(g.rating) FROM RatingEntity g GROUP BY g.ratingKey.gameId ORDER BY AVG(g.rating)")
     List<Tuple> getGameToRatingAggregation();
 	
+    @Query(value="SELECT g.ratingKey.gameId,g.rating  FROM RatingEntity g WHERE g.ratingKey.userId = :id")
+    List<Tuple> getGameRatingsForUser(Long id);
 }

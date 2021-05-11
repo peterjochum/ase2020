@@ -6,7 +6,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -96,7 +98,103 @@ public class GameServiceImpl implements GameService {
 		return ratingMapper.entityToDTO(ratingE);  
 	}	
 	
+	@Override
+	public List<GameDTO> getGameSuggestionsByNeighbourhood(Long id) {
+
+		UserEntity user;
+		try {
+			user = userRepository.findById(id).get(); 
+		}
+		catch (NoSuchElementException e){
+			System.out.println("User not found!");
+			return new ArrayList<GameDTO>();
+		}
+		
+		// get collection of user
+		GameCollectionEntity collection = getGameCollectionEntityByUserId(id);
+		
+		Set<UserEntity> friends = user.getFriends();
+
+		HashMap<Long, Integer> gameRating = new HashMap<Long, Integer>();
+
+		Set<GameCollectionEntity> friendCols = new HashSet<GameCollectionEntity>();
+		
+		List<Long> friendIds=new ArrayList<Long>();
+		Long friendId;
+		
+		List<Tuple> userRatingsT=ratingRepository.getGameRatingsForUser(id);
+		Map<Long,Long> userRatings=new HashMap<Long,Long>();
+		for (Tuple t: userRatingsT) {
+			userRatings.put(Long.parseLong(t.get(0).toString()),Long.parseLong(t.get(1).toString()));
+		}
+		
+		//userRatings=ratingRepository.getGameRatingsForUser(id);
+		
+		List<Tuple> friendRatings=new ArrayList<Tuple>();
+		
+		boolean similaritiesFound; //if we want to be more restrictive, we would not only watch for 1 match but like 5 game_ids in common
+		Map<Long,Double> distance=new HashMap<Long,Double>();
+		Long friendRating;
+		Long curGameKey;
+		Double curDistance;
+		
+		List<Long> friendsForAlgo=new ArrayList<Long>();
+		
+		for (UserEntity friend : friends) { //do the euclid distance
+			similaritiesFound=false;
+			friendId=friend.getId();
+			friendRatings=ratingRepository.getGameRatingsForUser(friendId);
+			distance.put(friendId,0D);
+			for (Tuple t: friendRatings) { 
+				curGameKey=Long.parseLong(t.get(0).toString());
+				if(userRatings.containsKey(curGameKey)) {
+					similaritiesFound=true;
+					friendRating=Long.parseLong(t.get(1).toString());
+					curDistance=Math.pow((userRatings.get(curGameKey)-friendRating),2);
+					distance.put(friendId,distance.get(friendId)+curDistance);
+				}
+			}
+			distance.put(friendId,Math.sqrt(distance.get(friendId)));
+			
+			if(similaritiesFound) {
+				friendsForAlgo.add(friendId);
+			}
+		}
+		
+		//Find k nearest neighbours, we just take 1 and only look at our friends
+		
+		Double smallestDistance=Double.MAX_VALUE;
+		Long bestFriendForAlgo=1L;
+		for (Long fittingFriend: friendsForAlgo) {
+			curDistance=distance.get(fittingFriend);
+			if(curDistance<smallestDistance) {
+				smallestDistance=curDistance;
+				bestFriendForAlgo=fittingFriend;
+			}
+		}
+		
+		List<GameEntity> suggestions=new ArrayList<GameEntity>();
+		
+		int maxSuggestions=10;
+		int curSuggestion=1;
+		GameCollectionEntity bestFriendGameCol=getGameCollectionEntityByUserId(bestFriendForAlgo);
+		for(GameEntity game: bestFriendGameCol.getGames()) {
+			if(!collection.containsGame(game)) {
+				if(curSuggestion<=maxSuggestions) {
+					suggestions.add(game);
+					curSuggestion++;
+				}
+			}
+		}
+		
+
+		
+		return mapper.mapEntityToDTO(suggestions);
+		
+
+	}
 	
+
 	@Override
 	public List<GameDTO> getGameSuggestionsByRatings(Long id) {
 
@@ -106,7 +204,6 @@ public class GameServiceImpl implements GameService {
 			System.out.println("User not found!");
 			return new ArrayList<GameDTO>();
 		}
-		
 		
 		
 		List<Tuple> tupleRatings=ratingRepository.getGameToRatingAggregation();
@@ -119,7 +216,7 @@ public class GameServiceImpl implements GameService {
 		GameEntity suggestion;
 		for (int i=0; i<10;i++) {
 			
-			if(i>=suggestions.size()) {//if there are too few suggestions, break
+			if(i>=tupleRatings.size()) {//if there are too few suggestions, break
 				break;
 			}
 			
@@ -137,7 +234,6 @@ public class GameServiceImpl implements GameService {
 		
 
 	}
-	
 	
 	@Override
 	public List<GameDTO> getGameSuggestionsByGenres(Long id) {
@@ -205,8 +301,14 @@ public class GameServiceImpl implements GameService {
 	}
 
 	private List<Entry<Long, Integer>> getGameRatings(long userId, List<GameEntity> allSuggestions) {
-		
-		UserEntity user = userRepository.findById(userId).get(); 
+		UserEntity user;
+		try {
+			user = userRepository.findById(userId).get(); 
+		}
+		catch (NoSuchElementException e){
+			System.out.println("User not found!");
+			return new ArrayList<Entry<Long, Integer>>();
+		}
 		
 		Set<UserEntity> friends = user.getFriends();
 

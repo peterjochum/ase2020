@@ -18,6 +18,8 @@ public interface GameService {
 	List<GameDTO> getGameSuggestionsByGenres(Long userId);
 	
 	List<GameDTO> getGameSuggestionsByRatings(Long userId);
+	
+	List<GameDTO> getGameSuggestionsByNeighbourhood( Long userId);
 
 	RatingDTO addRating(RatingDTO rating);
 	
